@@ -17,7 +17,7 @@ add_action('init', function() {
         // Log form submission attempt
         error_log('Contact form submitted by: ' . $name . ' (' . $email . ')');
         
-        $to = 'dragicajanketiccarlin@gmail.com';
+        $to = 'stuart@1976uk.com';
         $mail_subject = ($subject ? $subject . ' - ' : '') . 'Website Contact Form';
         $body = "Name: $name\nEmail: $email\nProject Type: $project_type\nMessage:\n$message";
         
@@ -111,7 +111,7 @@ function configure_phpmailer_php_mail($phpmailer) {
 // Add email testing functionality to admin
 function add_email_test_to_admin() {
     if (current_user_can('administrator') && isset($_GET['test_email']) && $_GET['test_email'] === 'send') {
-        $test_result = wp_mail('dragicajanketiccarlin@gmail.com', 'Test Email from ' . get_bloginfo('name'), 
+        $test_result = wp_mail('stuart@1976uk.com', 'Test Email from ' . get_bloginfo('name'), 
             'This is a test email sent at ' . date('Y-m-d H:i:s') . ' to verify email functionality.');
         
         add_action('admin_notices', function() use ($test_result) {
@@ -136,8 +136,7 @@ function add_email_test_admin_bar($wp_admin_bar) {
 add_action('admin_bar_menu', 'add_email_test_admin_bar', 999);
 
 /**
-/**
- * Functions and definitions for the Artist Theme
+ * Functions and definitions for the 1976uk Artist Theme
  *
  * This file is responsible for setting up the theme, including registering menus,
  * sidebars, and other theme features.

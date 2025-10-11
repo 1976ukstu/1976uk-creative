@@ -1,18 +1,17 @@
 <?php get_header(); ?>
 <?php
-$bg_image = get_field('background_image');
-if ($bg_image) {
-    // Check if the field returned an array (the recommended setting) or just a URL string.
-    $image_url = is_array($bg_image) ? $bg_image['url'] : $bg_image;
-    
-    if ($image_url) {
-        echo '<style>body.home { background-image: url(' . esc_url($image_url) . '); background-size: cover; background-position: center; }</style>';
-    }
-}
+// Set background image for home page - no ACF dependency
+$bg_image_url = get_template_directory_uri() . '/images/1976uk-creative-bg.webp';
+echo '<style>body.home { 
+    background-image: url(' . esc_url($bg_image_url) . '); 
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed;
+}</style>';
 ?>
 
 <div class="site-title">
-    Dragica<br>Carlin
+    1976uk<br>Creative
 </div>
 
 <!-- Permanent menu for home page - no hamburger needed -->

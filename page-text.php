@@ -1,20 +1,13 @@
 <?php
 /**
- * Template Name: Custom Text Page
+ * Template Name: About/Text Page
  */
 get_header();
-// Add ACF color picker background for non-home pages
-if (!is_front_page() && !is_home()) {
-    $bg_colour = get_field('background_colour');
-    if ($bg_colour) {
-        echo '<style>body.page { background-color: ' . esc_attr($bg_colour) . ' !important; }</style>';
-    }
-}
 ?>
 
 <div class="site-title">
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="color: inherit; text-decoration: none;">
-        Dragica<br>Carlin
+        1976uk<br>Creative
     </a>
 </div>
 

@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../../dragica-carlin/app/public/wp-content/themes/dragica-carlin-backup-theme"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"chat.agent.maxRequests": 250
+	}
+}
