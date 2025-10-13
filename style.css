@@ -3,9 +3,16 @@ Theme Name: 1976uk Creative Lab
 Theme URI: http://1976uk.com
 Author: Stuart Hunt
 Author URI: http://1976uk.com
-Description: Experimental creative lab and portfolio foundation for 1976uk.
-Version: 1.0
+Description: Modern creative showcase focused on Websites + Contact (Production Ready)
+Version: 2.0 - Production Launch
 Text Domain: 1976uk-creative-theme
+
+PRODUCTION DEPLOYMENT NOTES:
+- Optimized for Websites page (interactive gallery) + Contact form
+- Modern typography with Inter + Poppins fonts
+- Frosted glass UI with responsive design
+- Portfolio/Projects styles included for future development
+- Menu simplified to Websites + Contact only (see functions.php)
 */
 
 /* ==========================================================================
