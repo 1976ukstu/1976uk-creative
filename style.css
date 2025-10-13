@@ -9,6 +9,12 @@ Text Domain: 1976uk-creative-theme
 */
 
 /* ==========================================================================
+   MODERN GOOGLE FONTS IMPORT - INTER + POPPINS
+   Perfect for frosted glass UI and contemporary design
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* ==========================================================================
    1976uk CREATIVE LAB STYLESHEET
    Clean, optimized CSS for experimental creative development
    ========================================================================== */
@@ -69,11 +75,13 @@ Text Domain: 1976uk-creative-theme
    ========================================================================== */
 
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   line-height: 1.6;
   margin: 0;
   padding: 0;
   color: #333;
+  font-weight: 400;
+  letter-spacing: -0.01em; /* Modern subtle letter spacing */
 }
 
 header {
@@ -159,8 +167,31 @@ footer {
   width: 100%;
   align-items: flex-end; /* Right-align menu items */
   margin: 0;
-  padding: 0;
+  padding: 30px;
   list-style: none;
+
+  /* Frosted glass effect */
+  background: rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Remove any list bullets completely */
+.home-menu ul,
+.home-menu li {
+  list-style: none !important;
+  list-style-type: none !important;
+  margin: 0;
+  padding: 0;
+}
+
+.home-menu ul::before,
+.home-menu li::before {
+  content: none !important;
+  display: none !important;
 }
 
 .home-menu li {
@@ -1543,22 +1574,212 @@ footer {
 }
 
 .site-title {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 400;
   position: absolute;
-  top: 1%;
-  left: 1%;
-  color: #394356;
-  background: rgba(43, 45, 147, 0);
+  top: 2%;
+  left: 2%;
+  /* Option 1: Elegant Gradient Text (Very Modern!) */
+  background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* color: #ffffff; Pure white for better contrast */
   padding: 0px 0px;
   border-radius: 8px;
   font-size: 75px;
   z-index: 10;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   line-height: 0.8;
   text-align: left;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
   cursor: pointer;
+  /* text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3); Deep shadow for depth */
+  filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.4)); /* Gradient text shadow */
+}
+
+.site-title:hover {
+  /* color: #f0f0f0; */
+  background: linear-gradient(135deg, #ffffff 0%, #d0d0d0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transform: translateY(-2px); /* Subtle lift on hover */
+  /* text-shadow: 0 6px 30px rgba(0, 0, 0, 0.6), 0 3px 12px rgba(0, 0, 0, 0.4); */
+  filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.5));
+}
+
+/* Enhanced Site Title - Different sizes for 1976uk and Creative */
+.site-title .main-title {
+  font-size: 120px; /* Reduced from 150px for better mobile fit */
+  font-weight: 800;
+  line-height: 0.85;
+  display: block;
+  letter-spacing: -2px; /* Tighter to prevent mobile overflow */
+  text-align: left; /* Force left alignment */
+}
+
+.site-title .sub-title {
+  font-size: 60px; /* Slightly reduced proportionally */
+  font-weight: 300; /* Light weight for elegant contrast */
+  line-height: 0.8;
+  display: block;
+  text-align: left; /* Changed from center to left */
+  margin-top: -5px;
+  letter-spacing: 3px; /* Wider spacing for elegance */
+  opacity: 0.95; /* Slightly subtle for hierarchy */
+}
+
+/* Mobile Responsive Site Title */
+@media (max-width: 768px) {
+  .site-title {
+    top: 2%;
+    left: 3%;
+    right: 3%; /* Prevent overflow */
+  }
+
+  .site-title .main-title {
+    font-size: 70px; /* Much smaller for mobile */
+    letter-spacing: -1px;
+    line-height: 0.9;
+  }
+
+  .site-title .sub-title {
+    font-size: 35px; /* Proportional reduction */
+    letter-spacing: 1px;
+    margin-top: -3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-title {
+    top: 3%;
+    left: 4%;
+    right: 4%;
+  }
+
+  .site-title .main-title {
+    font-size: 50px; /* Even smaller for very small screens */
+    letter-spacing: 0px;
+  }
+
+  .site-title .sub-title {
+    font-size: 25px;
+    letter-spacing: 1px;
+    margin-top: -2px;
+  }
+}
+
+/* ==========================================================================
+   ALTERNATIVE COLOR SCHEMES FOR SITE TITLE - CHOOSE YOUR FAVORITE!
+   ========================================================================== */
+
+/* 
+Current: Pure White with Deep Shadow
+color: #ffffff;
+text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
+
+Option 1: Elegant Gradient Text (Very Modern!)
+background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+text-shadow: none;
+filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.4));
+
+Option 2: Warm Creative Glow
+color: #fff8f0;
+text-shadow: 0 0 30px rgba(255, 200, 100, 0.4), 0 4px 20px rgba(0, 0, 0, 0.5);
+filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.2));
+
+Option 3: Tech-Forward Blue Accent  
+color: #f8faff;
+text-shadow: 0 0 25px rgba(103, 126, 234, 0.3), 0 4px 20px rgba(0, 0, 0, 0.4);
+filter: drop-shadow(0 0 20px rgba(103, 126, 234, 0.15));
+
+Option 4: Frosted Glass Complement
+color: rgba(255, 255, 255, 0.95);
+text-shadow: 0 4px 25px rgba(0, 0, 0, 0.6), 0 1px 4px rgba(0, 0, 0, 0.3);
+backdrop-filter: blur(1px);
+filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.1));
+*/
+
+/* ==========================================================================
+   MODERN TYPOGRAPHY SYSTEM - POPPINS + INTER
+   ========================================================================== */
+
+/* All headings use Poppins for modern creative impact */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+h4 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+h5 {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+h6 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Body text uses Inter for excellent readability */
+p,
+li,
+span,
+div {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Button and UI element typography */
+button,
+.btn,
+.website-link,
+.external-link {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+/* Page titles and main headings - Enhanced Poppins */
+.page-title,
+.website-title,
+.project-title {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Menu and navigation - Clean Inter */
+.side-menu,
+.home-menu,
+.menu-card {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .site-title:hover {
@@ -1573,10 +1794,7 @@ footer {
   right: -700px; /* Hide sidebar by default, allow .open to show */
   width: 600px;
   height: 100vh;
-  background: rgba(255, 255, 255, 0); /* Elegant semi-transparent white */
-  /* -webkit-backdrop-filter: blur(10px); */
-  /* backdrop-filter: blur(10px); */
-  /* box-shadow: -2px 0 20px rgba(52, 67, 86, 0.12); */
+  background: rgba(255, 255, 255, 0); /* Transparent when closed */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -1591,6 +1809,40 @@ footer {
 /* Show sidebar when open class is added */
 .side-panel.open {
   right: 0;
+}
+
+/* Add frosted glass background to the menu container inside side panel */
+.side-panel nav,
+.side-panel .side-menu {
+  /* Frosted glass effect */
+  background: rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 30px;
+  margin: 0;
+  list-style: none !important;
+}
+
+/* Remove any list bullets from side menu */
+.side-panel ul,
+.side-panel li,
+.side-menu,
+.side-menu li {
+  list-style: none !important;
+  list-style-type: none !important;
+  margin: 0;
+  padding: 0;
+}
+
+.side-panel ul::before,
+.side-panel li::before,
+.side-menu ul::before,
+.side-menu li::before {
+  content: none !important;
+  display: none !important;
 }
 
 /* Match sidebar nav titles to home menu styling */
@@ -1970,5 +2222,240 @@ footer {
 
   .portfolio-title {
     font-size: 1.2em;
+  }
+}
+
+/* ==========================================================================
+   HOME PAGE ENHANCED HAMBURGER MENU & MODAL SYSTEM
+   ========================================================================== */
+
+/* Enhanced Hamburger Button for Homepage */
+.home-hamburger {
+  position: fixed;
+  top: 2%;
+  right: 2%;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.home-hamburger:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.05);
+}
+
+.home-hamburger span {
+  width: 25px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.9);
+  margin: 3px 0;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.home-hamburger:hover span {
+  background: white;
+}
+
+/* Home Menu Modal - Dashboard Style */
+.home-menu-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+}
+
+.home-menu-content {
+  width: 90%;
+  max-width: 900px;
+  max-height: 80%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  animation: modalSlideIn 0.4s ease-out;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Menu Header */
+.home-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 30px;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.home-menu-header h3 {
+  margin: 0;
+  color: white;
+  font-size: 1.6em;
+  font-weight: 600;
+}
+
+.menu-close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.5em;
+  color: white;
+  font-weight: bold;
+}
+
+.menu-close-btn:hover {
+  background: rgba(255, 82, 82, 0.8);
+  border-color: rgba(255, 82, 82, 1);
+  transform: scale(1.1);
+}
+
+/* Menu Body */
+.home-menu-body {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+/* Menu Grid - Dashboard Style Cards */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.menu-card {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 25px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.menu-card:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.menu-card-icon {
+  font-size: 3em;
+  margin-bottom: 15px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.menu-card h4 {
+  color: white;
+  margin: 0 0 10px 0;
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
+.menu-card p {
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  font-size: 0.95em;
+  line-height: 1.4;
+}
+
+/* Responsive Design for Menu */
+@media (max-width: 768px) {
+  .home-menu-content {
+    width: 95%;
+    max-height: 90%;
+  }
+
+  .home-menu-header {
+    padding: 20px;
+  }
+
+  .home-menu-header h3 {
+    font-size: 1.3em;
+  }
+
+  .home-menu-body {
+    padding: 20px;
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .menu-card {
+    padding: 20px;
+  }
+
+  .menu-card-icon {
+    font-size: 2.5em;
+  }
+
+  .home-hamburger {
+    width: 50px;
+    height: 50px;
+  }
+
+  .home-hamburger span {
+    width: 20px;
+    height: 2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-title .main-title {
+    font-size: 100px;
+  }
+
+  .site-title .sub-title {
+    font-size: 50px;
+  }
+
+  .home-hamburger {
+    top: 3%;
+    right: 3%;
   }
 }

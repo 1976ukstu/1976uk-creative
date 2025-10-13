@@ -5,18 +5,21 @@
 ## 📋 Branch Structure
 
 ### **`main` Branch**
+
 - **Purpose:** Production-ready code
 - **Protection:** Stable, tested features only
 - **Deployment:** Ready for live showcase
 - **Access:** Merge only via Pull Requests
 
-### **`development` Branch** 
+### **`development` Branch**
+
 - **Purpose:** Integration branch for new features
 - **Testing:** All features tested here first
 - **Usage:** Daily development work
 - **Merge:** Features merged here before `main`
 
 ### **Feature Branches**
+
 - **Pattern:** `feature/description` (e.g., `feature/portfolio-lightbox`)
 - **Purpose:** Individual feature development
 - **Lifecycle:** Create → Develop → Test → Merge to `development`
@@ -24,6 +27,7 @@
 ## 🔧 Workflow Process
 
 ### **1. Starting New Work**
+
 ```bash
 # Switch to development and pull latest
 git checkout development
@@ -34,6 +38,7 @@ git checkout -b feature/your-feature-name
 ```
 
 ### **2. Development Work**
+
 ```bash
 # Regular commits with clear messages
 git add .
@@ -42,6 +47,7 @@ git push origin feature/your-feature-name
 ```
 
 ### **3. Feature Complete**
+
 ```bash
 # Switch back to development
 git checkout development
@@ -57,6 +63,7 @@ git push origin --delete feature/your-feature-name
 ```
 
 ### **4. Ready for Production**
+
 ```bash
 # Create PR from development → main on GitHub
 # After review and testing, merge to main
@@ -65,6 +72,7 @@ git push origin --delete feature/your-feature-name
 ## 🎯 Commit Message Standards
 
 ### **Format:**
+
 ```
 🎨 Type: Short description
 
@@ -72,8 +80,9 @@ Optional longer description explaining the change
 ```
 
 ### **Types:**
+
 - `✨` `:sparkles:` New features
-- `🐛` `:bug:` Bug fixes  
+- `🐛` `:bug:` Bug fixes
 - `🎨` `:art:` Style/UI improvements
 - `♻️` `:recycle:` Refactoring
 - `📝` `:memo:` Documentation
@@ -86,23 +95,26 @@ Optional longer description explaining the change
 ✅ **Repository:** `1976ukstu/1976uk-creative`  
 ✅ **Main Branch:** Clean production foundation  
 ✅ **Development Branch:** Ready for daily work  
-✅ **Remote:** Connected and tracking  
+✅ **Remote:** Connected and tracking
 
 ## 🎨 Development Ideas Pipeline
 
 ### **Phase 1: Content Foundation**
+
 - [ ] Add ACF Free field groups
 - [ ] Populate portfolio with sample work
 - [ ] Test contact form functionality
 - [ ] Add real about page content
 
 ### **Phase 2: Feature Enhancement**
+
 - [ ] Portfolio lightbox improvements
 - [ ] Project filtering system
 - [ ] Admin dashboard features
 - [ ] CSS optimization
 
 ### **Phase 3: Creative Experiments**
+
 - [ ] Animation effects
 - [ ] Interactive elements
 - [ ] Custom layouts
@@ -134,4 +146,4 @@ git branch -d feature-name
 
 **Your Git workflow is now professional and ready for creative development!** 🎉
 
-*Setup completed: October 11, 2025*
+_Setup completed: October 11, 2025_

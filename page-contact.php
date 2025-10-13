@@ -10,7 +10,8 @@ get_header();
 
 <div class="site-title">
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="color: inherit; text-decoration: none;">
-        1976uk<br>Creative
+        <span class="main-title">1976uk</span>
+        <span class="sub-title">Creative</span>
     </a>
 </div>
 
@@ -25,7 +26,7 @@ get_header();
     wp_nav_menu( array(
         'theme_location' => 'side-panel',
         'menu_class'     => 'side-menu',
-        'fallback_cb'    => false,
+        'fallback_cb'    => 'creative_lab_side_fallback_menu',
     ) );
     ?>
 </div>

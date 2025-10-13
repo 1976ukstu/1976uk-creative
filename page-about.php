@@ -24,7 +24,7 @@ get_header();
     wp_nav_menu( array(
         'theme_location' => 'side-panel',
         'menu_class'     => 'side-menu',
-        'fallback_cb'    => false,
+        'fallback_cb'    => 'creative_lab_side_fallback_menu',
     ) );
     ?>
 </div>

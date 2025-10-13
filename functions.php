@@ -290,5 +290,73 @@ function artist_theme_clean_styles() {
 }
 add_action( 'wp_enqueue_scripts', 'artist_theme_clean_styles', 1 );
 
+// Custom menu fallback for 1976uk Creative (without Home link)
+function creative_lab_fallback_menu() {
+    echo '<nav class="home-menu"><ul>';
+    
+    // Portfolio Page
+    $portfolio_page = get_page_by_path('portfolio');
+    if ($portfolio_page) {
+        echo '<li><a href="' . get_permalink($portfolio_page->ID) . '">Portfolio</a></li>';
+    }
+    
+    // Projects Page  
+    $projects_page = get_page_by_path('projects');
+    if ($projects_page) {
+        echo '<li><a href="' . get_permalink($projects_page->ID) . '">Projects</a></li>';
+    }
+    
+    // About Page
+    $about_page = get_page_by_path('about');
+    if ($about_page) {
+        echo '<li><a href="' . get_permalink($about_page->ID) . '">About</a></li>';
+    }
+    
+    // Contact Page
+    $contact_page = get_page_by_path('contact');
+    if ($contact_page) {
+        echo '<li><a href="' . get_permalink($contact_page->ID) . '">Contact</a></li>';
+    }
+    
+    echo '</ul></nav>';
+}
+
+// Custom side menu fallback for other pages (without Home link)
+function creative_lab_side_fallback_menu() {
+    echo '<ul class="side-menu">';
+    
+    // Portfolio Page
+    $portfolio_page = get_page_by_path('portfolio');
+    if ($portfolio_page) {
+        echo '<li><a href="' . get_permalink($portfolio_page->ID) . '">Portfolio</a></li>';
+    }
+    
+    // Projects Page  
+    $projects_page = get_page_by_path('projects');
+    if ($projects_page) {
+        echo '<li><a href="' . get_permalink($projects_page->ID) . '">Projects</a></li>';
+    }
+    
+    // Websites Page
+    $websites_page = get_page_by_path('websites');
+    if ($websites_page) {
+        echo '<li><a href="' . get_permalink($websites_page->ID) . '">Websites</a></li>';
+    }
+    
+    // About Page
+    $about_page = get_page_by_path('about');
+    if ($about_page) {
+        echo '<li><a href="' . get_permalink($about_page->ID) . '">About</a></li>';
+    }
+    
+    // Contact Page
+    $contact_page = get_page_by_path('contact');
+    if ($contact_page) {
+        echo '<li><a href="' . get_permalink($contact_page->ID) . '">Contact</a></li>';
+    }
+    
+    echo '</ul>';
+}
+
 // Additional custom functions can be added below
 ?>
