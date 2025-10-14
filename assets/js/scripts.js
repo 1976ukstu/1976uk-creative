@@ -15,6 +15,11 @@ document.addEventListener('DOMContentLoaded', function () {
   function initHomeStyleMenu() {
     debugLog('Initializing home-style menu for all pages');
 
+    // Check what page we're on
+    const isHomePage =
+      document.body.classList.contains('home') || document.body.classList.contains('front-page');
+    debugLog('Is home page:', isHomePage);
+
     // For home page - existing functionality
     const homeHamburger = document.querySelector('.home-hamburger');
     const homeModal = document.getElementById('homeMenuModal');
@@ -46,14 +51,30 @@ document.addEventListener('DOMContentLoaded', function () {
           closeHomeMenu();
         });
       }
+    } else {
+      debugLog(
+        'Home page elements not found - homeHamburger:',
+        !!homeHamburger,
+        'homeModal:',
+        !!homeModal
+      );
     }
 
     // For other pages - enhance universal hamburger to match home style
     const universalHamburger = document.querySelector('.universal-hamburger');
     const universalModal = document.querySelector('.universal-menu-modal');
 
+    debugLog('Looking for universal elements...');
+    debugLog('universalHamburger found:', !!universalHamburger);
+    debugLog('universalModal found:', !!universalModal);
+
     if (universalHamburger && universalModal) {
       debugLog('Universal hamburger found - applying home-style functionality');
+
+      // Make sure the button is visible
+      universalHamburger.style.display = 'flex';
+      universalHamburger.style.visibility = 'visible';
+      debugLog('Universal hamburger visibility forced');
 
       universalHamburger.addEventListener('click', function (e) {
         debugLog('Universal hamburger clicked');
@@ -67,6 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
       // Close when clicking outside
       universalModal.addEventListener('click', function (e) {
         if (e.target === universalModal) {
+          debugLog('Clicked outside universal modal content');
           closeUniversalMenu();
         }
       });
@@ -74,11 +96,19 @@ document.addEventListener('DOMContentLoaded', function () {
       // Close button
       const universalCloseBtn = universalModal.querySelector('.universal-close-button');
       if (universalCloseBtn) {
+        debugLog('Universal close button found');
         universalCloseBtn.addEventListener('click', function (e) {
+          debugLog('Universal close button clicked');
           e.preventDefault();
           closeUniversalMenu();
         });
+      } else {
+        debugLog('Universal close button NOT found');
       }
+    } else {
+      debugLog('Universal elements not found - this might be the issue!');
+      if (!universalHamburger) debugLog('Missing: .universal-hamburger element');
+      if (!universalModal) debugLog('Missing: .universal-menu-modal element');
     }
 
     // ESC key functionality for all menus
