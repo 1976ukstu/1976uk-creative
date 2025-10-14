@@ -91,6 +91,40 @@ body {
   letter-spacing: -0.01em; /* Modern subtle letter spacing */
 }
 
+/* ==========================================================================
+   ANIMATED BACKGROUND - SMOOTH COLOR CYCLING
+   Pink → Purple → Blue → Teal → Pink (4 second cycles)
+   ========================================================================== */
+
+/* Apply animated background to homepage only */
+.home .site,
+.front-page .site,
+body.home,
+body.front-page {
+  background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #06ffa5);
+  background-size: 400% 400%;
+  animation: gradientShift 16s ease-in-out infinite;
+  min-height: 100vh;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 header {
   background: #f8f8f822;
   padding: 0px;
@@ -2229,6 +2263,189 @@ button,
 
   .portfolio-title {
     font-size: 1.2em;
+  }
+}
+
+/* ==========================================================================
+   UNIVERSAL HAMBURGER MENU - CONSISTENT ACROSS ALL PAGES
+   Beautiful circular design with frosted glass effect
+   ========================================================================== */
+
+/* Universal Hamburger Button (for all pages including home) */
+.universal-hamburger {
+  position: fixed;
+  top: 2%;
+  right: 2%;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.universal-hamburger:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.05);
+}
+
+.universal-hamburger span {
+  width: 25px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.9);
+  margin: 3px 0;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.universal-hamburger:hover span {
+  background: white;
+}
+
+/* Universal Menu Modal - Dashboard Style for All Pages */
+.universal-menu-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+}
+
+.universal-menu-content {
+  width: 90%;
+  max-width: 600px;
+  max-height: 80%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  animation: universalModalSlideIn 0.4s ease-out;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes universalModalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Universal Menu Header */
+.universal-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 30px;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.universal-menu-header h3 {
+  margin: 0;
+  color: white;
+  font-size: 1.6em;
+  font-weight: 600;
+}
+
+.universal-close-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  color: white;
+  font-size: 1.5em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.universal-close-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.1);
+}
+
+/* Universal Menu Items Container */
+.universal-menu-items {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.universal-menu-items a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.8em;
+  font-weight: 500;
+  padding: 15px 30px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  text-align: center;
+  min-width: 200px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.universal-menu-items a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile Responsiveness for Universal Menu */
+@media (max-width: 768px) {
+  .universal-hamburger {
+    width: 50px;
+    height: 50px;
+    top: 3%;
+    right: 3%;
+  }
+
+  .universal-hamburger span {
+    width: 20px;
+    height: 2px;
+    margin: 2px 0;
+  }
+
+  .universal-menu-content {
+    width: 95%;
+    max-width: none;
+  }
+
+  .universal-menu-items a {
+    font-size: 1.5em;
+    padding: 12px 25px;
+    min-width: 180px;
   }
 }
 

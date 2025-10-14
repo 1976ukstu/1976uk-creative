@@ -15,20 +15,25 @@ get_header();
     </a>
 </div>
 
-<button class="hamburger" aria-label="Open menu">
+<button class="universal-hamburger" aria-label="Open menu">
     <span></span>
     <span></span>
     <span></span>
 </button>
 
-<div class="side-panel">
-    <?php
-    wp_nav_menu( array(
-        'theme_location' => 'side-panel',
-        'menu_class'     => 'side-menu',
-        'fallback_cb'    => 'creative_lab_side_fallback_menu',
-    ) );
-    ?>
+<!-- Universal Menu Modal -->
+<div class="universal-menu-modal">
+    <div class="universal-menu-content">
+        <div class="universal-menu-header">
+            <h3>Navigation</h3>
+            <button class="universal-close-button" aria-label="Close menu">×</button>
+        </div>
+        <div class="universal-menu-items">
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
+            <a href="<?php echo esc_url( home_url( '/websites' ) ); ?>">Websites</a>
+            <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>">Contact</a>
+        </div>
+    </div>
 </div>
 
 <div id="primary" class="content-area">
