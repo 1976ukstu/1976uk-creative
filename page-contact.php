@@ -116,6 +116,12 @@ get_header();
                                 <form class="artist-contact-form" action="<?php echo esc_url(get_permalink()); ?>" method="post">
                                     <input type="hidden" name="artist_contact_form_submitted" value="1">
                                     
+                                    <!-- Honeypot field to catch spam bots -->
+                                    <div style="position: absolute; left: -9999px; top: -9999px;">
+                                        <label for="website">Website (leave blank)</label>
+                                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                                    </div>
+                                    
                                     <div class="form-row">
                                         <div class="form-group">
                                             <label for="name">Name *</label>

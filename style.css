@@ -1664,11 +1664,15 @@ footer {
   font-size: 60px; /* Slightly reduced proportionally */
   font-weight: 300; /* Light weight for elegant contrast */
   line-height: 0.8;
-  display: block;
+  display: block !important; /* Force display */
+  visibility: visible !important; /* Force visibility */
   text-align: left; /* Changed from center to left */
   margin-top: -5px;
   letter-spacing: 3px; /* Wider spacing for elegance */
   opacity: 0.95; /* Slightly subtle for hierarchy */
+  overflow: visible; /* Ensure no clipping */
+  height: auto; /* Ensure proper height */
+  min-height: 48px; /* Minimum height to prevent clipping */
 }
 
 /* Mobile Responsive Site Title */

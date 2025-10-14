@@ -1,5 +1,5 @@
 <?php
-// --- Enhanced Contact Form Handler with Debugging ---
+// --- Enhanced Contact Form Handler with Gmail Forwarding & Spam Protection ---
 add_action('init', function() {
     if (
         isset($_POST['artist_contact_form_submitted']) &&
@@ -8,73 +8,121 @@ add_action('init', function() {
         !empty($_POST['email']) &&
         !empty($_POST['message'])
     ) {
+        // Basic spam protection
+        $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+        $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? 'unknown';
+        
+        // Simple honeypot check (add hidden field to form)
+        if (!empty($_POST['website'])) {
+            error_log('Spam detected (honeypot triggered) from IP: ' . $ip);
+            wp_safe_redirect(add_query_arg('contact_status', 'error', wp_get_referer()));
+            exit;
+        }
+        
+        // Rate limiting - only allow 1 submission per minute per IP
+        $submission_key = 'contact_submission_' . md5($ip);
+        $last_submission = get_transient($submission_key);
+        if ($last_submission) {
+            error_log('Rate limit exceeded from IP: ' . $ip);
+            wp_safe_redirect(add_query_arg('contact_status', 'error', wp_get_referer()));
+            exit;
+        }
+        set_transient($submission_key, time(), 60); // 1 minute cooldown
+        
         $name = sanitize_text_field($_POST['name']);
         $email = sanitize_email($_POST['email']);
         $subject = sanitize_text_field($_POST['subject'] ?? '');
         $project_type = sanitize_text_field($_POST['project-type'] ?? '');
         $message = sanitize_textarea_field($_POST['message']);
         
-        // Log form submission attempt
-        error_log('Contact form submitted by: ' . $name . ' (' . $email . ')');
+        // Additional spam detection
+        $spam_words = ['hello world', 'test', 'generic', 'lorem ipsum', 'click here', 'free money'];
+        $combined_text = strtolower($name . ' ' . $subject . ' ' . $message);
+        foreach ($spam_words as $spam_word) {
+            if (strpos($combined_text, $spam_word) !== false) {
+                error_log('Potential spam detected (keyword: ' . $spam_word . ') from: ' . $email);
+                // Still process but flag as suspicious
+                $subject = '[SUSPICIOUS] ' . $subject;
+                break;
+            }
+        }
         
-        $to = 'stuart@1976uk.com';
-        $mail_subject = ($subject ? $subject . ' - ' : '') . 'Website Contact Form';
-        $body = "Name: $name\nEmail: $email\nProject Type: $project_type\nMessage:\n$message";
+        // Log form submission attempt
+        error_log('Contact form submitted by: ' . $name . ' (' . $email . ') from IP: ' . $ip);
+        
+        // Multiple recipients - both cPanel webmail AND Gmail
+        $recipients = array(
+            'stuart@1976uk.com',     // Your cPanel email
+            'your-gmail@gmail.com'   // Add your Gmail address here
+        );
+        
+        $mail_subject = ($subject ? $subject . ' - ' : '') . '1976uk Website Contact Form';
+        $body = "=== 1976uk WEBSITE CONTACT FORM ===\n\n";
+        $body .= "Name: $name\n";
+        $body .= "Email: $email\n";
+        $body .= "Project Type: $project_type\n";
+        $body .= "Subject: $subject\n\n";
+        $body .= "Message:\n" . $message . "\n\n";
+        $body .= "=== TECHNICAL INFO ===\n";
+        $body .= "IP Address: $ip\n";
+        $body .= "User Agent: $user_agent\n";
+        $body .= "Submitted: " . date('Y-m-d H:i:s') . "\n";
         
         // Enhanced headers for better deliverability
         $headers = array(
             'Content-Type: text/plain; charset=UTF-8',
             'Reply-To: ' . $name . ' <' . $email . '>',
-            'From: ' . get_bloginfo('name') . ' <noreply@' . parse_url(home_url(), PHP_URL_HOST) . '>'
+            'From: 1976uk Creative <noreply@' . parse_url(home_url(), PHP_URL_HOST) . '>',
+            'X-Mailer: 1976uk Creative Contact Form',
+            'X-Originating-IP: ' . $ip
         );
         
-        $success = false;
+        $success_count = 0;
         if (is_email($email)) {
-            // Log email attempt
-            error_log('Attempting to send email to: ' . $to . ' with subject: ' . $mail_subject);
-            
-            $success = wp_mail($to, $mail_subject, $body, $headers);
-            
-            // Log result
-            if ($success) {
-                error_log('wp_mail() returned TRUE for: ' . $to);
+            // Send to all recipients
+            foreach ($recipients as $recipient) {
+                error_log('Attempting to send email to: ' . $recipient);
                 
-                // Double-check by trying PHP mail() as backup
-                $php_mail_headers = "From: " . get_bloginfo('name') . " <noreply@" . parse_url(home_url(), PHP_URL_HOST) . ">\r\n";
-                $php_mail_headers .= "Reply-To: " . $name . " <" . $email . ">\r\n";
-                $php_mail_headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+                $individual_success = wp_mail($recipient, $mail_subject, $body, $headers);
                 
-                $php_success = mail($to, $mail_subject, $body, $php_mail_headers);
-                error_log('PHP mail() backup result: ' . ($php_success ? 'SUCCESS' : 'FAILED'));
-            } else {
-                error_log('wp_mail() FAILED for: ' . $to);
-                
-                // Get more detailed error information
-                global $phpmailer;
-                if (isset($phpmailer) && !empty($phpmailer->ErrorInfo)) {
-                    error_log('PHPMailer error: ' . $phpmailer->ErrorInfo);
+                if ($individual_success) {
+                    error_log('Email sent successfully to: ' . $recipient);
+                    $success_count++;
+                } else {
+                    error_log('Email failed to: ' . $recipient);
+                    
+                    // Try fallback with PHP mail()
+                    $php_headers = implode("\r\n", array(
+                        "From: 1976uk Creative <noreply@" . parse_url(home_url(), PHP_URL_HOST) . ">",
+                        "Reply-To: " . $name . " <" . $email . ">",
+                        "Content-Type: text/plain; charset=UTF-8",
+                        "X-Mailer: 1976uk Creative Contact Form",
+                        "X-Originating-IP: " . $ip
+                    ));
+                    
+                    $php_success = mail($recipient, $mail_subject, $body, $php_headers);
+                    if ($php_success) {
+                        error_log('PHP mail() backup successful to: ' . $recipient);
+                        $success_count++;
+                    } else {
+                        error_log('PHP mail() backup failed to: ' . $recipient);
+                    }
                 }
-                
-                // Try fallback with PHP mail()
-                error_log('Attempting fallback with PHP mail()...');
-                $php_mail_headers = "From: " . get_bloginfo('name') . " <noreply@" . parse_url(home_url(), PHP_URL_HOST) . ">\r\n";
-                $php_mail_headers .= "Reply-To: " . $name . " <" . $email . ">\r\n";
-                $php_mail_headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-                
-                $success = mail($to, $mail_subject, $body, $php_mail_headers);
-                error_log('PHP mail() fallback result: ' . ($success ? 'SUCCESS' : 'FAILED'));
             }
         } else {
             error_log('Invalid email address provided: ' . $email);
         }
         
+        // Determine overall success
+        $overall_success = $success_count > 0;
+        
         // Redirect back to the form page with status
         $contact_page_url = get_permalink(get_page_by_path('contact'));
         $redirect_url = add_query_arg([
-            'contact_status' => $success ? 'success' : 'error',
+            'contact_status' => $overall_success ? 'success' : 'error',
         ], wp_get_referer() ?: $contact_page_url);
         
-        error_log('Redirecting to: ' . $redirect_url . ' with status: ' . ($success ? 'success' : 'error'));
+        error_log('Redirecting to: ' . $redirect_url . ' with status: ' . ($overall_success ? 'success' : 'error') . ' (sent to ' . $success_count . ' recipients)');
         
         wp_safe_redirect($redirect_url);
         exit;

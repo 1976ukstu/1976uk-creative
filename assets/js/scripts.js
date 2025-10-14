@@ -9,65 +9,111 @@ document.addEventListener('DOMContentLoaded', function () {
   debugLog('DOM Content Loaded');
 
   // ========================================
-  // UNIVERSAL HAMBURGER MENU FUNCTIONALITY
+  // HOME-STYLE HAMBURGER MENU FOR ALL PAGES
   // ========================================
 
-  function initUniversalHamburgerMenu() {
-    debugLog('Initializing universal hamburger menu');
+  function initHomeStyleMenu() {
+    debugLog('Initializing home-style menu for all pages');
 
-    const hamburger = document.querySelector('.universal-hamburger');
-    const modal = document.querySelector('.universal-menu-modal');
-    const closeButton = document.querySelector('.universal-close-button');
+    // For home page - existing functionality
+    const homeHamburger = document.querySelector('.home-hamburger');
+    const homeModal = document.getElementById('homeMenuModal');
 
-    if (!hamburger || !modal) {
-      debugLog('Universal hamburger or modal not found');
-      return;
-    }
+    if (homeHamburger && homeModal) {
+      debugLog('Home page hamburger found');
 
-    debugLog('Universal hamburger menu elements found');
-
-    // Open modal when hamburger is clicked
-    hamburger.addEventListener('click', function (e) {
-      debugLog('Universal hamburger clicked');
-      e.preventDefault();
-      e.stopPropagation();
-      modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden'; // Prevent background scrolling
-      debugLog('Universal menu modal opened');
-    });
-
-    // Close modal when close button is clicked
-    if (closeButton) {
-      closeButton.addEventListener('click', function (e) {
-        debugLog('Universal close button clicked');
+      homeHamburger.addEventListener('click', function (e) {
+        debugLog('Home hamburger clicked');
         e.preventDefault();
-        closeModal();
+        e.stopPropagation();
+        homeModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        debugLog('Home menu modal opened');
       });
+
+      // Close when clicking outside
+      homeModal.addEventListener('click', function (e) {
+        if (e.target === homeModal) {
+          closeHomeMenu();
+        }
+      });
+
+      // Close button
+      const homeCloseBtn = homeModal.querySelector('.menu-close-btn');
+      if (homeCloseBtn) {
+        homeCloseBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          closeHomeMenu();
+        });
+      }
     }
 
-    // Close modal when clicking outside the content
-    modal.addEventListener('click', function (e) {
-      if (e.target === modal) {
-        debugLog('Clicked outside universal menu content, closing');
-        closeModal();
-      }
-    });
+    // For other pages - enhance universal hamburger to match home style
+    const universalHamburger = document.querySelector('.universal-hamburger');
+    const universalModal = document.querySelector('.universal-menu-modal');
 
-    // Close modal when pressing Escape key
+    if (universalHamburger && universalModal) {
+      debugLog('Universal hamburger found - applying home-style functionality');
+
+      universalHamburger.addEventListener('click', function (e) {
+        debugLog('Universal hamburger clicked');
+        e.preventDefault();
+        e.stopPropagation();
+        universalModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        debugLog('Universal menu modal opened');
+      });
+
+      // Close when clicking outside
+      universalModal.addEventListener('click', function (e) {
+        if (e.target === universalModal) {
+          closeUniversalMenu();
+        }
+      });
+
+      // Close button
+      const universalCloseBtn = universalModal.querySelector('.universal-close-button');
+      if (universalCloseBtn) {
+        universalCloseBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          closeUniversalMenu();
+        });
+      }
+    }
+
+    // ESC key functionality for all menus
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && modal.style.display === 'flex') {
-        debugLog('Escape key pressed, closing universal menu modal');
-        closeModal();
+      if (e.key === 'Escape') {
+        if (homeModal && homeModal.style.display === 'flex') {
+          closeHomeMenu();
+        }
+        if (universalModal && universalModal.style.display === 'flex') {
+          closeUniversalMenu();
+        }
       }
     });
 
-    function closeModal() {
-      modal.style.display = 'none';
-      document.body.style.overflow = ''; // Restore scrolling
-      debugLog('Universal menu modal closed');
+    function closeHomeMenu() {
+      if (homeModal) {
+        homeModal.style.display = 'none';
+        document.body.style.overflow = '';
+        debugLog('Home menu modal closed');
+      }
     }
 
-    debugLog('Universal hamburger menu initialized successfully');
+    function closeUniversalMenu() {
+      if (universalModal) {
+        universalModal.style.display = 'none';
+        document.body.style.overflow = '';
+        debugLog('Universal menu modal closed');
+      }
+    }
+
+    // Make functions globally available
+    window.closeHomeMenu = closeHomeMenu;
+    window.closeUniversalMenu = closeUniversalMenu;
+
+    debugLog('Home-style menu initialized successfully');
   }
 
   // ========================================
@@ -366,7 +412,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Initialize all functionality
-  initUniversalHamburgerMenu();
+  initHomeStyleMenu();
   initHamburgerMenu();
   initLightbox();
 
