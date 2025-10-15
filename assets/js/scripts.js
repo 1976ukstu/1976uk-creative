@@ -441,10 +441,42 @@ document.addEventListener('DOMContentLoaded', function () {
     debugLog('Lightbox initialized successfully');
   }
 
-  // Initialize all functionality
-  initHomeStyleMenu();
-  initHamburgerMenu();
-  initLightbox();
+  // Initialize all functionality with enhanced debugging
+  debugLog('Starting initialization of all functions...');
+
+  try {
+    initHomeStyleMenu();
+    debugLog('✅ initHomeStyleMenu completed');
+  } catch (error) {
+    debugLog('❌ initHomeStyleMenu failed:', error);
+  }
+
+  try {
+    initHamburgerMenu();
+    debugLog('✅ initHamburgerMenu completed');
+  } catch (error) {
+    debugLog('❌ initHamburgerMenu failed:', error);
+  }
+
+  try {
+    initLightbox();
+    debugLog('✅ initLightbox completed');
+  } catch (error) {
+    debugLog('❌ initLightbox failed:', error);
+  }
+
+  // Additional check for universal hamburger after a delay
+  setTimeout(function () {
+    const hamburgerCheck = document.querySelector('.universal-hamburger');
+    const modalCheck = document.querySelector('.universal-menu-modal');
+    debugLog('Post-init check - Hamburger exists:', !!hamburgerCheck);
+    debugLog('Post-init check - Modal exists:', !!modalCheck);
+
+    if (hamburgerCheck) {
+      debugLog('Hamburger computed style:', window.getComputedStyle(hamburgerCheck).display);
+      debugLog('Hamburger visibility:', window.getComputedStyle(hamburgerCheck).visibility);
+    }
+  }, 1000);
 
   debugLog('All scripts initialized');
 });

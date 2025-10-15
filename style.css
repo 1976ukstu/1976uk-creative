@@ -1661,18 +1661,25 @@ footer {
 }
 
 .site-title .sub-title {
-  font-size: 60px; /* Slightly reduced proportionally */
-  font-weight: 300; /* Light weight for elegant contrast */
-  line-height: 0.8;
+  font-size: 60px !important; /* Slightly reduced proportionally */
+  font-weight: 300 !important; /* Light weight for elegant contrast */
+  line-height: 0.8 !important;
   display: block !important; /* Force display */
   visibility: visible !important; /* Force visibility */
-  text-align: left; /* Changed from center to left */
-  margin-top: -5px;
-  letter-spacing: 3px; /* Wider spacing for elegance */
-  opacity: 0.95; /* Slightly subtle for hierarchy */
-  overflow: visible; /* Ensure no clipping */
-  height: auto; /* Ensure proper height */
-  min-height: 48px; /* Minimum height to prevent clipping */
+  text-align: left !important; /* Changed from center to left */
+  margin-top: -5px !important;
+  letter-spacing: 3px !important; /* Wider spacing for elegance */
+  opacity: 0.95 !important; /* Slightly subtle for hierarchy */
+  overflow: visible !important; /* Ensure no clipping */
+  height: auto !important; /* Ensure proper height */
+  min-height: 48px !important; /* Minimum height to prevent clipping */
+  position: relative !important;
+  z-index: 10 !important;
+  color: inherit !important;
+  background: inherit !important;
+  -webkit-background-clip: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+  background-clip: inherit !important;
 }
 
 /* Mobile Responsive Site Title */

@@ -31,6 +31,7 @@ get_header();
         <div class="universal-menu-items">
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
             <a href="<?php echo esc_url( home_url( '/websites' ) ); ?>">Websites</a>
+            <a href="<?php echo esc_url( home_url( '/about' ) ); ?>">About</a>
             <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>">Contact</a>
         </div>
     </div>
