@@ -338,7 +338,7 @@ function artist_theme_clean_styles() {
 }
 add_action( 'wp_enqueue_scripts', 'artist_theme_clean_styles', 1 );
 
-// Custom menu fallback for 1976uk Creative (Production: Websites + Contact only)
+// Custom menu fallback for 1976uk Creative (Updated with About page)
 function creative_lab_fallback_menu() {
     echo '<nav class="home-menu"><ul>';
     
@@ -346,6 +346,12 @@ function creative_lab_fallback_menu() {
     $websites_page = get_page_by_path('websites');
     if ($websites_page) {
         echo '<li><a href="' . get_permalink($websites_page->ID) . '">Websites</a></li>';
+    }
+    
+    // About Page - Your story and journey
+    $about_page = get_page_by_path('about');
+    if ($about_page) {
+        echo '<li><a href="' . get_permalink($about_page->ID) . '">About</a></li>';
     }
     
     // Contact Page - Essential for business
@@ -357,7 +363,7 @@ function creative_lab_fallback_menu() {
     echo '</ul></nav>';
 }
 
-// Custom side menu fallback for other pages (Production: Websites + Contact only)
+// Custom side menu fallback for other pages (Updated with About page)
 function creative_lab_side_fallback_menu() {
     echo '<ul class="side-menu">';
     
@@ -365,6 +371,12 @@ function creative_lab_side_fallback_menu() {
     $websites_page = get_page_by_path('websites');
     if ($websites_page) {
         echo '<li><a href="' . get_permalink($websites_page->ID) . '">Websites</a></li>';
+    }
+    
+    // About Page - Your story and journey
+    $about_page = get_page_by_path('about');
+    if ($about_page) {
+        echo '<li><a href="' . get_permalink($about_page->ID) . '">About</a></li>';
     }
     
     // Contact Page - Business inquiries
