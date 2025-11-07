@@ -8,6 +8,18 @@
 get_header();
 ?>
 
+<!-- Future Tech Ice Stone Background -->
+<div class="future-tech-background">
+    <div class="tech-stripes">
+        <div class="tech-stripe stripe-1"></div>
+        <div class="tech-stripe stripe-2"></div>
+        <div class="tech-stripe stripe-3"></div>
+        <div class="tech-stripe stripe-4"></div>
+        <div class="tech-stripe stripe-5"></div>
+        <div class="tech-stripe stripe-6"></div>
+    </div>
+</div>
+
 <div class="site-title">
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="color: inherit; text-decoration: none;">
         <span class="main-title">1976uk</span>
@@ -40,174 +52,162 @@ get_header();
 <div id="primary" class="content-area">
     <main id="main" class="site-main">
         
-        <!-- Websites Gallery Content -->
-        <div class="websites-content">
+        <!-- Websites Gallery Content with Beautiful Dashboard Styling -->
+        <div class="dashboard-content">
             
             <?php if (have_posts()) : ?>
                 <?php while (have_posts()) : the_post(); ?>
                     
-                    <!-- Page header removed for cleaner look -->
+                    <!-- Beautiful Page Header -->
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">
+                            <h1>🌐 Professional Websites</h1>
+                        </div>
+                        <div class="dashboard-subtitle">
+                            Modern WordPress development with stunning design and functionality
+                        </div>
+                    </div>
                     
                 <?php endwhile; ?>
             <?php endif; ?>
             
-            <!-- Interactive Website Gallery - 3x2 Grid -->
-            <div class="websites-gallery">
+            <!-- Dashboard Section for Websites -->
+            <div class="dashboard-section">
+                <h2>🌐 Website Portfolio</h2>
+                <p>Interactive previews of professional websites crafted with modern technology</p>
                 
+                <!-- Interactive Website Gallery - Dashboard Style Grid -->
+                <div class="dashboard-gallery-grid websites-gallery">
                 <!-- Row 1 -->
-                <div class="website-card featured-site">
-                    <!-- Website Preview Section (NOW AT TOP) -->
-                    <div class="website-preview-section">
+                <div class="dashboard-card featured-site">
+                    <!-- Website Preview Section -->
+                    <div class="card-preview">
                         <div class="site-preview-thumb dragica-preview" onclick="openSitePreview('dragicacarlin', 'https://dragicacarlin.com', 'Professional Art Portfolio - Dragica Carlin')">
                             <!-- Preview will show actual website screenshot -->
                         </div>
+                        <div class="card-overlay">
+                            <button class="card-action-btn" onclick="openSitePreview('dragicacarlin', 'https://dragicacarlin.com', 'Professional Art Portfolio - Dragica Carlin')">🌐 Live Preview</button>
+                            <a href="https://dragicacarlin.com" class="card-action-btn" target="_blank">🔗 Visit Site</a>
+                        </div>
                     </div>
-                    <!-- Text Info Section (NOW AT BOTTOM with solid color) -->
-                    <div class="website-info dragica-color">
-                        <div class="site-type-badge">WordPress</div>
-                        <div class="site-title-overlay">dragicacarlin.com</div>
-                        <div class="preview-hint">🔍 Live Preview</div>
-                        <h3 class="website-title">Dragica Carlin - Art Portfolio</h3>
-                        <p class="website-description">Professional artist portfolio with ACF Pro galleries, responsive design, and sophisticated content management system.</p>
-                        <div class="tech-stack"><strong>Tech:</strong> WordPress, ACF Pro, CSS Grid, PHP, Responsive Design</div>
-                        <div class="website-links">
-                            <button class="website-link preview-btn" onclick="openSitePreview('dragicacarlin', 'https://dragicacarlin.com', 'Professional Art Portfolio - Dragica Carlin')">
-                                🌐 Live Preview
-                            </button>
-                            <a href="https://dragicacarlin.com" class="external-link" target="_blank">
-                                🔗 Visit Site
-                            </a>
+                    <!-- Text Info Section -->
+                    <div class="card-info">
+                        <h4 class="card-title">Dragica Carlin - Art Portfolio</h4>
+                        <p class="card-description">Professional artist portfolio with ACF Pro galleries, responsive design, and sophisticated content management system.</p>
+                        <div class="card-meta">
+                            <span class="update-status">✅ Live</span>
+                            <span class="update-time">WordPress</span>
                         </div>
                     </div>
                 </div>
                 
-                <div class="website-card">
-                    <!-- Website Preview Section (NOW AT TOP) -->
-                    <div class="website-preview-section">
+                <div class="dashboard-card">
+                    <!-- Website Preview Section -->
+                    <div class="card-preview">
                         <div class="site-preview-thumb ben-preview" onclick="openSitePreview('benstockley', 'https://benstockley.com', 'Ben Stockley - Filmmaker Portfolio')">
                             <!-- Preview will show actual website screenshot -->
                         </div>
+                        <div class="card-overlay">
+                            <button class="card-action-btn" onclick="openSitePreview('benstockley', 'https://benstockley.com', 'Ben Stockley - Filmmaker Portfolio')">🌐 Live Preview</button>
+                            <a href="https://benstockley.com" class="card-action-btn" target="_blank">🔗 Visit Site</a>
+                        </div>
                     </div>
-                    <!-- Text Info Section (NOW AT BOTTOM with solid color) -->
-                    <div class="website-info ben-color">
-                        <div class="site-type-badge">Portfolio</div>
-                        <div class="site-title-overlay">benstockley.com</div>
-                        <div class="preview-hint">🔍 Live Preview</div>
-                        <h3 class="website-title">Ben Stockley - Filmmaker</h3>
-                        <p class="website-description">Dynamic filmmaker portfolio showcasing professional video work, commercial projects, and creative collaborations.</p>
-                        <div class="tech-stack"><strong>Tech:</strong> WordPress, Video Integration, Responsive Design</div>
-                        <div class="website-links">
-                            <button class="website-link preview-btn" onclick="openSitePreview('benstockley', 'https://benstockley.com', 'Ben Stockley - Filmmaker Portfolio')">
-                                🌐 Live Preview
-                            </button>
-                            <a href="https://benstockley.com" class="external-link" target="_blank">
-                                🔗 Visit Site
-                            </a>
+                    <!-- Text Info Section -->
+                    <div class="card-info">
+                        <h4 class="card-title">Ben Stockley - Filmmaker</h4>
+                        <p class="card-description">Dynamic filmmaker portfolio showcasing professional video work, commercial projects, and creative collaborations.</p>
+                        <div class="card-meta">
+                            <span class="update-status">✅ Live</span>
+                            <span class="update-time">Portfolio</span>
                         </div>
                     </div>
                 </div>
         
-                <div class="website-card">
-                    <!-- Website Preview Section (NOW AT TOP) -->
-                    <div class="website-preview-section">
+                <div class="dashboard-card">
+                    <!-- Website Preview Section -->
+                    <div class="card-preview">
                         <div class="site-preview-thumb reds-preview" onclick="openSitePreview('redsplastering', 'https://redsplastering.co.uk', 'Reds Plastering - Trade Services')">
                             <!-- Preview will show actual website screenshot -->
                         </div>
+                        <div class="card-overlay">
+                            <button class="card-action-btn" onclick="openSitePreview('redsplastering', 'https://redsplastering.co.uk', 'Reds Plastering - Trade Services')">🌐 Live Preview</button>
+                            <a href="https://redsplastering.co.uk" class="card-action-btn" target="_blank">🔗 Visit Site</a>
+                        </div>
                     </div>
-                    <!-- Text Info Section (NOW AT BOTTOM with glassmorphism) -->
-                    <div class="website-info reds-color">
-                        <div class="site-type-badge">Business</div>
-                        <div class="site-title-overlay">redsplastering.co.uk</div>
-                        <div class="preview-hint">🔍 Live Preview</div>
-                        <h3 class="website-title">Reds Plastering Services</h3>
-                        <p class="website-description">Professional trade services website with service showcases, contact systems, and business information management.</p>
-                        <div class="tech-stack"><strong>Tech:</strong> WordPress, Business Theme, Contact Forms, SEO Optimization</div>
-                        <div class="website-links">
-                            <button class="website-link preview-btn" onclick="openSitePreview('redsplastering', 'https://redsplastering.co.uk', 'Reds Plastering - Trade Services')">
-                                🌐 Live Preview
-                            </button>
-                            <a href="https://redsplastering.co.uk" class="external-link" target="_blank">
-                                🔗 Visit Site
-                            </a>
+                    <!-- Text Info Section -->
+                    <div class="card-info">
+                        <h4 class="card-title">Reds Plastering Services</h4>
+                        <p class="card-description">Professional trade services website with service showcases, contact systems, and business information management.</p>
+                        <div class="card-meta">
+                            <span class="update-status">✅ Live</span>
+                            <span class="update-time">Business</span>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Row 2 -->
-                <div class="website-card">
-                    <!-- Website Preview Section (NOW AT TOP) -->
-                    <div class="website-preview-section">
+                <div class="dashboard-card">
+                    <!-- Website Preview Section -->
+                    <div class="card-preview">
                         <div class="site-preview-thumb digital-preview" onclick="openSitePreview('digitald', 'https://digitald.website', 'Digital D - Creative Digital Solutions')">
                             <!-- Preview will show actual website screenshot -->
                         </div>
+                        <div class="card-overlay">
+                            <button class="card-action-btn" onclick="openSitePreview('digitald', 'https://digitald.website', 'Digital D - Creative Digital Solutions')">🌐 Live Preview</button>
+                            <a href="https://digitald.website" class="card-action-btn" target="_blank">🔗 Visit Site</a>
+                        </div>
                     </div>
-                    <!-- Text Info Section (NOW AT BOTTOM with glassmorphism) -->
-                    <div class="website-info digital-color">
-                        <div class="site-type-badge">Digital</div>
-                        <div class="site-title-overlay">digitald.website</div>
-                        <div class="preview-hint">🔍 Live Preview</div>
-                        <h3 class="website-title">Digital D - Creative Solutions</h3>
-                        <p class="website-description">Modern digital solutions website featuring creative services, portfolio showcase, and client collaboration tools.</p>
-                        <div class="tech-stack"><strong>Tech:</strong> WordPress, Custom Development, Interactive Elements, Modern Design</div>
-                        <div class="website-links">
-                            <button class="website-link preview-btn" onclick="openSitePreview('digitald', 'https://digitald.website', 'Digital D - Creative Digital Solutions')">
-                                🌐 Live Preview
-                            </button>
-                            <a href="https://digitald.website" class="external-link" target="_blank">
-                                🔗 Visit Site
-                            </a>
+                    <!-- Text Info Section -->
+                    <div class="card-info">
+                        <h4 class="card-title">Digital D - Creative Solutions</h4>
+                        <p class="card-description">Modern digital solutions website featuring creative services, portfolio showcase, and client collaboration tools.</p>
+                        <div class="card-meta">
+                            <span class="update-status">✅ Live</span>
+                            <span class="update-time">Digital</span>
                         </div>
                     </div>
                 </div>
                 
-                <div class="website-card">
-                    <!-- Website Preview Section (NOW AT TOP) -->
-                    <div class="website-preview-section">
+                <div class="dashboard-card">
+                    <!-- Website Preview Section -->
+                    <div class="card-preview">
                         <div class="site-preview-thumb urban-preview" onclick="openSitePreview('oururban', 'https://oururban.1976uk.com', 'Our Urban - Community Platform')">
                             <!-- Preview will show actual website screenshot -->
                         </div>
+                        <div class="card-overlay">
+                            <button class="card-action-btn" onclick="openSitePreview('oururban', 'https://oururban.1976uk.com', 'Our Urban - Community Platform')">🌐 Live Preview</button>
+                            <a href="https://oururban.1976uk.com" class="card-action-btn" target="_blank">🔗 Visit Site</a>
+                        </div>
                     </div>
-                    <!-- Text Info Section (NOW AT BOTTOM with glassmorphism) -->
-                    <div class="website-info urban-color">
-                        <div class="site-type-badge">Community</div>
-                        <div class="site-title-overlay">oururban.1976uk.com</div>
-                        <div class="preview-hint">🔍 Live Preview</div>
-                        <h3 class="website-title">Our Urban - Community Platform</h3>
-                        <p class="website-description">Community-focused platform for urban development, collaboration tools, and public engagement initiatives.</p>
-                        <div class="tech-stack"><strong>Tech:</strong> WordPress, Community Features, User Management, Interactive Content</div>
-                        <div class="website-links">
-                            <button class="website-link preview-btn" onclick="openSitePreview('oururban', 'https://oururban.1976uk.com', 'Our Urban - Community Platform')">
-                                🌐 Live Preview
-                            </button>
-                            <a href="https://oururban.1976uk.com" class="external-link" target="_blank">
-                                🔗 Visit Site
-                            </a>
+                    <!-- Text Info Section -->
+                    <div class="card-info">
+                        <h4 class="card-title">Our Urban - Community Platform</h4>
+                        <p class="card-description">Community-focused platform for urban development, collaboration tools, and public engagement initiatives.</p>
+                        <div class="card-meta">
+                            <span class="update-status">✅ Live</span>
+                            <span class="update-time">Community</span>
                         </div>
                     </div>
                 </div>
                 
-                <div class="website-card">
-                    <!-- Website Preview Section (NOW AT TOP) -->
-                    <div class="website-preview-section">
+                <div class="dashboard-card">
+                    <!-- Website Preview Section -->
+                    <div class="card-preview">
                         <div class="site-preview-thumb austen-preview" onclick="openSitePreview('davidausten', 'https://davidaustenstudio.com', 'David Austen Studio - Artist Portfolio')">
                             <!-- Preview will show actual website screenshot -->
                         </div>
+                        <div class="card-overlay">
+                            <button class="card-action-btn" onclick="openSitePreview('davidausten', 'https://davidaustenstudio.com', 'David Austen Studio - Artist Portfolio')">🌐 Live Preview</button>
+                            <a href="https://davidaustenstudio.com" class="card-action-btn" target="_blank">🔗 Visit Site</a>
+                        </div>
                     </div>
-                    <!-- Text Info Section (NOW AT BOTTOM with glassmorphism) -->
-                    <div class="website-info austen-color">
-                        <div class="site-type-badge">Art Studio</div>
-                        <div class="site-title-overlay">davidaustenstudio.com</div>
-                        <div class="preview-hint">🔍 Live Preview</div>
-                        <h3 class="website-title">David Austen Studio</h3>
-                        <p class="website-description">Professional artist studio website with gallery management, exhibition information, and optimized WordPress core.</p>
-                        <div class="tech-stack"><strong>Tech:</strong> WordPress, Gallery Systems, Performance Optimization, Plugin Management</div>
-                        <div class="website-links">
-                            <button class="website-link preview-btn" onclick="openSitePreview('davidausten', 'https://davidaustenstudio.com', 'David Austen Studio - Artist Portfolio')">
-                                🌐 Live Preview
-                            </button>
-                            <a href="https://davidaustenstudio.com" class="external-link" target="_blank">
-                                🔗 Visit Site
-                            </a>
+                    <!-- Text Info Section -->
+                    <div class="card-info">
+                        <h4 class="card-title">David Austen Studio</h4>
+                        <p class="card-description">Professional artist studio website with gallery management, exhibition information, and optimized WordPress core.</p>
+                        <div class="card-meta">
+                            <span class="update-status">✅ Live</span>
+                            <span class="update-time">Art Studio</span>
                         </div>
                     </div>
                 </div>
@@ -281,12 +281,16 @@ function openSitePreview(projectId, url, title) {
         screenshotDiv.innerHTML = `
             <img id="redsScreenshot" 
                  src="<?php echo get_template_directory_uri(); ?>/images/reds-plastering-large.png" 
-                 alt="Reds Plastering Website View" 
-                 class="reds-screenshot" />
-            <p class="screenshot-note">� Website Screenshot Preview - <a href="${url}" target="_blank">Visit live site</a></p>
+                 alt="Reds Plastering Website Desktop View" 
+                 class="reds-screenshot desktop-view" />
+            <p class="screenshot-note">📸 Website Screenshot Preview - <a href="${url}" target="_blank">Visit live site</a></p>
         `;
         
         iframe.parentNode.appendChild(screenshotDiv);
+        
+        // Set initial mobile button state
+        const mobileBtn = document.querySelector('.mobile-toggle span');
+        mobileBtn.textContent = '📱';
         
         // Set up mobile toggle functionality for Reds Plastering
         window.redsToggleMobile = function() {
@@ -295,11 +299,12 @@ function openSitePreview(projectId, url, title) {
             
             if (screenshot.src.includes('large.png')) {
                 // Switch to mobile view
-                screenshot.src = '<?php echo get_template_directory_uri(); ?>/images/reds-plastering-small.png';
+                screenshot.src = '<?php echo get_template_directory_uri(); ?>/images/reds-plastering-mobile.png';
                 screenshot.alt = 'Reds Plastering Website Mobile View';
                 screenshot.className = 'reds-screenshot mobile-view';
                 mobileBtn.style.background = 'rgba(102, 126, 234, 0.8)';
                 mobileBtn.style.color = 'white';
+                mobileBtn.querySelector('span').textContent = '💻';
             } else {
                 // Switch back to desktop view
                 screenshot.src = '<?php echo get_template_directory_uri(); ?>/images/reds-plastering-large.png';
@@ -307,6 +312,7 @@ function openSitePreview(projectId, url, title) {
                 screenshot.className = 'reds-screenshot desktop-view';
                 mobileBtn.style.background = '';
                 mobileBtn.style.color = '';
+                mobileBtn.querySelector('span').textContent = '📱';
             }
         };
         
@@ -348,10 +354,22 @@ function closeSitePreview() {
         delete window.redsToggleMobile;
     }
     
+    // Reset mobile button icon
+    const mobileBtn = document.querySelector('.mobile-toggle span');
+    if (mobileBtn) {
+        mobileBtn.textContent = '📱';
+    }
+    
     document.body.style.overflow = 'auto';
 }
 
 function toggleMobileView() {
+    // Check if we're viewing Reds Plastering screenshots
+    if (window.redsToggleMobile) {
+        window.redsToggleMobile();
+        return;
+    }
+    
     // Check if we're viewing a screenshot (any site with screenshots)
     const siteScreenshot = document.getElementById('siteScreenshot');
     if (siteScreenshot) {
@@ -399,93 +417,171 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
+/* Global Body Styling for Proper Background Rendering */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-x: hidden;
+}
+
 /* ==========================================================================
-   WEBSITES GALLERY STYLES - ENHANCED 3x2 GRID
+   FUTURE TECH ICE STONE BACKGROUND - SOPHISTICATED AESTHETIC
+   Low-key future tech ice cold stone look with animated lines
    ========================================================================== */
 
-.websites-content {
-    padding: 20px 0;
-}
-
-/* Page header styles removed */
-
-/* Enhanced 3x2 Grid Layout - FORCE 3 COLUMNS */
-.websites-showcase {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr 1fr !important;
-    grid-auto-rows: auto !important;
-    gap: 25px !important;
-    margin: 50px auto !important;
-    max-width: 1200px !important;
-    width: 90% !important;
-    min-height: auto !important;
-    /* Add deeper background for card depth */
+/* Future Tech Ice Stone Background */
+.future-tech-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
     background: linear-gradient(135deg, 
-        rgba(102, 126, 234, 0.08) 0%, 
-        rgba(118, 75, 162, 0.08) 25%,
-        rgba(255, 154, 158, 0.05) 50%,
-        rgba(250, 208, 196, 0.05) 75%,
-        rgba(102, 126, 234, 0.08) 100%
-    ) !important;
-    padding: 25px !important;
-    border-radius: 25px;
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box !important;
-}
-
-/* FORCE 3-column layout on desktop - NUCLEAR OPTION */
-@media (min-width: 768px) {
-    .websites-showcase {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr 1fr !important;
-        grid-auto-rows: auto !important;
-        gap: 25px !important;
-        padding: 25px !important;
-        width: 90% !important;
-        max-width: 1200px !important;
-    }
-    .website-card {
-        width: 100% !important;
-        max-width: none !important;
-        flex: none !important;
-    }
-}
-
-/* Enhanced Website Cards - NEW LAYOUT: Info Top, Preview Bottom */
-.website-card {
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.15) 0%, 
-        rgba(255, 255, 255, 0.08) 100%
+        #f8f9fa 0%,     /* Clean ice white */
+        #e9ecef 25%,    /* Subtle grey */
+        #dee2e6 50%,    /* Stone grey */
+        #ced4da 75%,    /* Darker stone */
+        #adb5bd 100%    /* Steel finish */
     );
+    overflow: hidden;
+}
+
+.tech-stripes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    opacity: 0.6; /* More pronounced as requested */
+}
+
+.tech-stripe {
+    position: absolute;
+    background: linear-gradient(45deg, 
+        transparent 0%, 
+        rgba(33, 150, 243, 0.4) 15%,    /* Strong blue */
+        rgba(76, 175, 80, 0.5) 25%,     /* Vibrant green */
+        rgba(244, 67, 54, 0.4) 35%,     /* Bold red */
+        rgba(255, 255, 255, 0.8) 50%,   /* Bright center */
+        rgba(244, 67, 54, 0.4) 65%,     /* Bold red */
+        rgba(76, 175, 80, 0.5) 75%,     /* Vibrant green */
+        rgba(33, 150, 243, 0.4) 85%,    /* Strong blue */
+        transparent 100%
+    );
+    height: 2px; /* Thicker for more pronounced effect */
+    width: 100%;
+    animation: techStripeMove 25s linear infinite;
+    box-shadow: 
+        0 0 4px rgba(33, 150, 243, 0.3),
+        0 0 8px rgba(76, 175, 80, 0.2),
+        0 0 6px rgba(244, 67, 54, 0.2);
+}
+
+.tech-stripe.stripe-1 { top: 8%; animation-delay: 0s; }
+.tech-stripe.stripe-2 { top: 22%; animation-delay: -5s; }
+.tech-stripe.stripe-3 { top: 36%; animation-delay: -10s; }
+.tech-stripe.stripe-4 { top: 52%; animation-delay: -15s; }
+.tech-stripe.stripe-5 { top: 68%; animation-delay: -20s; }
+.tech-stripe.stripe-6 { top: 84%; animation-delay: -3s; }
+
+@keyframes techStripeMove {
+    0% { transform: translateX(-100%) rotate(45deg) scaleY(1); opacity: 0; }
+    10% { opacity: 0.3; }
+    50% { opacity: 0.6; transform: translateX(0%) rotate(45deg) scaleY(1.2); }
+    90% { opacity: 0.3; }
+    100% { transform: translateX(100%) rotate(45deg) scaleY(1); opacity: 0; }
+}
+
+/* Enhanced body styling for tech aesthetic */
+body.page-template-page-websites {
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* DASHBOARD LAYOUT - COPY FROM WORKING GALLERY */
+.dashboard-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    color: white;
+}
+
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 40px 20px;
+}
+
+.dashboard-title h1 {
+    color: #ffffff;
+    font-size: 3em;
+    margin: 0 0 15px 0;
+    font-weight: 600;
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.7);
+}
+
+.dashboard-subtitle {
+    color: #f0f0f0;
+    font-size: 1.4em;
+    margin: 0;
+    font-weight: 400;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Dashboard Sections */
+.dashboard-section {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 30px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-section h2 {
+    color: #ffffff;
+    font-size: 1.8em;
+    margin: 0 0 10px 0;
+    font-weight: 500;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.dashboard-section p {
+    color: #e8e8e8;
+    font-size: 1.1em;
+    margin-bottom: 30px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Gallery Grid - DASHBOARD STYLE */
+.dashboard-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 30px;
+}
+
+/* Dashboard Cards - WORKING LAYOUT */
+.dashboard-card {
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 20px;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    transition: all 0.4s ease;
-    backdrop-filter: blur(15px);
-    position: relative;
-    width: 100% !important;
-    max-width: none !important;
-    min-width: 0 !important;
-    flex: none !important;
-    display: flex;
-    flex-direction: column;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
-.website-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 
-        0 20px 60px rgba(0, 0, 0, 0.25),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.3);
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.22) 0%, 
-        rgba(255, 255, 255, 0.12) 100%
-    );
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .featured-site {
@@ -498,29 +594,101 @@ document.addEventListener('DOMContentLoaded', function() {
     box-shadow: 0 20px 60px rgba(103, 126, 234, 0.3);
 }
 
-/* Website Image/Thumbnail Area */
-.website-image {
+.card-preview {
     position: relative;
-    aspect-ratio: 16/9;
+    height: 200px;
     overflow: hidden;
 }
 
-.site-preview-thumb {
+.card-image, .site-preview-thumb {
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
     cursor: pointer;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2em;
-    font-weight: bold;
-    color: white;
-    transition: all 0.3s ease;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+}
+
+.dashboard-card:hover .card-image,
+.dashboard-card:hover .site-preview-thumb {
+    transform: scale(1.05);
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.dashboard-card:hover .card-overlay {
+    opacity: 1;
+}
+
+.card-action-btn {
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    color: #333;
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.card-action-btn:hover {
+    background: white;
+    transform: translateY(-2px);
+    color: #333;
+    text-decoration: none;
+}
+
+.card-info {
+    padding: 20px;
+}
+
+.card-title {
+    color: #ffffff;
+    font-size: 1.3em;
+    margin: 0 0 10px 0;
+    font-weight: 600;
+}
+
+.card-description {
+    color: #e0e0e0;
+    font-size: 0.95em;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85em;
+}
+
+.update-status {
+    color: #4ade80;
+    font-weight: 500;
+}
+
+.update-time {
+    color: #d1d5db;
 }
 
 /* Website Screenshot Backgrounds */
@@ -533,7 +701,7 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 .reds-preview {
-    background-image: url('<?php echo get_template_directory_uri(); ?>/images/reds-screenshot.jpg') !important;
+    background-image: url('<?php echo get_template_directory_uri(); ?>/images/reds-plastering-large.png') !important;
 }
 
 .digital-preview {
@@ -548,469 +716,7 @@ document.addEventListener('DOMContentLoaded', function() {
     background-image: url('<?php echo get_template_directory_uri(); ?>/images/austen-screenshot.jpg') !important;
 }
 
-/* OLD STYLES REMOVED - Now using website previews instead of solid gradients */
-
-/* Screenshot Preview Styles for sites that can't be embedded */
-.screenshot-preview {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: #f8f9fa;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.reds-screenshot {
-    max-width: 90%;
-    max-height: 80%;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    margin-bottom: 15px;
-    object-fit: contain;
-    transition: all 0.3s ease;
-}
-
-.reds-screenshot.mobile-view {
-    max-width: 50%;
-    max-height: 70%;
-}
-
-.screenshot-note {
-    color: #666;
-    font-size: 0.9em;
-    text-align: center;
-    margin: 0;
-    max-width: 80%;
-}
-
-.screenshot-note a {
-    color: #007cba;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.screenshot-note a:hover {
-    text-decoration: underline;
-}
-
-/* Responsive screenshot display */
-@media (max-width: 768px) {
-    .reds-screenshot {
-        max-width: 95%;
-        max-height: 70%;
-    }
-    
-    .reds-screenshot.mobile-view {
-        max-width: 60%;
-        max-height: 75%;
-    }
-    
-    .screenshot-note {
-        font-size: 0.8em;
-        max-width: 95%;
-    }
-}
-
-/* Preview text overlays - UPDATED STYLES */
-    font-size: 1.1em;
-    text-align: center;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.preview-hint {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 20px;
-    font-size: 0.9em;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    font-weight: normal;
-}
-
-.site-preview-thumb:hover .preview-hint {
-    opacity: 1;
-}
-
-.site-preview-thumb:hover {
-    transform: scale(1.05);
-}
-
-.site-type-badge {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 6px 12px;
-    border-radius: 15px;
-    font-size: 0.8em;
-    text-transform: uppercase;
-    font-weight: 600;
-    backdrop-filter: blur(10px);
-}
-
-/* Website Info Section - NOW AT BOTTOM with solid color backgrounds */
-.website-info {
-    padding: 25px;
-    position: relative;
-    flex: 0 0 auto;
-}
-
-/* Colored backgrounds for each site - ENHANCED GLASSMORPHISM */
-.dragica-color {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        0 2px 8px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.4);
-    position: relative;
-}
-
-.dragica-color::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.25) 0%, 
-        rgba(255, 255, 255, 0.1) 50%,
-        rgba(255, 255, 255, 0.05) 100%
-    );
-    border-radius: inherit;
-    pointer-events: none;
-}
-
-.ben-color {
-    background: linear-gradient(135deg, #4834d4 0%, #686de0 100%);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        0 2px 8px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.4);
-}
-
-.reds-color {
-    background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
-}
-
-.digital-color {
-    background: linear-gradient(135deg, #00cec9 0%, #00b894 100%);
-}
-
-.urban-color {
-    background: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
-}
-
-.austen-color {
-    background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
-}
-
-/* Website Preview Section - NOW AT TOP with actual website screenshots */
-.website-preview-section {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-    flex: 1 1 auto;
-}
-
-.site-preview-thumb {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background-size: cover;
-    background-position: center;
-}
-
-/* Placeholder backgrounds - REPLACE WITH YOUR UPLOADED IMAGES */
-.dragica-preview {
-    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('<?php echo get_template_directory_uri(); ?>/images/dragica-screenshot.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-.ben-preview {
-    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('path-to-your-ben-screenshot.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-.reds-preview {
-    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('<?php echo get_template_directory_uri(); ?>/images/reds-plastering-large.png');
-    background-size: cover;
-    background-position: center;
-}
-
-/* Preview Overlay for hover effects and text */
-.preview-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        45deg,
-        rgba(0, 0, 0, 0.1) 0%,
-        rgba(0, 0, 0, 0.2) 50%,
-        rgba(0, 0, 0, 0.1) 100%
-    );
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.3s ease;
-}
-
-.site-preview-thumb:hover .preview-overlay {
-    background: linear-gradient(
-        45deg,
-        rgba(0, 0, 0, 0.2) 0%,
-        rgba(0, 0, 0, 0.4) 50%,
-        rgba(0, 0, 0, 0.2) 100%
-    );
-}
-
-.website-title {
-    color: #ffffff;
-    margin: 0 0 12px 0;
-    font-size: 1.4em;
-    font-weight: 600;
-    text-shadow: 
-        0 4px 8px rgba(0, 0, 0, 0.6),
-        0 2px 4px rgba(0, 0, 0, 0.4),
-        0 1px 2px rgba(0, 0, 0, 0.8);
-    position: relative;
-    z-index: 2;
-}
-
-.website-description {
-    color: #f8f8f8;
-    margin: 0 0 15px 0;
-    line-height: 1.6;
-    font-size: 1.05em;
-    text-shadow: 
-        0 3px 6px rgba(0, 0, 0, 0.5),
-        0 1px 3px rgba(0, 0, 0, 0.7);
-    position: relative;
-    z-index: 2;
-}
-
-.tech-stack {
-    color: #f0f0f0;
-    font-size: 1.0em;
-    margin: 15px 0 20px 0;
-    padding: 10px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
-    text-shadow: 
-        0 2px 4px rgba(0, 0, 0, 0.5),
-        0 1px 2px rgba(0, 0, 0, 0.7);
-    position: relative;
-    z-index: 2;
-}
-
-/* Site Type Badge - Enhanced glassmorphism */
-.site-type-badge {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 0.8em;
-    text-transform: uppercase;
-    font-weight: 600;
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 
-        0 4px 12px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.4);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-    z-index: 3;
-}
-
-/* Preview text overlays - Enhanced shadows */
-.site-title-overlay {
-    color: white;
-    font-size: 1.1em;
-    font-weight: 600;
-    text-shadow: 
-        0 4px 8px rgba(0, 0, 0, 0.8),
-        0 2px 4px rgba(0, 0, 0, 0.6),
-        0 1px 2px rgba(0, 0, 0, 0.9);
-    margin-bottom: 8px;
-    position: relative;
-    z-index: 2;
-}
-
-.preview-hint {
-    color: rgba(255, 255, 255, 0.95);
-    font-size: 0.9em;
-    text-shadow: 
-        0 3px 6px rgba(0, 0, 0, 0.7),
-        0 1px 3px rgba(0, 0, 0, 0.8);
-    position: relative;
-    z-index: 2;
-}
-
-/* Website Links */
-.website-links {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.website-link,
-.external-link {
-    color: white;
-    text-decoration: none;
-    padding: 12px 20px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 25px;
-    transition: all 0.3s ease;
-    font-size: 1.0em;
-    background: none;
-    cursor: pointer;
-    font-family: inherit;
-    font-weight: 500;
-}
-
-.preview-btn {
-    background: rgba(103, 126, 234, 0.8);
-    border-color: rgba(103, 126, 234, 1);
-}
-
-.preview-btn:hover {
-    background: rgba(103, 126, 234, 1);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(103, 126, 234, 0.4);
-}
-
-.external-link:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.6);
-    transform: translateY(-2px);
-}
-
-/* Portfolio Summary */
-.portfolio-summary {
-    text-align: center;
-    margin: 60px auto 40px;
-    max-width: 800px;
-    padding: 40px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-}
-
-.portfolio-summary h3 {
-    color: white;
-    font-size: 1.8em;
-    margin: 0 0 20px 0;
-    font-weight: 300;
-}
-
-.portfolio-summary p {
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.7;
-    font-size: 1.1em;
-    margin-bottom: 30px;
-}
-
-.skills-highlight {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-}
-
-.skill-tag {
-    background: rgba(103, 126, 234, 0.3);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 0.9em;
-    border: 1px solid rgba(103, 126, 234, 0.5);
-    font-weight: 500;
-}
-
-/* Responsive Design */
-/* Tablet: 2 columns */
-@media (max-width: 899px) and (min-width: 600px) {
-    .websites-showcase {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 20px;
-        padding: 25px 20px;
-        width: 95%;
-    }
-}
-
-/* Mobile: 1 column */
-@media (max-width: 599px) {
-    .websites-showcase {
-        grid-template-columns: 1fr !important;
-        gap: 20px;
-        margin: 30px 10px;
-        padding: 25px 15px;
-        width: 95%;
-    }
-}
-    
-    .website-info {
-        padding: 20px;
-    }
-    
-    .website-title {
-        font-size: 1.2em;
-    }
-    
-    .page-title {
-        font-size: 2em;
-    }
-    
-    .portfolio-summary {
-        margin: 40px 20px;
-        padding: 30px 20px;
-    }
-    
-    .skills-highlight {
-        gap: 8px;
-    }
-    
-    .skill-tag {
-        font-size: 0.8em;
-        padding: 6px 12px;
-    }
-}
-
-@media (max-width: 480px) {
-    .website-links {
-        flex-direction: column;
-    }
-    
-    .website-link,
-    .external-link {
-        text-align: center;
-        width: 100%;
-    }
-}
-
-/* Modal Styles - Reusing existing system with enhancements */
+/* Modal Styles - Enhanced for websites */
 .site-preview-modal {
     position: fixed;
     top: 0;
@@ -1159,6 +865,95 @@ document.addEventListener('DOMContentLoaded', function() {
     color: #666;
     font-size: 1.2em;
     font-weight: 500;
+}
+
+/* Screenshot Preview Styles for sites that can't be embedded */
+.screenshot-preview {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.reds-screenshot {
+    max-width: 90%;
+    max-height: 80%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin-bottom: 15px;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+.reds-screenshot.mobile-view {
+    max-width: 50%;
+    max-height: 70%;
+}
+
+.screenshot-note {
+    color: #666;
+    font-size: 0.9em;
+    text-align: center;
+    margin: 0;
+    max-width: 80%;
+}
+
+.screenshot-note a {
+    color: #007cba;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.screenshot-note a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .dashboard-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-content {
+        padding: 10px;
+    }
+    
+    .dashboard-section {
+        padding: 25px 20px;
+    }
+    
+    .dashboard-gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .dashboard-title h1 {
+        font-size: 2.2em;
+    }
+    
+    .reds-screenshot {
+        max-width: 95%;
+        max-height: 70%;
+    }
+    
+    .reds-screenshot.mobile-view {
+        max-width: 60%;
+        max-height: 75%;
+    }
+    
+    .screenshot-note {
+        font-size: 0.8em;
+        max-width: 95%;
+    }
 }
 </style>
 

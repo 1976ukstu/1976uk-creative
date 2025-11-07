@@ -34,50 +34,30 @@ echo '<style>body.home {
         <div class="home-menu-body">
             <div class="menu-grid">
                 <?php
-                // Portfolio Page
-                $portfolio_page = get_page_by_path('portfolio');
-                if ($portfolio_page) {
-                    echo '<div class="menu-card" onclick="window.location.href=\'' . get_permalink($portfolio_page->ID) . '\'">';
-                    echo '<div class="menu-card-icon">🎨</div>';
-                    echo '<h4>Portfolio</h4>';
-                    echo '<p>Creative work and project showcases</p>';
-                    echo '</div>';
-                }
-                
-                // Projects Page  
-                $projects_page = get_page_by_path('projects');
-                if ($projects_page) {
-                    echo '<div class="menu-card" onclick="window.location.href=\'' . get_permalink($projects_page->ID) . '\'">';
-                    echo '<div class="menu-card-icon">🚀</div>';
-                    echo '<h4>Projects</h4>';
-                    echo '<p>Development experiments and innovations</p>';
-                    echo '</div>';
-                }
-                
                 // Websites Page
                 $websites_page = get_page_by_path('websites');
                 if ($websites_page) {
-                    echo '<div class="menu-card" onclick="window.location.href=\'' . get_permalink($websites_page->ID) . '\'">';
+                    echo '<div class="menu-card" onclick="window.location.href=\'' . esc_url( home_url( '/websites' ) ) . '\'">';
                     echo '<div class="menu-card-icon">🌐</div>';
                     echo '<h4>Websites</h4>';
                     echo '<p>Interactive web development gallery</p>';
                     echo '</div>';
                 }
                 
-                // About Page
-                $about_page = get_page_by_path('about');
-                if ($about_page) {
-                    echo '<div class="menu-card" onclick="window.location.href=\'' . get_permalink($about_page->ID) . '\'">';
-                    echo '<div class="menu-card-icon">👋</div>';
-                    echo '<h4>About</h4>';
-                    echo '<p>Background and creative journey</p>';
+                // Gallery Page
+                $gallery_page = get_page_by_path('gallery');
+                if ($gallery_page) {
+                    echo '<div class="menu-card" onclick="window.location.href=\'' . esc_url( home_url( '/gallery' ) ) . '\'">';
+                    echo '<div class="menu-card-icon">🎨</div>';
+                    echo '<h4>Gallery</h4>';
+                    echo '<p>Dashboard-managed creative showcase</p>';
                     echo '</div>';
                 }
                 
                 // Contact Page
                 $contact_page = get_page_by_path('contact');
                 if ($contact_page) {
-                    echo '<div class="menu-card" onclick="window.location.href=\'' . get_permalink($contact_page->ID) . '\'">';
+                    echo '<div class="menu-card" onclick="window.location.href=\'' . esc_url( home_url( '/contact' ) ) . '\'">';
                     echo '<div class="menu-card-icon">📧</div>';
                     echo '<h4>Contact</h4>';
                     echo '<p>Get in touch for collaborations</p>';

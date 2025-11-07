@@ -314,20 +314,17 @@ function add_weekly_updates_capabilities() {
 add_action( 'admin_init', 'add_weekly_updates_capabilities' );
 
 // Enqueue scripts and styles
-function artist_theme_scripts() {
+function creative_theme_scripts() {
     // Enqueue Google Fonts (proper way, not @import)
-    wp_enqueue_style( 'artist-theme-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap', array(), null );
+    wp_enqueue_style( '1976uk-creative-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap', array(), null );
 
     // Enqueue main stylesheet with version for cache busting
-    wp_enqueue_style( 'artist-theme-style', get_stylesheet_uri(), array('artist-theme-fonts'), '1.0.2' );
+    wp_enqueue_style( '1976uk-creative-style', get_stylesheet_uri(), array('1976uk-creative-fonts'), '1.0.2' );
 
-    // Enqueue additional styles
-    wp_enqueue_style( 'artist-theme-custom-style', get_template_directory_uri() . '/assets/css/style.css', array('artist-theme-style'), '1.0.2' );
-
-    // Enqueue JavaScript file
-    wp_enqueue_script( 'artist-theme-scripts', get_template_directory_uri() . '/assets/js/scripts.js', array(), '1.0.3', true );
+    // Enqueue JavaScript file with updated version for hamburger menu fix
+    wp_enqueue_script( '1976uk-creative-scripts', get_template_directory_uri() . '/assets/js/scripts.js', array(), '1.0.4', true );
 }
-add_action( 'wp_enqueue_scripts', 'artist_theme_scripts' );
+add_action( 'wp_enqueue_scripts', 'creative_theme_scripts' );
 
 // Only remove specific problematic styles, keep accessibility ones
 function artist_theme_clean_styles() {
@@ -386,6 +383,149 @@ function creative_lab_side_fallback_menu() {
     }
     
     echo '</ul>';
+}
+
+// ==========================================================================
+// AJAX HANDLERS FOR DASHBOARD DRAG & DROP FUNCTIONALITY
+// ==========================================================================
+
+// Handle AJAX file uploads for gallery dashboard
+add_action('wp_ajax_upload_gallery_image', 'handle_gallery_image_upload');
+add_action('wp_ajax_nopriv_upload_gallery_image', 'handle_gallery_image_upload');
+
+function handle_gallery_image_upload() {
+    // Enable detailed error logging
+    error_log('Gallery image upload started');
+    
+    // Check if this is a valid AJAX request
+    if (!defined('DOING_AJAX') || !DOING_AJAX) {
+        error_log('Not an AJAX request');
+        wp_send_json_error('Not an AJAX request');
+        return;
+    }
+    
+    // Verify nonce for security
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'gallery_upload_nonce')) {
+        error_log('Security check failed - nonce invalid');
+        wp_send_json_error('Security check failed');
+        return;
+    }
+    
+    // Check if file was uploaded
+    if (!isset($_FILES['gallery_image']) || $_FILES['gallery_image']['error'] !== UPLOAD_ERR_OK) {
+        $error = $_FILES['gallery_image']['error'] ?? 'No file provided';
+        error_log('File upload error: ' . $error);
+        wp_send_json_error('No file uploaded or upload error: ' . $error);
+        return;
+    }
+    
+    $card_id = sanitize_text_field($_POST['card_id'] ?? '');
+    if (empty($card_id)) {
+        error_log('Card ID missing');
+        wp_send_json_error('Card ID is required');
+        return;
+    }
+    
+    $uploaded_file = $_FILES['gallery_image'];
+    
+    // Validate file type
+    $allowed_types = array('image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp');
+    $file_type = $uploaded_file['type'];
+    if (!in_array($file_type, $allowed_types)) {
+        error_log('Invalid file type: ' . $file_type);
+        wp_send_json_error('Invalid file type. Please upload JPG, PNG, GIF, or WebP images.');
+        return;
+    }
+    
+    // Validate file size (max 5MB)
+    $max_size = 5 * 1024 * 1024; // 5MB
+    if ($uploaded_file['size'] > $max_size) {
+        error_log('File too large: ' . $uploaded_file['size']);
+        wp_send_json_error('File too large. Maximum size is 5MB.');
+        return;
+    }
+    
+    // Use WordPress media handling
+    require_once(ABSPATH . 'wp-admin/includes/image.php');
+    require_once(ABSPATH . 'wp-admin/includes/file.php');
+    require_once(ABSPATH . 'wp-admin/includes/media.php');
+    
+    // Handle the upload
+    $upload_overrides = array(
+        'test_form' => false
+    );
+    
+    $movefile = wp_handle_upload($uploaded_file, $upload_overrides);
+    
+    if ($movefile && !isset($movefile['error'])) {
+        // Create attachment
+        $attachment = array(
+            'post_mime_type' => $movefile['type'],
+            'post_title' => 'Gallery Card ' . $card_id,
+            'post_content' => '',
+            'post_status' => 'inherit'
+        );
+        
+        $attach_id = wp_insert_attachment($attachment, $movefile['file']);
+        
+        if (!is_wp_error($attach_id)) {
+            $attach_data = wp_generate_attachment_metadata($attach_id, $movefile['file']);
+            wp_update_attachment_metadata($attach_id, $attach_data);
+            
+            // Store card metadata
+            update_option('gallery_card_' . $card_id . '_image', $movefile['url']);
+            update_option('gallery_card_' . $card_id . '_attachment_id', $attach_id);
+            update_option('gallery_card_' . $card_id . '_updated', current_time('mysql'));
+            
+            error_log('Upload successful for card: ' . $card_id);
+            
+            wp_send_json_success(array(
+                'url' => $movefile['url'],
+                'attachment_id' => $attach_id,
+                'card_id' => $card_id,
+                'message' => 'Upload successful!'
+            ));
+        } else {
+            error_log('Attachment creation failed: ' . $attach_id->get_error_message());
+            wp_send_json_error('Failed to create attachment: ' . $attach_id->get_error_message());
+        }
+    } else {
+        $error_message = isset($movefile['error']) ? $movefile['error'] : 'Unknown upload error';
+        error_log('Upload failed: ' . $error_message);
+        wp_send_json_error('Upload failed: ' . $error_message);
+    }
+}
+
+// Handle AJAX card data updates
+add_action('wp_ajax_update_card_data', 'handle_card_data_update');
+add_action('wp_ajax_nopriv_update_card_data', 'handle_card_data_update');
+
+function handle_card_data_update() {
+    // Verify nonce for security
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'gallery_upload_nonce')) {
+        wp_send_json_error('Security check failed');
+        return;
+    }
+    
+    $card_id = sanitize_text_field($_POST['card_id'] ?? '');
+    $title = sanitize_text_field($_POST['title'] ?? '');
+    $description = sanitize_textarea_field($_POST['description'] ?? '');
+    
+    if (empty($card_id)) {
+        wp_send_json_error('Card ID is required');
+        return;
+    }
+    
+    update_option('gallery_card_' . $card_id . '_title', $title);
+    update_option('gallery_card_' . $card_id . '_description', $description);
+    update_option('gallery_card_' . $card_id . '_updated', current_time('mysql'));
+    
+    wp_send_json_success(array(
+        'card_id' => $card_id,
+        'title' => $title,
+        'description' => $description,
+        'updated' => current_time('mysql')
+    ));
 }
 
 // Additional custom functions can be added below
