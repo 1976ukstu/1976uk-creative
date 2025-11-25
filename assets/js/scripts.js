@@ -458,11 +458,16 @@ document.addEventListener('DOMContentLoaded', function () {
     debugLog('❌ initHamburgerMenu failed:', error);
   }
 
-  try {
-    initLightbox();
-    debugLog('✅ initLightbox completed');
-  } catch (error) {
-    debugLog('❌ initLightbox failed:', error);
+  // Skip old lightbox on gallery page (uses its own 96% lightbox system)
+  if (!document.body.classList.contains('page-template-page-gallery')) {
+    try {
+      initLightbox();
+      debugLog('✅ initLightbox completed');
+    } catch (error) {
+      debugLog('❌ initLightbox failed:', error);
+    }
+  } else {
+    debugLog('📷 Gallery page detected - using 96% viewport lightbox system');
   }
 
   // Additional check for universal hamburger after a delay

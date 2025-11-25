@@ -1,0 +1,121 @@
+/* ==========================================================================
+   GALLERY PAGE STYLES
+   Extracted from main style.css for modular architecture
+   ========================================================================== */
+
+/* Remove flex interference - let grid handle everything */
+.gallery-content {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 20px 0 !important;
+}
+
+/* ==========================================================================
+   GALLERY SHOWCASE GRID SYSTEM
+   Nuclear option with maximum specificity for reliable layout
+   ========================================================================== */
+
+/* Desktop - 3 columns (default) */
+body .gallery-showcase,
+html body .gallery-showcase,
+.site .gallery-showcase,
+#page .gallery-showcase,
+body.page-template-page-gallery .gallery-showcase {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 25px !important;
+  margin: 50px auto !important;
+  max-width: 1200px !important;
+  width: 90% !important;
+  min-height: auto !important;
+  grid-gap: 25px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+}
+
+/* Tablet - 2 columns */
+@media (max-width: 1024px) and (min-width: 701px) {
+  body .gallery-showcase,
+  html body .gallery-showcase,
+  .site .gallery-showcase,
+  #page .gallery-showcase,
+  body.page-template-page-gallery .gallery-showcase {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 25px !important;
+    margin: 50px auto !important;
+    max-width: 900px !important;
+    width: 90% !important;
+    min-height: auto !important;
+  }
+}
+
+/* Mobile - 1 column */
+@media (max-width: 700px) {
+  body .gallery-showcase,
+  html body .gallery-showcase,
+  .site .gallery-showcase,
+  #page .gallery-showcase,
+  body.page-template-page-gallery .gallery-showcase {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    margin: 30px auto !important;
+    max-width: 500px !important;
+    width: 95% !important;
+    min-height: auto !important;
+  }
+}
+
+/* ==========================================================================
+   ULTIMATE GALLERY SHOWCASE OVERRIDE
+   Maximum override power - placed at end for ultimate precedence
+   ========================================================================== */
+
+/* ULTIMATE GALLERY SHOWCASE OVERRIDE - NOTHING CAN OVERRIDE THIS */
+html body.page-template-page-gallery #page .gallery-showcase,
+html body.page-template-page-gallery .site .gallery-showcase,
+html body.page-template-page-gallery .gallery-showcase {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 25px !important;
+  margin: 50px auto !important;
+  max-width: 1200px !important;
+  width: 90% !important;
+  min-height: auto !important;
+  grid-gap: 25px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+}
+
+/* TABLET OVERRIDE */
+@media (max-width: 1024px) and (min-width: 701px) {
+  html body.page-template-page-gallery #page .gallery-showcase,
+  html body.page-template-page-gallery .site .gallery-showcase,
+  html body.page-template-page-gallery .gallery-showcase {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 25px !important;
+    margin: 50px auto !important;
+    max-width: 900px !important;
+    width: 90% !important;
+  }
+}
+
+/* MOBILE OVERRIDE */
+@media (max-width: 700px) {
+  html body.page-template-page-gallery #page .gallery-showcase,
+  html body.page-template-page-gallery .site .gallery-showcase,
+  html body.page-template-page-gallery .gallery-showcase {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    margin: 30px auto !important;
+    max-width: 500px !important;
+    width: 95% !important;
+  }
+}

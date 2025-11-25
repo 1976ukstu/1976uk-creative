@@ -313,16 +313,133 @@ function add_weekly_updates_capabilities() {
 }
 add_action( 'admin_init', 'add_weekly_updates_capabilities' );
 
-// Enqueue scripts and styles
+// Enqueue modular CSS and scripts - NEW ARCHITECTURE!
 function creative_theme_scripts() {
-    // Enqueue Google Fonts (proper way, not @import)
-    wp_enqueue_style( '1976uk-creative-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap', array(), null );
-
-    // Enqueue main stylesheet with version for cache busting
-    wp_enqueue_style( '1976uk-creative-style', get_stylesheet_uri(), array('1976uk-creative-fonts'), '1.0.2' );
-
-    // Enqueue JavaScript file with updated version for hamburger menu fix
-    wp_enqueue_script( '1976uk-creative-scripts', get_template_directory_uri() . '/assets/js/scripts.js', array(), '1.0.4', true );
+    // Version for cache busting
+    $version = '2.0.0'; // Bumped for major refactor
+    
+    // Core styles (typography, colors, global elements)
+    wp_enqueue_style( 
+        '1976uk-core', 
+        get_template_directory_uri() . '/assets/css/core.css', 
+        array(), 
+        $version 
+    );
+    
+    // Layout styles (grid systems, containers, responsive)
+    wp_enqueue_style( 
+        '1976uk-layout', 
+        get_template_directory_uri() . '/assets/css/layout.css', 
+        array('1976uk-core'), 
+        $version 
+    );
+    
+    // Component styles (cards, buttons, modals)
+    wp_enqueue_style( 
+        '1976uk-components', 
+        get_template_directory_uri() . '/assets/css/components.css', 
+        array('1976uk-layout'), 
+        $version 
+    );
+    
+    // Page-specific styles
+    if (is_front_page()) {
+        wp_enqueue_style( 
+            '1976uk-homepage', 
+            get_template_directory_uri() . '/assets/css/pages/homepage.css', 
+            array('1976uk-components'), 
+            $version 
+        );
+    }
+    
+    // Websites page styles
+    if (is_page('websites')) {
+        wp_enqueue_style( 
+            '1976uk-websites', 
+            get_template_directory_uri() . '/assets/css/pages/websites.css', 
+            array('1976uk-components'), 
+            $version 
+        );
+    }
+    
+    // Gallery page styles  
+    if (is_page('gallery')) {
+        wp_enqueue_style( 
+            '1976uk-gallery', 
+            get_template_directory_uri() . '/assets/css/pages/gallery.css', 
+            array('1976uk-components'), 
+            $version 
+        );
+    }
+    
+    // Contact page styles
+    if (is_page('contact')) {
+        wp_enqueue_style( 
+            '1976uk-contact', 
+            get_template_directory_uri() . '/assets/css/pages/contact.css', 
+            array('1976uk-components'), 
+            $version 
+        );
+    }
+    
+    // Portfolio page styles
+    if (is_page('portfolio')) {
+        wp_enqueue_style( 
+            '1976uk-portfolio', 
+            get_template_directory_uri() . '/assets/css/pages/portfolio.css', 
+            array('1976uk-components'), 
+            $version 
+        );
+    }
+    
+    // Projects page styles
+    if (is_page('projects')) {
+        wp_enqueue_style( 
+            '1976uk-projects', 
+            get_template_directory_uri() . '/assets/css/pages/projects.css', 
+            array('1976uk-components'), 
+            $version 
+        );
+    }
+    
+    // Text page styles
+    if (is_page('text')) {
+        wp_enqueue_style( 
+            '1976uk-text', 
+            get_template_directory_uri() . '/assets/css/pages/text.css', 
+            array('1976uk-components'), 
+            $version 
+        );
+    }
+    
+    // About page styles
+    if (is_page('about')) {
+        wp_enqueue_style( 
+            '1976uk-about', 
+            get_template_directory_uri() . '/assets/css/pages/about.css', 
+            array('1976uk-components'), 
+            $version 
+        );
+    }
+    
+    // Debug styles (only load when needed)
+    if (isset($_GET['debug']) && $_GET['debug'] === 'layout') {
+        wp_enqueue_style( 
+            '1976uk-debug', 
+            get_template_directory_uri() . '/assets/css/debug.css', 
+            array('1976uk-components'), 
+            $version 
+        );
+        
+        // Add debug class to body
+        add_filter('body_class', function($classes) {
+            $classes[] = 'debug-layout';
+            return $classes;
+        });
+    }
+    
+    // Keep the existing JavaScript
+    wp_enqueue_script( '1976uk-creative-scripts', get_template_directory_uri() . '/assets/js/scripts.js', array(), $version, true );
 }
 add_action( 'wp_enqueue_scripts', 'creative_theme_scripts' );
 

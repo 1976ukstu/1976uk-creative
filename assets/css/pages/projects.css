@@ -1,0 +1,132 @@
+/* ==========================================================================
+   PROJECTS PAGE STYLES
+   Extracted from main style.css for modular architecture
+   Gallery grid system for projects and paintings
+   ========================================================================== */
+
+/* ==========================================================================
+   PROJECT GALLERY SYSTEM
+   Card-based grid layout for project items
+   ========================================================================== */
+
+/* Project gallery grid */
+.project-item {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+.project-item img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+}
+
+.project-details {
+  padding: 20px;
+}
+
+.commission-details h3 {
+  font-size: 1.4em;
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.commission-details p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+/* Contact section for commissions */
+
+/* Responsive adjustments for commissions */
+@media (max-width: 768px) {
+}
+
+/* ==========================================================================
+   PAINTINGS GALLERY SYSTEM
+   Specialized layout for painting portfolio items
+   ========================================================================== */
+
+/* Paintings gallery grid */
+.painting-item {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.painting-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+.painting-item img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+}
+
+.painting-details {
+  padding: 20px;
+}
+
+.painting-details h3 {
+  font-size: 1.4em;
+  color: #333;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.painting-details p:first-of-type {
+  font-size: 0.9em;
+  color: #888;
+  font-style: italic;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.painting-details p:last-of-type {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* Contact section for paintings */
+
+/* Responsive adjustments for paintings */
+@media (max-width: 768px) {
+}
+
+/* ==========================================================================
+   SOCIAL LINKS SYSTEM
+   Social media integration for projects
+   ========================================================================== */
+
+.social-link:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: white;
+  text-decoration: none;
+}
+
+/* Responsive adjustments for contact */
+@media (max-width: 768px) {
+}
+
+.social-links {
+  flex-direction: column;
+  align-items: center;
+}

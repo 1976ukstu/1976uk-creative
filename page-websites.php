@@ -8,8 +8,8 @@
 get_header();
 ?>
 
-<!-- Future Tech Ice Stone Background -->
-<div class="future-tech-background">
+<!-- Future Tech Ice Stone Background - TEMPORARILY COMMENTED OUT FOR PERFORMANCE -->
+<!-- <div class="future-tech-background">
     <div class="tech-stripes">
         <div class="tech-stripe stripe-1"></div>
         <div class="tech-stripe stripe-2"></div>
@@ -18,7 +18,10 @@ get_header();
         <div class="tech-stripe stripe-5"></div>
         <div class="tech-stripe stripe-6"></div>
     </div>
-</div>
+</div> -->
+
+<!-- Simple Gentle Gradient Background (Temporary) -->
+<div class="gentle-gradient-background"></div>
 
 <div class="site-title">
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="color: inherit; text-decoration: none;">
@@ -33,21 +36,10 @@ get_header();
     <span></span>
 </button>
 
-<!-- Universal Menu Modal -->
-<div class="universal-menu-modal">
-    <div class="universal-menu-content">
-        <div class="universal-menu-header">
-            <h3>Navigation</h3>
-            <button class="universal-close-button" aria-label="Close menu">×</button>
-        </div>
-        <div class="universal-menu-items">
-            <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
-            <a href="<?php echo esc_url( home_url( '/websites' ) ); ?>">Websites</a>
-            <a href="<?php echo esc_url( home_url( '/gallery' ) ); ?>">Gallery</a>
-            <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>">Contact</a>
-        </div>
-    </div>
-</div>
+<?php
+// Include the enhanced universal menu
+get_template_part('template-parts/enhanced-universal-menu');
+?>
 
 <div id="primary" class="content-area">
     <main id="main" class="site-main">
@@ -915,6 +907,15 @@ body.page-template-page-websites {
 }
 
 /* Responsive Design */
+
+/* Large Desktop Enhancement - Bigger cards, maintain 40px screen margins */
+@media (min-width: 1250px) {
+    .dashboard-gallery-grid {
+        grid-template-columns: repeat(3, 1fr); /* Keep exactly 3 cards */
+        gap: 40px; /* Larger gaps between the bigger cards */
+    }
+}
+
 @media (max-width: 1024px) {
     .dashboard-gallery-grid {
         grid-template-columns: repeat(2, 1fr);

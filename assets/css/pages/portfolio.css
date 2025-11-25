@@ -1,0 +1,245 @@
+/* ==========================================================================
+   PORTFOLIO PAGE STYLES
+   Extracted from main style.css for modular architecture
+   Professional portfolio grid system with lightbox functionality
+   ========================================================================== */
+
+/* ==========================================================================
+   PORTFOLIO CONTENT CONTAINER
+   Main layout and page structure
+   ========================================================================== */
+
+/* Portfolio Content Container */
+.portfolio-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Page Header */
+.page-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.page-title {
+  font-size: 3em;
+  font-weight: 300;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.page-intro {
+  font-size: 1.2em;
+  line-height: 1.6;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   PORTFOLIO GRID SYSTEM
+   Responsive grid layout for portfolio items
+   ========================================================================== */
+
+/* Portfolio Grid */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+/* Portfolio Cards */
+.portfolio-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portfolio-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Portfolio Images */
+.portfolio-image {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.portfolio-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.portfolio-image img:hover {
+  transform: scale(1.05);
+}
+
+/* Portfolio Info */
+.portfolio-info {
+  padding: 25px;
+}
+
+.portfolio-title {
+  font-size: 1.4em;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.portfolio-description {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.portfolio-link {
+  display: inline-block;
+  background: #333;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9em;
+  transition: background 0.3s ease;
+}
+
+.portfolio-link:hover {
+  background: #555;
+}
+
+/* No Portfolio Items Message */
+.no-portfolio-items {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+  font-size: 1.1em;
+}
+
+/* ==========================================================================
+   LIGHTBOX FUNCTIONALITY
+   Modal overlay for viewing portfolio images
+   ========================================================================== */
+
+/* Lightbox Styles */
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 30px;
+  color: #333;
+  cursor: pointer;
+  z-index: 1001;
+  background: rgba(255, 255, 255, 0.9);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+#lightbox-image {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: contain;
+}
+
+.lightbox-info {
+  padding: 25px;
+}
+
+.lightbox-info h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.lightbox-info p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   Mobile-first responsive breakpoints
+   ========================================================================== */
+
+/* Large screens to tablet */
+@media (max-width: 1200px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+}
+
+/* Tablet to mobile */
+@media (max-width: 768px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .portfolio-content {
+    padding: 30px 15px;
+  }
+
+  .page-title {
+    font-size: 2.5em;
+  }
+
+  .lightbox-content {
+    max-width: 95%;
+    max-height: 95%;
+  }
+
+  .portfolio-info {
+    padding: 20px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 2em;
+  }
+
+  .portfolio-title {
+    font-size: 1.2em;
+  }
+}
