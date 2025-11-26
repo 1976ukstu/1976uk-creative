@@ -255,25 +255,4 @@ get_template_part('template-parts/enhanced-universal-menu');
     </main>
 </div>
 
-<style>
-/* Override text shadows for crisp white subtitles - About page specific */
-.about-intro h3,
-.about-intro h2,
-.technical-features h4,
-.feature-card h4,
-.dashboard-content h3,
-.dashboard-content h2,
-.about-content h3,
-.about-content h2 {
-    text-shadow: none !important;
-    color: #ffffff !important;
-    font-weight: 600 !important;
-}
-
-/* Broader override for any shadowy text in dashboard content */
-.dashboard-content * {
-    text-shadow: none !important;
-}
-</style>
-
 <?php get_footer(); ?>

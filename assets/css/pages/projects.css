@@ -1,132 +1,308 @@
 /* ==========================================================================
    PROJECTS PAGE STYLES
-   Extracted from main style.css for modular architecture
-   Gallery grid system for projects and paintings
+   Hub page template with development roadmap and subdomain strategy
+   Strategic planning and technical innovation showcase
    ========================================================================== */
 
 /* ==========================================================================
-   PROJECT GALLERY SYSTEM
-   Card-based grid layout for project items
+   TEXT SHADOW OVERRIDES
+   Ensure crisp white typography across all Projects page elements
    ========================================================================== */
 
-/* Project gallery grid */
-.project-item {
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Override text shadows for crisp white subtitles - Projects page specific */
+.projects-intro h3,
+.projects-intro h2,
+.project-concepts h4,
+.project-concept-card h4,
+.dashboard-content h3,
+.dashboard-content h2,
+.projects-content h3,
+.projects-content h2 {
+    text-shadow: none !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
 }
 
-.project-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
-}
-
-.project-item img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  display: block;
-}
-
-.project-details {
-  padding: 20px;
-}
-
-.commission-details h3 {
-  font-size: 1.4em;
-  color: #333;
-  margin-bottom: 10px;
-  font-weight: 600;
-}
-
-.commission-details p {
-  color: #666;
-  line-height: 1.6;
-  margin-bottom: 15px;
-}
-
-/* Contact section for commissions */
-
-/* Responsive adjustments for commissions */
-@media (max-width: 768px) {
+/* Broader override for any shadowy text in dashboard content */
+.dashboard-content * {
+    text-shadow: none !important;
 }
 
 /* ==========================================================================
-   PAINTINGS GALLERY SYSTEM
-   Specialized layout for painting portfolio items
+   PROJECTS GRID LAYOUT
+   Two-column Hub page structure matching About page design
    ========================================================================== */
 
-/* Paintings gallery grid */
-.painting-item {
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Projects Grid Layout - matches About page structure */
+.projects-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+    margin-top: 40px;
 }
 
-.painting-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+/* Main Projects Content */
+.projects-main {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: 40px;
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
-.painting-item img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  display: block;
+/* Projects Sidebar */
+.projects-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 
-.painting-details {
-  padding: 20px;
-}
-
-.painting-details h3 {
-  font-size: 1.4em;
-  color: #333;
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-
-.painting-details p:first-of-type {
-  font-size: 0.9em;
-  color: #888;
-  font-style: italic;
-  margin-bottom: 12px;
-  font-weight: 500;
-}
-
-.painting-details p:last-of-type {
-  color: #666;
-  line-height: 1.6;
-  margin-bottom: 0;
-}
-
-/* Contact section for paintings */
-
-/* Responsive adjustments for paintings */
-@media (max-width: 768px) {
+.tech-specs,
+.projects-status {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: 30px;
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
 /* ==========================================================================
-   SOCIAL LINKS SYSTEM
-   Social media integration for projects
+   PROJECT CONCEPT CARDS
+   Subdomain strategy showcase with interactive design
    ========================================================================== */
 
-.social-link:hover {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.5);
-  color: white;
-  text-decoration: none;
+/* Project Concept Cards */
+.concepts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 25px;
 }
 
-/* Responsive adjustments for contact */
+.project-concept-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 25px;
+    transition: all 0.3s ease;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.project-concept-card:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.concept-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.concept-status {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.concept-tech {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* ==========================================================================
+   DEVELOPMENT TIMELINE
+   Project roadmap with phased approach and status tracking
+   ========================================================================== */
+
+/* Development Timeline */
+.timeline-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.timeline-phase {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.phase-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.phase-header h4 {
+    margin: 0;
+    color: white;
+    font-size: 1.2em;
+}
+
+.phase-status {
+    font-size: 0.8em;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.phase-status.active {
+    background: rgba(46, 204, 113, 0.8);
+    color: white;
+}
+
+.phase-status.planned {
+    background: rgba(52, 152, 219, 0.8);
+    color: white;
+}
+
+.phase-status.future {
+    background: rgba(155, 89, 182, 0.8);
+    color: white;
+}
+
+.phase-tasks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.phase-tasks li {
+    padding: 6px 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95em;
+    line-height: 1.4;
+}
+
+/* ==========================================================================
+   TECHNICAL SPECIFICATIONS AND STATUS
+   Development metrics and progress tracking
+   ========================================================================== */
+
+/* Tech Specs List */
+.tech-specs ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tech-specs li {
+    margin-bottom: 12px;
+    font-size: 0.95em;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    line-height: 1.4;
+}
+
+.tech-specs li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.tech-specs strong {
+    color: white;
+    font-weight: 600;
+}
+
+/* Status Progress */
+.status-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.status-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.status-item:last-child {
+    border-bottom: none;
+}
+
+.status-name {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.status-progress {
+    font-size: 0.8em;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-weight: 600;
+    min-width: 45px;
+    text-align: center;
+}
+
+.status-progress.active {
+    background: rgba(46, 204, 113, 0.8);
+    color: white;
+}
+
+.status-progress.planning {
+    background: rgba(52, 152, 219, 0.8);
+    color: white;
+}
+
+.status-progress.future {
+    background: rgba(155, 89, 182, 0.8);
+    color: white;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   Mobile-first responsive breakpoints for projects page
+   ========================================================================== */
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+
 @media (max-width: 768px) {
-}
-
-.social-links {
-  flex-direction: column;
-  align-items: center;
+    .concepts-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .timeline-container {
+        gap: 20px;
+    }
+    
+    .phase-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
 }
