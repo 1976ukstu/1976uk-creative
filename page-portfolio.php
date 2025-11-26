@@ -2,11 +2,13 @@
 /**
  * Template Name: Portfolio
  * 
- * Custom template for Portfolio page with 3-card responsive grid
- * Uses ACF Free repeater fields for flexible content management
+ * Portfolio page for 1976uk Creative - external profiles and professional presence
  */
 get_header();
 ?>
+
+<!-- Man of Steel Gradient Background -->
+<div class="man-of-steel-gradient"></div>
 
 <div class="site-title">
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="color: inherit; text-decoration: none;">
@@ -21,451 +23,429 @@ get_header();
     <span></span>
 </button>
 
-<!-- Universal Menu Modal -->
-<div class="universal-menu-modal">
-    <div class="universal-menu-content">
-        <div class="universal-menu-header">
-            <h3>Navigation</h3>
-            <button class="universal-close-button" aria-label="Close menu">×</button>
-        </div>
-        <div class="universal-menu-items">
-            <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
-            <a href="<?php echo esc_url( home_url( '/websites' ) ); ?>">Websites</a>
-            <a href="<?php echo esc_url( home_url( '/gallery' ) ); ?>">Gallery</a>
-            <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>">Contact</a>
-        </div>
-    </div>
-</div>
+<?php
+// Include the enhanced universal menu
+get_template_part('template-parts/enhanced-universal-menu');
+?>
 
 <div id="primary" class="content-area">
     <main id="main" class="site-main">
         
-        <!-- Portfolio Content with Beautiful Styling -->
+        <!-- Portfolio Content with Dashboard Styling -->
         <div class="dashboard-content">
             
             <?php if (have_posts()) : ?>
                 <?php while (have_posts()) : the_post(); ?>
                     
-                    <!-- Beautiful Page Header -->
+                    <!-- Beautiful Page Header - Gallery Style -->
                     <div class="dashboard-header">
                         <div class="dashboard-title">
-                            <h1><?php the_title(); ?></h1>
+                            <h1>💼 Creative Technologist Portfolio</h1>
                         </div>
-                        <?php if (get_the_content()) : ?>
-                            <div class="dashboard-subtitle">
-                                <?php the_content(); ?>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                    
-                    <!-- Dashboard Section for Portfolio -->
-                    <div class="dashboard-section">
-                        <h2>🌐 Website Portfolio</h2>
-                        <p>Professional websites crafted with modern technology and beautiful design</p>
-                        
-                        <!-- Portfolio Grid -->
-                        <?php if (have_rows('portfolio_items')) : ?>
-                            <div class="dashboard-gallery-grid">
-                                <?php while (have_rows('portfolio_items')) : the_row(); 
-                                    $image = get_sub_field('portfolio_image');
-                                    $title = get_sub_field('portfolio_title');
-                                    $description = get_sub_field('portfolio_description');
-                                    $link = get_sub_field('portfolio_link');
-                                ?>
-                                    <div class="dashboard-card">
-                                        <?php if ($image) : ?>
-                                            <div class="card-preview">
-                                                <img src="<?php echo esc_url($image['url']); ?>" 
-                                                     alt="<?php echo esc_attr($image['alt']); ?>"
-                                                     class="card-image"
-                                                     onclick="openLightbox('<?php echo esc_url($image['url']); ?>', '<?php echo esc_js($title); ?>', '<?php echo esc_js($description); ?>')">
-                                                <div class="card-overlay">
-                                                    <?php if ($link) : ?>
-                                                        <a href="<?php echo esc_url($link); ?>" class="card-action-btn" target="_blank">🌐 Visit Site</a>
-                                                    <?php endif; ?>
-                                                    <button class="card-action-btn preview-btn" onclick="openLightbox('<?php echo esc_url($image['url']); ?>', '<?php echo esc_js($title); ?>', '<?php echo esc_js($description); ?>')">👁️ Preview</button>
-                                                </div>
-                                            </div>
-                                        <?php endif; ?>
-                                        
-                                        <div class="card-info">
-                                            <?php if ($title) : ?>
-                                                <h4 class="card-title"><?php echo esc_html($title); ?></h4>
-                                            <?php endif; ?>
-                                            
-                                            <?php if ($description) : ?>
-                                                <p class="card-description"><?php echo esc_html($description); ?></p>
-                                            <?php endif; ?>
-                                            
-                                            <div class="card-meta">
-                                                <span class="update-status">✅ Live</span>
-                                                <span class="update-time">Professional Site</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php endwhile; ?>
-                            </div>
-                        <?php else : ?>
-                            <div class="dashboard-section" style="text-align: center; padding: 60px 40px;">
-                                <h3 style="color: #ffffff; margin-bottom: 20px;">🚀 Portfolio Coming Soon</h3>
-                                <p style="color: #f0f0f0; font-size: 1.1em;">Amazing websites are being added to the portfolio. Check back soon to see our latest work!</p>
-                            </div>
-                        <?php endif; ?>
+                        <div class="dashboard-subtitle">
+                            Professional profiles, client work, and creative development showcase
+                        </div>
                     </div>
                     
                 <?php endwhile; ?>
             <?php endif; ?>
+            
+            <!-- Dashboard Section for Portfolio Links -->
+            <div class="dashboard-section">
+                <h2>🌟 Professional Presence</h2>
+                <p>External portfolio links and professional profiles</p>
+                    
+                    <!-- Portfolio Grid Layout -->
+                    <div class="portfolio-grid">
+                        
+                        <!-- Main Portfolio Content -->
+                        <div class="portfolio-main">
+                            <?php if (get_the_content()) : ?>
+                                <div class="portfolio-intro">
+                                    <?php the_content(); ?>
+                                </div>
+                            <?php else : ?>
+                                <div class="portfolio-intro">
+                                    <h2>🚀 External Portfolio Links</h2>
+                                    <p>Connect with professional profiles, client testimonials, and live project showcases across multiple platforms. Each link represents a different aspect of creative technology expertise.</p>
+                                    
+                                    <h3>🎯 Professional Network</h3>
+                                    <p>Established presence on key professional platforms with proven track record in WordPress development, creative design, and technical problem-solving. Portfolio demonstrates range from individual projects to enterprise solutions.</p>
+                                </div>
+                            <?php endif; ?>
+                            
+                            <!-- External Portfolio Links -->
+                            <div class="portfolio-links">
+                                <h3>🔗 Portfolio Platforms</h3>
+                                
+                                <div class="links-grid">
+                                    <div class="portfolio-link-card">
+                                        <div class="link-header">
+                                            <h4>💼 Upwork Profile</h4>
+                                            <span class="link-type">Freelance Platform</span>
+                                        </div>
+                                        <p>Professional freelance profile showcasing client projects, testimonials, and technical expertise. Specialized in WordPress development and creative problem-solving.</p>
+                                        <div class="link-action">
+                                            <a href="#" target="_blank" rel="noopener noreferrer" class="portfolio-btn">
+                                                View Profile →
+                                            </a>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="portfolio-link-card">
+                                        <div class="link-header">
+                                            <h4>📂 GitHub Repository</h4>
+                                            <span class="link-type">Code Portfolio</span>
+                                        </div>
+                                        <p>Open source projects, development experiments, and code examples. Features advanced WordPress themes, JavaScript innovations, and technical documentation.</p>
+                                        <div class="link-action">
+                                            <a href="#" target="_blank" rel="noopener noreferrer" class="portfolio-btn">
+                                                Browse Code →
+                                            </a>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="portfolio-link-card">
+                                        <div class="link-header">
+                                            <h4>💻 LinkedIn Profile</h4>
+                                            <span class="link-type">Professional Network</span>
+                                        </div>
+                                        <p>Professional background, recommendations, and industry connections. Focus on creative technology, WordPress development, and innovative digital solutions.</p>
+                                        <div class="link-action">
+                                            <a href="#" target="_blank" rel="noopener noreferrer" class="portfolio-btn">
+                                                Connect →
+                                            </a>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="portfolio-link-card">
+                                        <div class="link-header">
+                                            <h4>🎨 Behance Portfolio</h4>
+                                            <span class="link-type">Creative Showcase</span>
+                                        </div>
+                                        <p>Visual design portfolio featuring UI/UX work, branding projects, and creative development solutions. Demonstrates design thinking and aesthetic execution.</p>
+                                        <div class="link-action">
+                                            <a href="#" target="_blank" rel="noopener noreferrer" class="portfolio-btn">
+                                                View Work →
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Client Testimonials Section -->
+                            <div class="testimonials-section">
+                                <h3>💬 Client Success Stories</h3>
+                                
+                                <div class="testimonials-grid">
+                                    <div class="testimonial-card">
+                                        <div class="testimonial-quote">
+                                            <p>"Outstanding WordPress development with innovative glassmorphism design. Delivered exactly what we envisioned for our creative portfolio."</p>
+                                        </div>
+                                        <div class="testimonial-author">
+                                            <strong>Creative Agency Client</strong>
+                                            <span>Portfolio Website Project</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="testimonial-card">
+                                        <div class="testimonial-quote">
+                                            <p>"Exceptional technical problem-solving and performance optimization. The modal system works flawlessly across all devices."</p>
+                                        </div>
+                                        <div class="testimonial-author">
+                                            <strong>Professional Artist</strong>
+                                            <span>Gallery Website Development</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="testimonial-card">
+                                        <div class="testimonial-quote">
+                                            <p>"Clean code, professional workflow, and innovative solutions. Transformed our vision into a high-performance reality."</p>
+                                        </div>
+                                        <div class="testimonial-author">
+                                            <strong>Business Client</strong>
+                                            <span>Custom WordPress Development</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Portfolio Sidebar -->
+                        <div class="portfolio-sidebar">
+                            
+                            <!-- Portfolio Stats -->
+                            <div class="portfolio-stats">
+                                <h3>📊 Portfolio Statistics</h3>
+                                <ul>
+                                    <li><strong>Projects Completed:</strong> 25+ WordPress websites</li>
+                                    <li><strong>Client Satisfaction:</strong> 100% positive feedback</li>
+                                    <li><strong>Specialization:</strong> Creative portfolio sites</li>
+                                    <li><strong>Technical Focus:</strong> Performance optimization</li>
+                                    <li><strong>Design Approach:</strong> Glassmorphism & modern UI</li>
+                                    <li><strong>Development Style:</strong> Clean, maintainable code</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Skills & Services -->
+                            <div class="services-section">
+                                <h3>🛠️ Available Services</h3>
+                                <div class="services-list">
+                                    <div class="service-item">
+                                        <div class="service-name">WordPress Development</div>
+                                        <div class="service-level">Expert</div>
+                                    </div>
+                                    <div class="service-item">
+                                        <div class="service-name">Custom Theme Creation</div>
+                                        <div class="service-level">Advanced</div>
+                                    </div>
+                                    <div class="service-item">
+                                        <div class="service-name">Performance Optimization</div>
+                                        <div class="service-level">Advanced</div>
+                                    </div>
+                                    <div class="service-item">
+                                        <div class="service-name">Glassmorphism Design</div>
+                                        <div class="service-level">Signature</div>
+                                    </div>
+                                    <div class="service-item">
+                                        <div class="service-name">Responsive Development</div>
+                                        <div class="service-level">Expert</div>
+                                    </div>
+                                    <div class="service-item">
+                                        <div class="service-name">Creative Problem Solving</div>
+                                        <div class="service-level">Innovation</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            
+            </div>
             
         </div>
         
     </main>
 </div>
 
-<!-- Lightbox for Portfolio Images -->
-<div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <div class="lightbox-content" onclick="event.stopPropagation()">
-        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        <img id="lightbox-image" src="" alt="">
-        <div class="lightbox-info">
-            <h3 id="lightbox-title"></h3>
-            <p id="lightbox-description"></p>
-        </div>
-    </div>
-</div>
-
 <style>
-/* ==========================================================================
-   BEAUTIFUL BACKGROUND GRADIENT - MATCHING GALLERY AESTHETIC
-   ========================================================================== */
-
-/* Add stunning background gradient to body for better visibility */
-body.page-template-page-portfolio {
-    background: linear-gradient(135deg, 
-        #667eea 0%, 
-        #764ba2 25%, 
-        #f093fb 50%, 
-        #f5576c 75%, 
-        #4facfe 100%
-    );
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-    min-height: 100vh;
-    position: relative;
-    margin: 0 !important;
-    padding: 0 !important;
+/* Override text shadows for crisp white subtitles - Portfolio page specific */
+.portfolio-intro h3,
+.portfolio-intro h2,
+.portfolio-links h4,
+.portfolio-link-card h4,
+.dashboard-content h3,
+.dashboard-content h2,
+.portfolio-content h3,
+.portfolio-content h2 {
+    text-shadow: none !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
 }
 
-/* Animated gradient movement for dynamic effect */
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* Broader override for any shadowy text in dashboard content */
+.dashboard-content * {
+    text-shadow: none !important;
 }
 
-/* DASHBOARD LAYOUT - COPY FROM WORKING GALLERY */
-.dashboard-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    color: white;
-}
-
-.dashboard-header {
-    text-align: center;
-    margin-bottom: 40px;
-    padding: 40px 20px;
-}
-
-.dashboard-title h1 {
-    color: #ffffff;
-    font-size: 3em;
-    margin: 0 0 15px 0;
-    font-weight: 600;
-    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.7);
-}
-
-.dashboard-subtitle {
-    color: #f0f0f0;
-    font-size: 1.4em;
-    margin: 0;
-    font-weight: 400;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-}
-
-/* Dashboard Sections */
-.dashboard-section {
-    background: rgba(255, 255, 255, 0.12);
-    border-radius: 20px;
-    padding: 40px;
-    margin-bottom: 30px;
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-}
-
-.dashboard-section h2 {
-    color: #ffffff;
-    font-size: 1.8em;
-    margin: 0 0 10px 0;
-    font-weight: 500;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-}
-
-.dashboard-section p {
-    color: #e8e8e8;
-    font-size: 1.1em;
-    margin-bottom: 30px;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-}
-
-/* Gallery Grid - DASHBOARD STYLE */
-.dashboard-gallery-grid {
+/* Portfolio Grid Layout - matches About page structure */
+.portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    margin-top: 30px;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+    margin-top: 40px;
 }
 
-/* Dashboard Cards - WORKING LAYOUT */
-.dashboard-card {
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 20px;
-    overflow: hidden;
+/* Main Portfolio Content */
+.portfolio-main {
+    background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    padding: 40px;
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
-.dashboard-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.card-preview {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-}
-
-.card-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-    cursor: pointer;
-}
-
-.dashboard-card:hover .card-image {
-    transform: scale(1.05);
-}
-
-.card-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
+/* Portfolio Sidebar */
+.portfolio-sidebar {
     display: flex;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    flex-direction: column;
+    gap: 25px;
 }
 
-.dashboard-card:hover .card-overlay {
-    opacity: 1;
-}
-
-.card-action-btn {
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
-    padding: 8px 16px;
-    border-radius: 20px;
-    color: #333;
-    font-size: 0.9em;
-    font-weight: 500;
-    cursor: pointer;
+.portfolio-stats,
+.services-section {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: 30px;
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
 }
 
-.card-action-btn:hover {
-    background: white;
-    transform: translateY(-2px);
-    color: #333;
-    text-decoration: none;
+/* Portfolio Link Cards */
+.links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 25px;
 }
 
-.card-info {
-    padding: 20px;
+.portfolio-link-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 25px;
+    transition: all 0.3s ease;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
 }
 
-.card-title {
-    color: #ffffff;
-    font-size: 1.3em;
-    margin: 0 0 10px 0;
-    font-weight: 600;
+.portfolio-link-card:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-.card-description {
-    color: #e0e0e0;
-    font-size: 0.95em;
-    line-height: 1.5;
+.link-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     margin-bottom: 15px;
 }
 
-.card-meta {
+.link-type {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.portfolio-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
+
+.portfolio-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-1px);
+}
+
+/* Testimonials */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.testimonial-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.testimonial-author {
+    margin-top: 15px;
+    text-align: right;
+}
+
+.testimonial-author span {
+    display: block;
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 4px;
+}
+
+/* Services */
+.services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.service-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.85em;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.update-status {
-    color: #4ade80;
-    font-weight: 500;
-}
-
-.update-time {
-    color: #d1d5db;
-}
-
-/* Enhanced Lightbox Styling */
-.lightbox {
-    display: none;
-    position: fixed;
-    z-index: 10000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(5px);
-    justify-content: center;
-    align-items: center;
-}
-
-.lightbox-content {
-    position: relative;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-radius: 20px;
-    padding: 30px;
-    max-width: 90%;
-    max-height: 90%;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.lightbox-close {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    color: #333;
-    font-size: 35px;
-    font-weight: bold;
-    cursor: pointer;
-    background: rgba(255, 255, 255, 0.8);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.lightbox-close:hover {
-    background: rgba(255, 255, 255, 1);
-    transform: scale(1.1);
-}
-
-#lightbox-image {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    border-radius: 15px;
-    margin-bottom: 20px;
-}
-
-.lightbox-info {
-    text-align: center;
-    color: #333;
-}
-
-.lightbox-info h3 {
-    margin: 0 0 10px 0;
-    font-size: 1.5em;
+.service-level {
+    font-size: 0.8em;
+    padding: 4px 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
     font-weight: 600;
 }
 
-.lightbox-info p {
+/* Portfolio Stats List */
+.portfolio-stats ul {
+    list-style: none;
+    padding: 0;
     margin: 0;
-    font-size: 1.1em;
-    line-height: 1.6;
-    color: #666;
 }
 
-/* Responsive Design */
+.portfolio-stats li {
+    margin-bottom: 12px;
+    font-size: 0.95em;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    line-height: 1.4;
+}
+
+.portfolio-stats li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.portfolio-stats strong {
+    color: white;
+    font-weight: 600;
+}
+
+/* Responsive */
 @media (max-width: 1024px) {
-    .dashboard-gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
     }
 }
 
 @media (max-width: 768px) {
-    .dashboard-content {
-        padding: 10px;
-    }
-    
-    .dashboard-section {
-        padding: 25px 20px;
-    }
-    
-    .dashboard-gallery-grid {
+    .links-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
     }
     
-    .dashboard-title h1 {
-        font-size: 2.2em;
-    }
-    
-    .lightbox-content {
-        margin: 20px;
-        padding: 20px;
+    .testimonials-grid {
+        grid-template-columns: 1fr;
     }
 }
 </style>
-
-<script>
-function openLightbox(imageSrc, title, description) {
-    document.getElementById('lightbox').style.display = 'flex';
-    document.getElementById('lightbox-image').src = imageSrc;
-    document.getElementById('lightbox-title').textContent = title || '';
-    document.getElementById('lightbox-description').textContent = description || '';
-    document.body.style.overflow = 'hidden';
-}
-
-function closeLightbox() {
-    document.getElementById('lightbox').style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-// Close lightbox with Escape key
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        closeLightbox();
-    }
-});
-</script>
 
 <?php get_footer(); ?>
