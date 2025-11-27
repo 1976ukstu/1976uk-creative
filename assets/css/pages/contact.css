@@ -71,6 +71,64 @@
 }
 
 /* ==========================================================================
+   CONTACT PAGE HUB CONSISTENCY
+   Match Portfolio and Projects page structure and styling
+   ========================================================================== */
+
+/* Contact page title size to match other Hub pages */
+.page-template-page-contact .dashboard-title h1 {
+  font-size: 3.5em !important;
+}
+
+/* Contact page specific dashboard adjustments */
+.page-template-page-contact .dashboard-section {
+  margin-bottom: 40px;
+}
+
+/* Contact info grid using glassmorphism cards */
+.contact-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  padding: 25px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.info-icon {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.info-card h3 {
+  color: #ffffff;
+  font-size: 1.3em;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.info-card p {
+  color: #f0f0f0;
+  font-size: 0.95em;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ==========================================================================
    RESPONSIVE ADJUSTMENTS
    Mobile-first responsive design for contact elements
    ========================================================================== */
@@ -87,5 +145,10 @@
 
   .contact-card-header p {
     font-size: 1.1em;
+  }
+  
+  .contact-info-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 }

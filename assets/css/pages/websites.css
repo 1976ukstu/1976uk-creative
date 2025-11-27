@@ -33,6 +33,17 @@ html body .website-card,
   min-width: 0 !important; /* Remove min-width that causes overflow */
 }
 
+/* Large tablet - prevent card overlap at 1150px */
+@media (max-width: 1150px) and (min-width: 1101px) {
+  body .websites-gallery,
+  html body .websites-gallery,
+  .site .websites-gallery,
+  #page .websites-gallery {
+    gap: 20px !important;
+    margin: 40px auto !important;
+  }
+}
+
 /* Tablet breakpoint - 2 columns */
 @media (max-width: 1100px) {
   body .websites-gallery,
@@ -53,4 +64,30 @@ html body .website-card,
     grid-template-columns: 1fr !important;
     gap: 20px !important;
   }
+}
+
+/* ==========================================================================
+   WEBSITES PAGE TITLE CONSISTENCY
+   Match Gallery page title size for consistency across pages
+   ========================================================================== */
+
+/* Websites page title size to match Gallery */
+.page-template-page-websites .dashboard-title h1 {
+  font-size: 3.5em !important;
+}
+
+/* ==========================================================================
+   WEBSITE CARD PREVIEW ENHANCEMENT
+   Increase preview area to show more website content like gallery cards
+   ========================================================================== */
+
+/* Increase website preview area for better visibility */
+.page-template-page-websites .card-preview {
+  height: 250px !important;
+}
+
+/* Adjust card aspect ratio to accommodate larger preview */
+.page-template-page-websites .website-card-2x2 {
+  aspect-ratio: 1.1/1 !important;
+  min-height: 450px !important;
 }

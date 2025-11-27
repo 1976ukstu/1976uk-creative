@@ -68,141 +68,94 @@ get_template_part('template-parts/enhanced-universal-menu');
                 <h2>🌐 Website Portfolio</h2>
                 <p>Interactive previews of professional websites crafted with modern technology</p>
                 
-                <!-- Interactive Website Gallery - Dashboard Style Grid -->
-                <div class="dashboard-gallery-grid websites-gallery">
-                <!-- Row 1 -->
-                <div class="dashboard-card featured-site">
-                    <!-- Website Preview Section -->
-                    <div class="card-preview">
-                        <div class="site-preview-thumb dragica-preview" onclick="openSitePreview('dragicacarlin', 'https://dragicacarlin.com', 'Professional Art Portfolio - Dragica Carlin')">
-                            <!-- Preview will show actual website screenshot -->
-                        </div>
-                        <div class="card-overlay">
-                            <button class="card-action-btn" onclick="openSitePreview('dragicacarlin', 'https://dragicacarlin.com', 'Professional Art Portfolio - Dragica Carlin')">🌐 Live Preview</button>
-                            <a href="https://dragicacarlin.com" class="card-action-btn" target="_blank">🔗 Visit Site</a>
-                        </div>
-                    </div>
-                    <!-- Text Info Section -->
-                    <div class="card-info">
-                        <h4 class="card-title">Dragica Carlin - Art Portfolio</h4>
-                        <p class="card-description">Professional artist portfolio with ACF Pro galleries, responsive design, and sophisticated content management system.</p>
-                        <div class="card-meta">
-                            <span class="update-status">✅ Live</span>
-                            <span class="update-time">WordPress</span>
-                        </div>
-                    </div>
-                </div>
+                <!-- 2x2 Website Portfolio Grid -->
+                <div class="websites-2x2-grid">
                 
-                <div class="dashboard-card">
-                    <!-- Website Preview Section -->
-                    <div class="card-preview">
-                        <div class="site-preview-thumb ben-preview" onclick="openSitePreview('benstockley', 'https://benstockley.com', 'Ben Stockley - Filmmaker Portfolio')">
-                            <!-- Preview will show actual website screenshot -->
+                    <!-- Top Row -->
+                    <!-- Dragica Carlin - Top Left -->
+                    <div class="dashboard-card website-card-2x2">
+                        <div class="card-preview">
+                            <div class="site-preview-thumb dragica-preview" onclick="openSitePreview('dragicacarlin', 'https://dragicacarlin.com', 'Professional Art Portfolio - Dragica Carlin')">
+                                <!-- Preview will show actual website screenshot -->
+                            </div>
+                            <div class="card-overlay">
+                                <button class="card-action-btn" onclick="openSitePreview('dragicacarlin', 'https://dragicacarlin.com', 'Professional Art Portfolio - Dragica Carlin')">🌐 Live Preview</button>
+                                <a href="https://dragicacarlin.com" class="card-action-btn" target="_blank">🔗 Visit Site</a>
+                            </div>
                         </div>
-                        <div class="card-overlay">
-                            <button class="card-action-btn" onclick="openSitePreview('benstockley', 'https://benstockley.com', 'Ben Stockley - Filmmaker Portfolio')">🌐 Live Preview</button>
-                            <a href="https://benstockley.com" class="card-action-btn" target="_blank">🔗 Visit Site</a>
-                        </div>
-                    </div>
-                    <!-- Text Info Section -->
-                    <div class="card-info">
-                        <h4 class="card-title">Ben Stockley - Filmmaker</h4>
-                        <p class="card-description">Dynamic filmmaker portfolio showcasing professional video work, commercial projects, and creative collaborations.</p>
-                        <div class="card-meta">
-                            <span class="update-status">✅ Live</span>
-                            <span class="update-time">Portfolio</span>
-                        </div>
-                    </div>
-                </div>
-        
-                <div class="dashboard-card">
-                    <!-- Website Preview Section -->
-                    <div class="card-preview">
-                        <div class="site-preview-thumb reds-preview" onclick="openSitePreview('redsplastering', 'https://redsplastering.co.uk', 'Reds Plastering - Trade Services')">
-                            <!-- Preview will show actual website screenshot -->
-                        </div>
-                        <div class="card-overlay">
-                            <button class="card-action-btn" onclick="openSitePreview('redsplastering', 'https://redsplastering.co.uk', 'Reds Plastering - Trade Services')">🌐 Live Preview</button>
-                            <a href="https://redsplastering.co.uk" class="card-action-btn" target="_blank">🔗 Visit Site</a>
+                        <div class="card-info">
+                            <h4 class="card-title">Dragica Carlin</h4>
+                            <p class="card-description">Professional artist portfolio with ACF Pro galleries and responsive design</p>
+                            <div class="card-meta">
+                                <span class="update-status">✅ Live</span>
+                                <span class="update-time">Art Portfolio</span>
+                            </div>
                         </div>
                     </div>
-                    <!-- Text Info Section -->
-                    <div class="card-info">
-                        <h4 class="card-title">Reds Plastering Services</h4>
-                        <p class="card-description">Professional trade services website with service showcases, contact systems, and business information management.</p>
-                        <div class="card-meta">
-                            <span class="update-status">✅ Live</span>
-                            <span class="update-time">Business</span>
+                    
+                    <!-- Ben Stockley - Top Right -->
+                    <div class="dashboard-card website-card-2x2">
+                        <div class="card-preview">
+                            <div class="site-preview-thumb ben-preview" onclick="openSitePreview('benstockley', 'https://benstockley.com', 'Ben Stockley - Filmmaker Portfolio')">
+                                <!-- Preview will show actual website screenshot -->
+                            </div>
+                            <div class="card-overlay">
+                                <button class="card-action-btn" onclick="openSitePreview('benstockley', 'https://benstockley.com', 'Ben Stockley - Filmmaker Portfolio')">🌐 Live Preview</button>
+                                <a href="https://benstockley.com" class="card-action-btn" target="_blank">🔗 Visit Site</a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h4 class="card-title">Ben Stockley</h4>
+                            <p class="card-description">Dynamic filmmaker portfolio showcasing video work and creative projects</p>
+                            <div class="card-meta">
+                                <span class="update-status">✅ Live</span>
+                                <span class="update-time">Film Portfolio</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Row 2 -->
-                <div class="dashboard-card">
-                    <!-- Website Preview Section -->
-                    <div class="card-preview">
-                        <div class="site-preview-thumb digital-preview" onclick="openSitePreview('digitald', 'https://digitald.website', 'Digital D - Creative Digital Solutions')">
-                            <!-- Preview will show actual website screenshot -->
+                    
+                    <!-- Bottom Row -->
+                    <!-- Reds Plastering - Bottom Left -->
+                    <div class="dashboard-card website-card-2x2">
+                        <div class="card-preview">
+                            <div class="site-preview-thumb reds-preview" onclick="openSitePreview('redsplastering', 'https://redsplastering.co.uk', 'Reds Plastering - Trade Services')">
+                                <!-- Preview will show actual website screenshot -->
+                            </div>
+                            <div class="card-overlay">
+                                <button class="card-action-btn" onclick="openSitePreview('redsplastering', 'https://redsplastering.co.uk', 'Reds Plastering - Trade Services')">🌐 Live Preview</button>
+                                <a href="https://redsplastering.co.uk" class="card-action-btn" target="_blank">🔗 Visit Site</a>
+                            </div>
                         </div>
-                        <div class="card-overlay">
-                            <button class="card-action-btn" onclick="openSitePreview('digitald', 'https://digitald.website', 'Digital D - Creative Digital Solutions')">🌐 Live Preview</button>
-                            <a href="https://digitald.website" class="card-action-btn" target="_blank">🔗 Visit Site</a>
-                        </div>
-                    </div>
-                    <!-- Text Info Section -->
-                    <div class="card-info">
-                        <h4 class="card-title">Digital D - Creative Solutions</h4>
-                        <p class="card-description">Modern digital solutions website featuring creative services, portfolio showcase, and client collaboration tools.</p>
-                        <div class="card-meta">
-                            <span class="update-status">✅ Live</span>
-                            <span class="update-time">Digital</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="dashboard-card">
-                    <!-- Website Preview Section -->
-                    <div class="card-preview">
-                        <div class="site-preview-thumb urban-preview" onclick="openSitePreview('oururban', 'https://oururban.1976uk.com', 'Our Urban - Community Platform')">
-                            <!-- Preview will show actual website screenshot -->
-                        </div>
-                        <div class="card-overlay">
-                            <button class="card-action-btn" onclick="openSitePreview('oururban', 'https://oururban.1976uk.com', 'Our Urban - Community Platform')">🌐 Live Preview</button>
-                            <a href="https://oururban.1976uk.com" class="card-action-btn" target="_blank">🔗 Visit Site</a>
+                        <div class="card-info">
+                            <h4 class="card-title">Reds Plastering</h4>
+                            <p class="card-description">Professional trade services website with contact systems and business info</p>
+                            <div class="card-meta">
+                                <span class="update-status">✅ Live</span>
+                                <span class="update-time">Trade Services</span>
+                            </div>
                         </div>
                     </div>
-                    <!-- Text Info Section -->
-                    <div class="card-info">
-                        <h4 class="card-title">Our Urban - Community Platform</h4>
-                        <p class="card-description">Community-focused platform for urban development, collaboration tools, and public engagement initiatives.</p>
-                        <div class="card-meta">
-                            <span class="update-status">✅ Live</span>
-                            <span class="update-time">Community</span>
+                    
+                    <!-- David Austen - Bottom Right -->
+                    <div class="dashboard-card website-card-2x2">
+                        <div class="card-preview">
+                            <div class="site-preview-thumb austen-preview" onclick="openSitePreview('davidausten', 'https://davidaustenstudio.com', 'David Austen Studio - Artist Portfolio')">
+                                <!-- Preview will show actual website screenshot -->
+                            </div>
+                            <div class="card-overlay">
+                                <button class="card-action-btn" onclick="openSitePreview('davidausten', 'https://davidaustenstudio.com', 'David Austen Studio - Artist Portfolio')">🌐 Live Preview</button>
+                                <a href="https://davidaustenstudio.com" class="card-action-btn" target="_blank">🔗 Visit Site</a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h4 class="card-title">David Austen</h4>
+                            <p class="card-description">Artist studio website with gallery management and exhibition information</p>
+                            <div class="card-meta">
+                                <span class="update-status">✅ Live</span>
+                                <span class="update-time">Art Studio</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="dashboard-card">
-                    <!-- Website Preview Section -->
-                    <div class="card-preview">
-                        <div class="site-preview-thumb austen-preview" onclick="openSitePreview('davidausten', 'https://davidaustenstudio.com', 'David Austen Studio - Artist Portfolio')">
-                            <!-- Preview will show actual website screenshot -->
-                        </div>
-                        <div class="card-overlay">
-                            <button class="card-action-btn" onclick="openSitePreview('davidausten', 'https://davidaustenstudio.com', 'David Austen Studio - Artist Portfolio')">🌐 Live Preview</button>
-                            <a href="https://davidaustenstudio.com" class="card-action-btn" target="_blank">🔗 Visit Site</a>
-                        </div>
-                    </div>
-                    <!-- Text Info Section -->
-                    <div class="card-info">
-                        <h4 class="card-title">David Austen Studio</h4>
-                        <p class="card-description">Professional artist studio website with gallery management, exhibition information, and optimized WordPress core.</p>
-                        <div class="card-meta">
-                            <span class="update-status">✅ Live</span>
-                            <span class="update-time">Art Studio</span>
-                        </div>
-                    </div>
-                </div>
                 
             </div>
             
@@ -559,6 +512,23 @@ body.page-template-page-websites {
     margin-top: 30px;
 }
 
+/* 2x2 Website Portfolio Grid - NEW LAYOUT */
+.websites-2x2-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 30px;
+    margin-top: 30px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.website-card-2x2 {
+    aspect-ratio: 1.1/1; /* Adjusted for taller preview area */
+    min-height: 450px; /* Increased to accommodate 250px preview + content */
+}
+
 /* Dashboard Cards - WORKING LAYOUT */
 .dashboard-card {
     background: rgba(255, 255, 255, 0.15);
@@ -572,8 +542,15 @@ body.page-template-page-websites {
 
 .dashboard-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
     background: rgba(255, 255, 255, 0.2);
+}
+
+.dashboard-card:hover .card-preview {
+    box-shadow: 
+        inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+        0 8px 25px rgba(0, 0, 0, 0.3),
+        0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .featured-site {
@@ -588,23 +565,32 @@ body.page-template-page-websites {
 
 .card-preview {
     position: relative;
-    height: 200px;
+    height: 250px; /* Increased from 200px for better proportion */
     overflow: hidden;
+    border-radius: 15px 15px 0 0; /* Round top corners */
+    box-shadow: 
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+        0 4px 15px rgba(0, 0, 0, 0.2),
+        0 1px 3px rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.02);
+    backdrop-filter: blur(2px);
 }
 
 .card-image, .site-preview-thumb {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     background-size: cover;
     background-position: center;
+    filter: brightness(1) contrast(1.05) saturate(1.1);
 }
 
 .dashboard-card:hover .card-image,
 .dashboard-card:hover .site-preview-thumb {
     transform: scale(1.05);
+    filter: brightness(1.1) contrast(1.1) saturate(1.2);
 }
 
 .card-overlay {
@@ -914,12 +900,30 @@ body.page-template-page-websites {
         grid-template-columns: repeat(3, 1fr); /* Keep exactly 3 cards */
         gap: 40px; /* Larger gaps between the bigger cards */
     }
+    
+    .websites-2x2-grid {
+        gap: 40px;
+        max-width: 1400px;
+    }
+    
+    .website-card-2x2 {
+        min-height: 450px;
+    }
 }
 
 @media (max-width: 1024px) {
     .dashboard-gallery-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
+    }
+    
+    .websites-2x2-grid {
+        gap: 20px;
+        /* Keep 2x2 layout on tablet */
+    }
+    
+    .website-card-2x2 {
+        min-height: 350px;
     }
 }
 
@@ -935,6 +939,16 @@ body.page-template-page-websites {
     .dashboard-gallery-grid {
         grid-template-columns: 1fr;
         gap: 20px;
+    }
+    
+    .websites-2x2-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 20px;
+    }
+    
+    .website-card-2x2 {
+        min-height: 300px;
     }
     
     .dashboard-title h1 {

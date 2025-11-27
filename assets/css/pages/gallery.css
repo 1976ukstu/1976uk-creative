@@ -36,6 +36,18 @@ body.page-template-page-gallery .gallery-showcase {
   right: auto !important;
 }
 
+/* Large tablet - spacing adjustment to prevent overflow at 1310px */
+@media (max-width: 1310px) and (min-width: 1025px) {
+  body .gallery-showcase,
+  html body .gallery-showcase,
+  .site .gallery-showcase,
+  #page .gallery-showcase,
+  body.page-template-page-gallery .gallery-showcase {
+    gap: 20px !important;
+    margin: 40px auto !important;
+  }
+}
+
 /* Tablet - 2 columns */
 @media (max-width: 1024px) and (min-width: 701px) {
   body .gallery-showcase,
@@ -118,4 +130,73 @@ html body.page-template-page-gallery .gallery-showcase {
     max-width: 500px !important;
     width: 95% !important;
   }
+}
+
+/* ==========================================================================
+   GALLERY SUBTITLE ALIGNMENT
+   Override dashboard-header center alignment for Gallery subtitle
+   ========================================================================== */
+
+/* Gallery page subtitle left alignment override */
+.page-template-page-gallery .dashboard-header {
+  text-align: left !important;
+}
+
+/* Keep title centered but make subtitle left-aligned */
+.page-template-page-gallery .dashboard-title h1 {
+  text-align: center !important;
+  font-size: 3.5em !important;
+}
+
+.page-template-page-gallery .dashboard-subtitle {
+  text-align: left !important;
+}
+
+/* ==========================================================================
+   GALLERY MODAL IMPROVEMENTS
+   Better padding and spacing for optimal image display
+   ========================================================================== */
+
+/* Improve modal image container padding for better spacing */
+.page-template-page-gallery .lightbox-image-container {
+  padding: 30px 20px 40px 20px !important; /* More bottom padding to prevent image cutoff */
+}
+
+/* Optimize modal image sizing for better spacing */
+.page-template-page-gallery .lightbox-image {
+  max-width: 85% !important; /* Slightly smaller to ensure better spacing */
+  max-height: 85% !important; /* Slightly smaller to ensure proper bottom spacing */
+}
+
+/* ==========================================================================
+   GALLERY V2 MODAL IMPROVEMENTS
+   Better padding and navigation for gallery-v2.php template
+   ========================================================================== */
+
+/* Gallery v2 title size consistency */
+.page-template-page-gallery-v2 .dashboard-title h1 {
+  font-size: 3.5em !important;
+}
+
+/* Gallery v2 subtitle left alignment */
+.page-template-page-gallery-v2 .dashboard-header {
+  text-align: left !important;
+}
+
+.page-template-page-gallery-v2 .dashboard-title h1 {
+  text-align: center !important;
+}
+
+.page-template-page-gallery-v2 .dashboard-subtitle {
+  text-align: left !important;
+}
+
+/* Gallery v2 modal improvements */
+.page-template-page-gallery-v2 .preview-image-container {
+  padding: 30px 20px 40px 20px !important; /* More bottom padding to prevent image cutoff */
+}
+
+.page-template-page-gallery-v2 .preview-image-container img {
+  max-width: 85% !important; /* Slightly smaller to ensure better spacing */
+  max-height: 85% !important; /* Slightly smaller to ensure proper bottom spacing */
 }

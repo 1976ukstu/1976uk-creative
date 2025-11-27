@@ -41,15 +41,16 @@
     margin-top: 40px;
 }
 
-/* Main Projects Content */
-.projects-main {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 25px;
-    padding: 40px;
-    -webkit-backdrop-filter: blur(15px);
-    backdrop-filter: blur(15px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+/* Main Projects Content - Enhanced Specificity */
+.page-template-page-projects .projects-main,
+.dashboard-section .projects-main {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 25px !important;
+    padding: 40px !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    backdrop-filter: blur(15px) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* Projects Sidebar */
@@ -59,16 +60,18 @@
     gap: 25px;
 }
 
-.tech-specs,
-.projects-status {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 25px;
-    padding: 30px;
-    -webkit-backdrop-filter: blur(15px);
-    backdrop-filter: blur(15px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+.page-template-page-projects .tech-specs,
+.page-template-page-projects .projects-status,
+.dashboard-section .tech-specs,
+.dashboard-section .projects-status {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 25px !important;
+    padding: 30px !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    backdrop-filter: blur(15px) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+    transition: all 0.3s ease !important;
 }
 
 /* ==========================================================================
@@ -305,4 +308,24 @@
         align-items: flex-start;
         gap: 10px;
     }
+}
+
+/* ==========================================================================
+   PROJECTS PAGE POSITIONING IMPROVEMENTS  
+   Adjust concept bubble positioning and Development Roadmap spacing
+   ========================================================================== */
+
+/* Improve concept bubble positioning */
+.concept-status {
+  position: relative;
+  top: -2px; /* Slight upward adjustment for better visual alignment */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Add spacing above Development Roadmap title */
+.development-timeline h3 {
+  margin-top: 20px !important; /* Add a few px of space above */
+  padding-top: 8px;
 }

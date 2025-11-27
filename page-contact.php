@@ -45,21 +45,28 @@ get_template_part('template-parts/enhanced-universal-menu');
     <main id="main" class="site-main">
         
         <!-- Enhanced Contact Page Content -->
-        <div class="contact-v2-content">
+        <div class="dashboard-content">
             
             <?php if (have_posts()) : ?>
                 <?php while (have_posts()) : the_post(); ?>
                     
-                    <!-- Professional Contact Section -->
-                    <div class="contact-professional-section">
-                        
-                        <!-- Main Contact Card - Dashboard Style -->
-                        <div class="contact-professional-card">
-                            <div class="contact-card-header-v2">
-                                <div class="header-icon">💬</div>
-                                <h1>Let's Create Something Extraordinary</h1>
-                                <p class="header-subtitle">Ready to transform your digital vision into reality? Whether it's a stunning website, powerful dashboard system, or innovative web application – I'm here to bring your ideas to life with cutting-edge technology and creative excellence.</p>
-                            </div>
+                    <!-- Dashboard Header -->
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">
+                            <h1>💬 Let's Create Together</h1>
+                        </div>
+                        <div class="dashboard-subtitle">
+                            Ready to transform your digital vision into reality with cutting-edge technology and creative excellence
+                        </div>
+                    </div>
+                    
+                <?php endwhile; ?>
+            <?php endif; ?>
+            
+            <!-- Dashboard Section for Contact Form -->
+            <div class="dashboard-section">
+                <h2>🚀 Start Your Project</h2>
+                <p>Whether it's a stunning website, powerful dashboard system, or innovative web application – let's bring your ideas to life</p>
                             
                             <!-- WordPress Content Integration -->
                             <?php if (get_the_content()) : ?>
@@ -296,11 +303,9 @@ get_template_part('template-parts/enhanced-universal-menu');
                                         <span class="btn-arrow">→</span>
                                     </button>
                                 </form>
-                            </div>
-                        </div>
-                        
-                        <!-- Professional Info Cards -->
-                        <div class="contact-info-grid">
+                                
+                                <!-- Contact Information Cards -->
+                                <div class="contact-info-grid">
                             <div class="info-card response-card">
                                 <div class="info-icon">⚡</div>
                                 <h3>Quick Response</h3>
@@ -317,6 +322,8 @@ get_template_part('template-parts/enhanced-universal-menu');
                                 <p>Professional development with modern technologies, responsive design, and exceptional user experience.</p>
                             </div>
                         </div>
+                        
+                    </div> <!-- Close dashboard-section -->
                         
                         <?php if (current_user_can('administrator')): ?>
                         <!-- Enhanced Admin Email Test Section -->
@@ -402,11 +409,8 @@ get_template_part('template-parts/enhanced-universal-menu');
                         <?php endif; ?>
                         
                     </div>
-                    
-                <?php endwhile; ?>
-            <?php endif; ?>
-            
-        </div>
+        
+        </div> <!-- Close dashboard-content -->
         
     </main>
 </div>

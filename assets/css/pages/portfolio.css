@@ -41,15 +41,16 @@
     margin-top: 40px;
 }
 
-/* Main Portfolio Content */
-.portfolio-main {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 25px;
-    padding: 40px;
-    -webkit-backdrop-filter: blur(15px);
-    backdrop-filter: blur(15px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+/* Main Portfolio Content - Enhanced Specificity */
+.page-template-page-portfolio .portfolio-main,
+.dashboard-section .portfolio-main {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 25px !important;
+    padding: 40px !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    backdrop-filter: blur(15px) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* Portfolio Sidebar */
@@ -59,16 +60,18 @@
     gap: 25px;
 }
 
-.portfolio-stats,
-.services-section {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 25px;
-    padding: 30px;
-    -webkit-backdrop-filter: blur(15px);
-    backdrop-filter: blur(15px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+.page-template-page-portfolio .portfolio-stats,
+.page-template-page-portfolio .services-section,
+.dashboard-section .portfolio-stats,
+.dashboard-section .services-section {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 25px !important;
+    padding: 30px !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    backdrop-filter: blur(15px) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+    transition: all 0.3s ease !important;
 }
 
 /* ==========================================================================
