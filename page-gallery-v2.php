@@ -8,8 +8,8 @@
 get_header();
 ?>
 
-<!-- Simple Gentle Gradient Background (Temporary) -->
-<div class="gentle-gradient-background"></div>
+<!-- Man of Steel Gradient Background -->
+<div class="man-of-steel-gradient"></div>
 
 <div class="site-title">
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="color: inherit; text-decoration: none;">
@@ -151,8 +151,14 @@ get_template_part('template-parts/enhanced-universal-menu');
         <div class="preview-image-container">
             <img id="previewImage" src="" alt="" />
             <div id="loadingIndicator" class="loading-indicator" style="display: none;">
-                <div class="spinner"></div>
-                <p>Loading image...</p>
+                <div class="gallery-spinner">
+                    <div class="spinner-gallery-icon">🎨</div>
+                    <div class="spinner-ring"></div>
+                </div>
+                <div class="loading-text">
+                    <p class="loading-main">Loading your image...</p>
+                    <p class="loading-sub">Preparing high-quality preview</p>
+                </div>
             </div>
         </div>
     </div>
@@ -502,16 +508,182 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 30px 20px 40px 20px; /* More bottom padding to prevent image cutoff */
+    padding: 20px; /* Reduced padding to prevent clipping */
     background: #f8f9fa;
+    box-sizing: border-box;
+    min-height: 0; /* Allow flex shrinking */
+    overflow: hidden; /* Prevent overflow */
 }
 
 .preview-image-container img {
-    max-width: 85%; /* Slightly smaller to ensure better spacing */
-    max-height: 85%; /* Slightly smaller to ensure proper bottom spacing */
+    max-width: calc(100% - 40px); /* Account for padding */
+    max-height: calc(100% - 40px); /* Account for padding and prevent clipping */
+    width: auto;
+    height: auto;
     object-fit: contain;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    transition: opacity 0.3s ease;
+}
+
+/* Enhanced Loading Animation */
+.loading-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    z-index: 100;
+}
+
+.gallery-spinner {
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.spinner-gallery-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    animation: galleryIconSpin 2s linear infinite;
+}
+
+.spinner-ring {
+    width: 80px;
+    height: 80px;
+    border: 3px solid rgba(0, 123, 255, 0.2);
+    border-top: 3px solid #007bff;
+    border-radius: 50%;
+    animation: ringRotate 1s linear infinite;
+}
+
+@keyframes galleryIconSpin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes ringRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+    text-align: center;
+}
+
+.loading-main {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 5px 0;
+}
+
+.loading-sub {
+    font-size: 0.9em;
+    color: #666;
+    margin: 0;
+    font-style: italic;
+}
+
+/* Navigation Button Enhancements */
+.nav-btn {
+    font-size: 1.5em;
+    font-weight: 300;
+    transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+    background: rgba(0, 123, 255, 0.15);
+    border-color: rgba(0, 123, 255, 0.4);
+    color: #007bff;
+    transform: scale(1.15);
+}
+
+.nav-btn:active {
+    transform: scale(1.05);
+}
+
+/* Enhanced Loading Animation */
+.loading-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    z-index: 100;
+}
+
+.gallery-spinner {
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.spinner-gallery-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    animation: galleryIconSpin 2s linear infinite;
+}
+
+.spinner-ring {
+    width: 80px;
+    height: 80px;
+    border: 3px solid rgba(0, 123, 255, 0.2);
+    border-top: 3px solid #007bff;
+    border-radius: 50%;
+    animation: ringRotate 1s linear infinite;
+}
+
+@keyframes galleryIconSpin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes ringRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+    text-align: center;
+}
+
+.loading-main {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 5px 0;
+}
+
+.loading-sub {
+    font-size: 0.9em;
+    color: #666;
+    margin: 0;
+    font-style: italic;
+}
+
+/* Navigation Button Enhancements */
+.nav-btn:hover {
+    background: rgba(0, 123, 255, 0.15) !important;
+    border-color: rgba(0, 123, 255, 0.4) !important;
+    color: #007bff !important;
+    transform: scale(1.15) !important;
+}
+
+.nav-btn:active {
+    transform: scale(1.05) !important;
 }
 
 /* Responsive Design */
@@ -536,6 +708,55 @@ body {
     }
 }
 
+/* Modal Responsive Design - Prevent image clipping on smaller screens */
+@media (max-height: 700px) {
+    .preview-modal-content {
+        height: 98%;
+    }
+    
+    .preview-image-container {
+        padding: 10px; /* Even smaller padding for short screens */
+    }
+    
+    .preview-image-container img {
+        max-width: calc(100% - 20px);
+        max-height: calc(100% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .preview-modal-content {
+        width: 98%;
+        height: 98%;
+    }
+    
+    .preview-image-container {
+        padding: 15px;
+    }
+    
+    .preview-modal-header {
+        padding: 15px 20px;
+        min-height: 60px;
+    }
+}
+
+/* Fix layout at 1045px - transition to single column earlier to prevent overlap */
+@media (max-width: 900px) {
+    .gallery-2x2-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 25px;
+        max-width: 600px;
+        margin: 30px auto;
+        padding: 0 15px;
+    }
+    
+    .gallery-card-2x2 {
+        min-height: 400px;
+        max-width: 100%;
+    }
+}
+
 @media (max-width: 768px) {
     .dashboard-content {
         padding: 20px 10px;
@@ -545,10 +766,14 @@ body {
         grid-template-columns: 1fr;
         grid-template-rows: auto;
         gap: 20px;
+        max-width: 500px;
+        margin: 20px auto;
+        padding: 0 10px;
     }
     
     .gallery-card-2x2 {
-        min-height: 300px;
+        min-height: 350px;
+        max-width: 100%;
     }
     
     .preview-modal-content {
@@ -566,7 +791,43 @@ body {
     }
 }
 
+/* Extra small screens - 550px and below for optimal mobile experience */
+@media (max-width: 550px) {
+    .gallery-2x2-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 15px;
+        max-width: 100%;
+        margin: 15px auto;
+        padding: 0 5px;
+    }
+    
+    .gallery-card-2x2 {
+        min-height: 320px;
+        max-width: calc(100vw - 30px);
+        margin: 0 auto;
+    }
+    
+    .dashboard-section {
+        padding: 20px 15px;
+        margin: 0 5px;
+    }
+    
+    .dashboard-content {
+        padding: 15px 5px;
+    }
+}
+
 @media (max-width: 480px) {
+    .gallery-2x2-grid {
+        gap: 12px;
+        padding: 0 3px;
+    }
+    
+    .gallery-card-2x2 {
+        min-height: 300px;
+    }
+    
     .dashboard-section h2 {
         font-size: 1.5em;
     }
@@ -798,6 +1059,10 @@ body {
 </style>
 
 <script>
+// Global variables for gallery navigation
+window.galleryImages = [];
+window.currentImageIndex = 0;
+
 // Image Preview Modal Functions - Based on Website Modal System
 function openImageModal(imageUrl, title, description) {
     const modal = document.getElementById('imagePreviewModal');
@@ -811,16 +1076,22 @@ function openImageModal(imageUrl, title, description) {
         titleElement.textContent = title || 'Gallery Image';
         descriptionElement.textContent = description || '';
         
-        // Show loading indicator
-        loadingIndicator.style.display = 'flex';
-        image.style.display = 'none';
+        // Show loading indicator and hide image with opacity
+        if (loadingIndicator) loadingIndicator.style.display = 'flex';
+        image.style.opacity = '0';
         
         // Load image
         image.onload = function() {
-            loadingIndicator.style.display = 'none';
-            image.style.display = 'block';
+            if (loadingIndicator) loadingIndicator.style.display = 'none';
+            image.style.opacity = '1';
         };
         
+        image.onerror = function() {
+            if (loadingIndicator) loadingIndicator.style.display = 'none';
+            image.style.opacity = '1';
+        };
+        
+        // Set the image source
         image.src = imageUrl;
         
         // Set current image index for navigation
@@ -841,13 +1112,28 @@ function closeImagePreview() {
 }
 
 // Gallery navigation functionality
-let currentImageIndex = 0;
-let galleryImages = [];
-
 // Initialize gallery images array on page load
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, looking for gallery images...');
     const imageElements = document.querySelectorAll('.gallery-image-thumb');
-    galleryImages = Array.from(imageElements).map(thumb => {
+    console.log('Gallery initialization: Found', imageElements.length, 'images');
+    console.log('Image elements:', imageElements);
+    
+    // If no images found initially, try again after a short delay
+    if (imageElements.length === 0) {
+        console.log('No images found immediately, trying again in 500ms...');
+        setTimeout(initializeGallery, 500);
+        return;
+    }
+    
+    initializeGallery();
+});
+
+function initializeGallery() {
+    const imageElements = document.querySelectorAll('.gallery-image-thumb');
+    console.log('Initializing gallery with', imageElements.length, 'images');
+    
+    window.galleryImages = Array.from(imageElements).map(thumb => {
         const card = thumb.closest('.dashboard-card');
         const title = card.querySelector('.card-title')?.textContent || 'Gallery Image';
         const description = card.querySelector('.card-description')?.textContent || '';
@@ -867,43 +1153,106 @@ document.addEventListener('DOMContentLoaded', function() {
             title: title,
             description: description
         };
-    });
-});
-
-// Navigate gallery function
-function navigateGallery(direction) {
-    console.log('Navigate called with direction:', direction);
-    console.log('Gallery images count:', galleryImages.length);
-    console.log('Current index:', currentImageIndex);
+    }).filter(img => img.url);
     
-    if (galleryImages.length === 0) {
-        console.log('No images found in gallery array');
+    console.log('Final gallery array:', window.galleryImages);
+}
+
+// Navigate gallery function - Enhanced with smooth transitions
+function navigateGallery(direction) {
+    console.log('Navigation clicked:', direction, 'Current index:', window.currentImageIndex, 'Total images:', window.galleryImages.length);
+    
+    if (window.galleryImages.length === 0) {
+        console.log('No images in gallery array');
         return;
     }
     
-    currentImageIndex += direction;
+    // Show loading animation during navigation
+    const image = document.getElementById('previewImage');
+    const loadingIndicator = document.getElementById('loadingIndicator');
     
-    // Wrap around
-    if (currentImageIndex >= galleryImages.length) {
-        currentImageIndex = 0;
-    } else if (currentImageIndex < 0) {
-        currentImageIndex = galleryImages.length - 1;
+    if (loadingIndicator && image) {
+        loadingIndicator.style.display = 'flex';
+        image.style.opacity = '0';
     }
     
-    console.log('New index:', currentImageIndex);
+    window.currentImageIndex += direction;
     
-    const currentImage = galleryImages[currentImageIndex];
+    // Wrap around
+    if (window.currentImageIndex >= window.galleryImages.length) {
+        window.currentImageIndex = 0;
+    } else if (window.currentImageIndex < 0) {
+        window.currentImageIndex = window.galleryImages.length - 1;
+    }
+    
+    const currentImage = window.galleryImages[window.currentImageIndex];
+    console.log('Navigating to image:', window.currentImageIndex, currentImage);
+    
     if (currentImage) {
-        console.log('Loading image:', currentImage.title);
-        openImageModal(currentImage.url, currentImage.title, currentImage.description);
+        // Update modal with new image using smooth transition
+        const image = document.getElementById('previewImage');
+        const titleElement = document.getElementById('previewTitle');
+        const descriptionElement = document.getElementById('previewDescription');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        
+        // Show loading and fade out current image
+        if (loadingIndicator && image) {
+            loadingIndicator.style.display = 'flex';
+            image.style.opacity = '0';
+        }
+        
+        // Update text content
+        if (titleElement) titleElement.textContent = currentImage.title || 'Gallery Image';
+        if (descriptionElement) descriptionElement.textContent = currentImage.description || '';
+        
+        // Load new image with smooth transition
+        setTimeout(() => {
+            image.onload = function() {
+                if (loadingIndicator) loadingIndicator.style.display = 'none';
+                image.style.opacity = '1';
+            };
+            image.src = currentImage.url;
+        }, 150); // Small delay for smooth animation
     }
 }
 
+// Add keyboard navigation support
+document.addEventListener('keydown', function(e) {
+    const modal = document.getElementById('imagePreviewModal');
+    if (modal && modal.style.display === 'flex') {
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            navigateGallery(-1);
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            navigateGallery(1);
+        } else if (e.key === 'Escape') {
+            e.preventDefault();
+            closeImagePreview();
+        }
+    }
+});
+
 // Update openImageModal to track current index
 function setCurrentImageIndex(imageUrl) {
-    const foundIndex = galleryImages.findIndex(img => img.url === imageUrl);
-    currentImageIndex = foundIndex !== -1 ? foundIndex : 0;
-    console.log('Set current index to:', currentImageIndex, 'for URL:', imageUrl);
+    const foundIndex = window.galleryImages.findIndex(img => img.url === imageUrl);
+    window.currentImageIndex = foundIndex !== -1 ? foundIndex : 0;
+    console.log('Set current index to:', window.currentImageIndex, 'for image:', imageUrl);
+}
+
+// Test function to verify navigation is working
+function testNavigation() {
+    console.log('Testing navigation...');
+    console.log('Gallery images:', window.galleryImages);
+    console.log('Current index:', window.currentImageIndex);
+    console.log('Navigation buttons exist:', document.querySelectorAll('.nav-btn').length);
+    console.log('Gallery thumbs on page:', document.querySelectorAll('.gallery-image-thumb').length);
+}
+
+// Manual refresh function for debugging
+function refreshGallery() {
+    console.log('Manually refreshing gallery...');
+    initializeGallery();
 }
 
 // Keyboard navigation
