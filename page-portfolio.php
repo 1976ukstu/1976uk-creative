@@ -54,8 +54,8 @@ get_template_part('template-parts/enhanced-universal-menu');
             <div class="dashboard-section">
                 <h2>🌟 Professional Presence</h2>
                 <p>External portfolio links and professional profiles</p>
-                    
-                    <!-- Portfolio Grid Layout -->
+                
+                <!-- Portfolio Grid Layout -->
                     <div class="portfolio-grid">
                         
                         <!-- Main Portfolio Content -->
@@ -84,9 +84,9 @@ get_template_part('template-parts/enhanced-universal-menu');
                                             <h4>💼 Upwork Profile</h4>
                                             <span class="link-type">Freelance Platform</span>
                                         </div>
-                                        <p>Professional freelance profile showcasing client projects, testimonials, and technical expertise. Specialized in WordPress development and creative problem-solving.</p>
+                                        <p>Top Rated freelancer specializing in WordPress development, creative themes, and performance optimization. 100% job success rate with 25+ completed projects and excellent client reviews.</p>
                                         <div class="link-action">
-                                            <a href="#" target="_blank" rel="noopener noreferrer" class="portfolio-btn">
+                                            <a href="https://www.upwork.com/freelancers/~01d3e9362798a7a655?mp_source=share" target="_blank" rel="noopener noreferrer" class="portfolio-btn">
                                                 View Profile →
                                             </a>
                                         </div>
@@ -97,9 +97,9 @@ get_template_part('template-parts/enhanced-universal-menu');
                                             <h4>📂 GitHub Repository</h4>
                                             <span class="link-type">Code Portfolio</span>
                                         </div>
-                                        <p>Open source projects, development experiments, and code examples. Features advanced WordPress themes, JavaScript innovations, and technical documentation.</p>
+                                        <p>Open source WordPress themes, custom development projects, and innovative code solutions. Features the 1976uk Creative theme, dashboard systems, and modern web development techniques.</p>
                                         <div class="link-action">
-                                            <a href="#" target="_blank" rel="noopener noreferrer" class="portfolio-btn">
+                                            <a href="https://github.com/1976ukstu" target="_blank" rel="noopener noreferrer" class="portfolio-btn">
                                                 Browse Code →
                                             </a>
                                         </div>
@@ -112,7 +112,7 @@ get_template_part('template-parts/enhanced-universal-menu');
                                         </div>
                                         <p>Professional background, recommendations, and industry connections. Focus on creative technology, WordPress development, and innovative digital solutions.</p>
                                         <div class="link-action">
-                                            <a href="#" target="_blank" rel="noopener noreferrer" class="portfolio-btn">
+                                            <a href="https://linkedin.com/in/stuart-hunt-1976uk" target="_blank" rel="noopener noreferrer" class="portfolio-btn">
                                                 Connect →
                                             </a>
                                         </div>
@@ -120,13 +120,13 @@ get_template_part('template-parts/enhanced-universal-menu');
                                     
                                     <div class="portfolio-link-card">
                                         <div class="link-header">
-                                            <h4>🎨 Behance Portfolio</h4>
-                                            <span class="link-type">Creative Showcase</span>
+                                            <h4>🏢 Google My Business</h4>
+                                            <span class="link-type">Business Profile</span>
                                         </div>
-                                        <p>Visual design portfolio featuring UI/UX work, branding projects, and creative development solutions. Demonstrates design thinking and aesthetic execution.</p>
+                                        <p>Official business listing with client reviews, service areas, and professional credentials. Verified local business profile showcasing WordPress development and creative technology services.</p>
                                         <div class="link-action">
-                                            <a href="#" target="_blank" rel="noopener noreferrer" class="portfolio-btn">
-                                                View Work →
+                                            <a href="https://share.google/AWtpu4KD6aNhD8Cyv" target="_blank" rel="noopener noreferrer" class="portfolio-btn">
+                                                View Business →
                                             </a>
                                         </div>
                                     </div>
@@ -221,16 +221,10 @@ get_template_part('template-parts/enhanced-universal-menu');
                         </div>
                         
                     </div>
-                    
                 </div>
-            
             </div>
-            
         </div>
-        
     </main>
 </div>
-
-
 
 <?php get_footer(); ?>
