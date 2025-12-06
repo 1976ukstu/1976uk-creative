@@ -3,6 +3,19 @@
    Extracted from main style.css for modular architecture
    ========================================================================== */
 
+/* ==========================================================================
+   RESPONSIVE SITE TITLE POSITIONING
+   Fix site title positioning at mobile breakpoints
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .page-template-page-gallery-v2 .site-title {
+    top: 20px !important;
+    left: 20px !important;
+    position: fixed !important;
+  }
+}
+
 /* Remove flex interference - let grid handle everything */
 .gallery-content {
   width: 100% !important;
@@ -199,4 +212,43 @@ html body.page-template-page-gallery .gallery-showcase {
 .page-template-page-gallery-v2 .preview-image-container img {
   max-width: 85% !important; /* Slightly smaller to ensure better spacing */
   max-height: 85% !important; /* Slightly smaller to ensure proper bottom spacing */
+}
+
+/* ==========================================================================
+   GALLERY V2 RESPONSIVE LAYOUT SUPPORT
+   Backup responsive fixes for gallery-2x2-grid container
+   ========================================================================== */
+
+/* Ensure gallery cards never overflow container */
+body .gallery-card-2x2,
+html body .gallery-card-2x2,
+.site .gallery-card-2x2,
+#page .gallery-card-2x2 {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  min-width: 0 !important; /* Remove min-width that causes overflow */
+}
+
+/* Backup responsive rules matching websites page structure */
+@media (max-width: 900px) {
+  .page-template-page-gallery-v2 .gallery-2x2-grid {
+    grid-template-columns: 1fr !important;
+    gap: 25px !important;
+    max-width: 600px !important;
+    margin: 30px auto !important;
+    padding: 0 15px !important;
+  }
+}
+
+@media (max-width: 550px) {
+  .page-template-page-gallery-v2 .gallery-2x2-grid {
+    gap: 15px !important;
+    padding: 0 10px !important;
+  }
+  
+  .page-template-page-gallery-v2 .gallery-card-2x2 {
+    max-width: calc(100vw - 40px) !important;
+    margin: 0 auto !important;
+  }
 }

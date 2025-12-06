@@ -29,6 +29,8 @@ Performance optimization while developing new gradient system
   overflow: hidden;
 }
 
+/* TECH STRIPES SECTION - COMPLETELY DISABLED FOR PERFORMANCE */
+/*
 .tech-stripes {
   position: absolute;
   top: 0;
@@ -40,8 +42,8 @@ Performance optimization while developing new gradient system
 
 .tech-stripe {
   position: absolute;
-  background: linear-gradient(45deg, 
-    transparent 0%, 
+  background: linear-gradient(45deg,
+    transparent 0%,
     rgba(33, 150, 243, 0.4) 15%,
     rgba(76, 175, 80, 0.5) 25%,
     rgba(244, 67, 54, 0.4) 35%,
@@ -53,19 +55,18 @@ Performance optimization while developing new gradient system
   );
   height: 2px;
   width: 100%;
-  animation: techStripeMove 25s linear infinite;
   box-shadow: 
     0 0 4px rgba(33, 150, 243, 0.3),
     0 0 8px rgba(76, 175, 80, 0.2),
     0 0 6px rgba(244, 67, 54, 0.2);
 }
 
-.tech-stripe.stripe-1 { top: 8%; animation-delay: 0s; }
-.tech-stripe.stripe-2 { top: 22%; animation-delay: -5s; }
-.tech-stripe.stripe-3 { top: 36%; animation-delay: -10s; }
-.tech-stripe.stripe-4 { top: 52%; animation-delay: -15s; }
-.tech-stripe.stripe-5 { top: 68%; animation-delay: -20s; }
-.tech-stripe.stripe-6 { top: 84%; animation-delay: -3s; }
+.tech-stripe.stripe-1 { top: 8%; }
+.tech-stripe.stripe-2 { top: 22%; }
+.tech-stripe.stripe-3 { top: 36%; }
+.tech-stripe.stripe-4 { top: 52%; }
+.tech-stripe.stripe-5 { top: 68%; }
+.tech-stripe.stripe-6 { top: 84%; }
 
 @keyframes techStripeMove {
   0% { transform: translateX(-100%) rotate(45deg) scaleY(1); opacity: 0; }
@@ -74,7 +75,8 @@ Performance optimization while developing new gradient system
   90% { opacity: 0.3; }
   100% { transform: translateX(100%) rotate(45deg) scaleY(1); opacity: 0; }
 }
-END COMMENTED ANIMATED TECH STRIPES */
+*/
+/* END TECH STRIPES SECTION */
 
 /* ==========================================================================
    MAIN LAYOUT CONTAINERS
@@ -113,6 +115,8 @@ END COMMENTED ANIMATED TECH STRIPES */
   margin: 0 auto;
   padding: 20px;
   color: white;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Dashboard Header */

@@ -49,7 +49,7 @@ This theme follows strict WordPress coding standards and a modular file structur
 I utilize Advanced Custom Fields to create structured data types, ensuring the site is dynamic and easy to update.
 
 Example: Projects Repeater
-
+,
 Tech Stack: Dynamic text fields
 
 GitHub Integration: Direct links to public repos

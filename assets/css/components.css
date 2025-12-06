@@ -295,7 +295,7 @@ input[type="range"]::-moz-range-thumb {
     rgba(33, 150, 243, 0.6) 85%,
     transparent 100%
   );
-  animation: demoStripeMove 25s linear infinite;
+  /* animation: demoStripeMove 25s linear infinite; - DISABLED FOR PERFORMANCE */
 }
 
 @keyframes demoStripeMove {

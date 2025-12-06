@@ -1,5 +1,8 @@
 <?php get_header(); ?>
 
+<!-- Man of Steel Gradient Background -->
+<div class="man-of-steel-gradient"></div>
+
 <div class="site-title">
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="color: inherit; text-decoration: none;">
         <span class="main-title">1976uk</span>

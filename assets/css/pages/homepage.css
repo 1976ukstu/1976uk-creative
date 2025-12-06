@@ -8,16 +8,19 @@
    ANIMATED GRADIENT BACKGROUND - HOMEPAGE SIGNATURE
    ========================================================================== */
 
+/* ANIMATED GRADIENT DISABLED FOR PERFORMANCE - Using Man of Steel gradient from core.css instead */
+/*/* ANIMATED GRADIENT COMPLETELY DISABLED FOR PERFORMANCE */
 .home .site,
 .front-page .site,
 body.home,
 body.front-page {
-  background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #06ffa5);
+  /* background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #06ffa5);
   background-size: 400% 400%;
-  animation: gradientShift 16s ease-in-out infinite;
+  animation: gradientShift 16s ease-in-out infinite; */
   min-height: 100vh;
 }
 
+/* @keyframes gradientShift - DISABLED FOR PERFORMANCE
 @keyframes gradientShift {
   0% {
     background-position: 0% 50%;
@@ -34,6 +37,14 @@ body.front-page {
   100% {
     background-position: 0% 50%;
   }
+}*/*/
+
+/* Homepage now uses static Man of Steel gradient for consistent performance */
+.home .site,
+.front-page .site,
+body.home,
+body.front-page {
+  min-height: 100vh;
 }
 
 /* Remove the tech stripes background on homepage */

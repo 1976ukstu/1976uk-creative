@@ -5,6 +5,19 @@
    ========================================================================== */
 
 /* ==========================================================================
+   RESPONSIVE SITE TITLE POSITIONING
+   Fix site title positioning at mobile breakpoints
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .page-template-page-about .site-title {
+    top: 20px !important;
+    left: 20px !important;
+    position: fixed !important;
+  }
+}
+
+/* ==========================================================================
    ABOUT PAGE CONTENT CONTAINER
    Main layout and background structure
    ========================================================================== */

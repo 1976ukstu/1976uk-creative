@@ -116,29 +116,7 @@ get_template_part('template-parts/enhanced-universal-menu');
                                 </div>
                             </div>
                             
-                            <!-- Skills/Interests Section (ACF Free repeater) -->
-                            <?php if (have_rows('skills_interests')) : ?>
-                                <div class="skills-section">
-                                    <h3>🛠️ Development Skills & Interests</h3>
-                                    <div class="skills-grid">
-                                        <?php while (have_rows('skills_interests')) : the_row(); 
-                                            $skill_title = get_sub_field('skill_title');
-                                            $skill_description = get_sub_field('skill_description');
-                                            $skill_level = get_sub_field('skill_level'); // beginner, intermediate, advanced
-                                        ?>
-                                            <div class="skill-item <?php echo esc_attr($skill_level); ?>">
-                                                <h4><?php echo esc_html($skill_title); ?></h4>
-                                                <?php if ($skill_description) : ?>
-                                                    <p><?php echo esc_html($skill_description); ?></p>
-                                                <?php endif; ?>
-                                                <?php if ($skill_level) : ?>
-                                                    <span class="skill-level"><?php echo esc_html($skill_level); ?></span>
-                                                <?php endif; ?>
-                                            </div>
-                                        <?php endwhile; ?>
-                                    </div>
-                                </div>
-                            <?php else : ?>
+                            <!-- Skills/Interests Section -->
                                 <div class="skills-section">
                                     <h3>🛠️ Core Development Technologies</h3>
                                     <div class="skills-grid">
@@ -164,21 +142,13 @@ get_template_part('template-parts/enhanced-universal-menu');
                                         </div>
                                     </div>
                                 </div>
-                            <?php endif; ?>
                         </div>
                         
                         <!-- Side Info -->
                         <div class="about-sidebar">
                             
-                            <!-- Profile Image (optional) -->
-                            <?php 
-                            $profile_image = get_field('profile_image');
-                            if ($profile_image) : ?>
-                                <div class="profile-image">
-                                    <img src="<?php echo esc_url($profile_image['url']); ?>" 
-                                         alt="<?php echo esc_attr($profile_image['alt']); ?>">
-                                </div>
-                            <?php endif; ?>
+                            <!-- Profile Image (placeholder) -->
+                            <!-- Add profile image here when needed -->
                             
                             <!-- Technical Specifications -->
                             <div class="quick-facts">
@@ -194,23 +164,7 @@ get_template_part('template-parts/enhanced-universal-menu');
                                 </ul>
                             </div>
                             
-                            <!-- Timeline (ACF Free repeater) -->
-                            <?php if (have_rows('timeline_items')) : ?>
-                                <div class="timeline-section">
-                                    <h3>Journey Timeline</h3>
-                                    <div class="timeline">
-                                        <?php while (have_rows('timeline_items')) : the_row(); 
-                                            $year = get_sub_field('year');
-                                            $event = get_sub_field('event');
-                                        ?>
-                                            <div class="timeline-item">
-                                                <div class="timeline-year"><?php echo esc_html($year); ?></div>
-                                                <div class="timeline-event"><?php echo esc_html($event); ?></div>
-                                            </div>
-                                        <?php endwhile; ?>
-                                    </div>
-                                </div>
-                            <?php else : ?>
+                            <!-- Timeline Section -->
                                 <div class="timeline-section">
                                     <h3>🚀 Development Milestones</h3>
                                     <div class="timeline">
@@ -240,7 +194,6 @@ get_template_part('template-parts/enhanced-universal-menu');
                                         </div>
                                     </div>
                                 </div>
-                            <?php endif; ?>
                             
                         </div>
                         

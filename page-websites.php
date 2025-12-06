@@ -20,8 +20,8 @@ get_header();
     </div>
 </div> -->
 
-<!-- Simple Gentle Gradient Background (Temporary) -->
-<div class="gentle-gradient-background"></div>
+<!-- Man of Steel Gradient Background -->
+<div class="man-of-steel-gradient"></div>
 
 <div class="site-title">
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="color: inherit; text-decoration: none;">
@@ -418,27 +418,29 @@ body {
     );
     height: 2px; /* Thicker for more pronounced effect */
     width: 100%;
-    animation: techStripeMove 25s linear infinite;
+    /* animation: techStripeMove 25s linear infinite; - DISABLED FOR PERFORMANCE */
     box-shadow: 
         0 0 4px rgba(33, 150, 243, 0.3),
         0 0 8px rgba(76, 175, 80, 0.2),
         0 0 6px rgba(244, 67, 54, 0.2);
 }
 
-.tech-stripe.stripe-1 { top: 8%; animation-delay: 0s; }
+/* Tech stripe positioning - ANIMATIONS DISABLED FOR PERFORMANCE */
+/*.tech-stripe.stripe-1 { top: 8%; animation-delay: 0s; }
 .tech-stripe.stripe-2 { top: 22%; animation-delay: -5s; }
 .tech-stripe.stripe-3 { top: 36%; animation-delay: -10s; }
 .tech-stripe.stripe-4 { top: 52%; animation-delay: -15s; }
 .tech-stripe.stripe-5 { top: 68%; animation-delay: -20s; }
-.tech-stripe.stripe-6 { top: 84%; animation-delay: -3s; }
+.tech-stripe.stripe-6 { top: 84%; animation-delay: -3s; }*/
 
+/* @keyframes techStripeMove - DISABLED FOR PERFORMANCE
 @keyframes techStripeMove {
     0% { transform: translateX(-100%) rotate(45deg) scaleY(1); opacity: 0; }
     10% { opacity: 0.3; }
     50% { opacity: 0.6; transform: translateX(0%) rotate(45deg) scaleY(1.2); }
     90% { opacity: 0.3; }
     100% { transform: translateX(100%) rotate(45deg) scaleY(1); opacity: 0; }
-}
+}*/
 
 /* Enhanced body styling for tech aesthetic */
 body.page-template-page-websites {
@@ -927,6 +929,23 @@ body.page-template-page-websites {
     }
 }
 
+/* Fix layout at 850px - transition to 1 column earlier */
+@media (max-width: 900px) {
+    .websites-2x2-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 25px;
+        max-width: 600px;
+        margin: 30px auto;
+        padding: 0 15px;
+    }
+    
+    .website-card-2x2 {
+        min-height: 400px;
+        max-width: 100%;
+    }
+}
+
 @media (max-width: 768px) {
     .dashboard-content {
         padding: 10px;
@@ -945,7 +964,34 @@ body.page-template-page-websites {
         grid-template-columns: 1fr;
         grid-template-rows: auto;
         gap: 20px;
+        max-width: 500px;
+        margin: 20px auto;
+        padding: 0 10px;
     }
+}
+
+/* Extra small screens - 500px and below */
+@media (max-width: 550px) {
+    .websites-2x2-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 15px;
+        max-width: 100%;
+        margin: 15px auto;
+        padding: 0 5px;
+    }
+    
+    .website-card-2x2 {
+        min-height: 350px;
+        max-width: calc(100vw - 30px);
+        margin: 0 auto;
+    }
+    
+    .dashboard-section {
+        padding: 20px 15px;
+        margin: 0 5px;
+    }
+}
     
     .website-card-2x2 {
         min-height: 300px;

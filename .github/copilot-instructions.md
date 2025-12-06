@@ -19,6 +19,7 @@ This is a custom WordPress creative portfolio theme focused on interactive galle
 ### Gallery & Media Management
 - Gallery cards use WordPress options API: `get_option("gallery_card_{$id}_title")` pattern
 - Drag & drop functionality via AJAX handlers in `functions.php`
+
 - Image uploads integrate with WordPress Media Library using `wp_handle_upload()`
 - Card data persistence follows pattern: `update_option('gallery_card_' . $card_id . '_field', $value)`
 
