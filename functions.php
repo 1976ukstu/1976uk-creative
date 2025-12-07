@@ -645,5 +645,57 @@ function handle_card_data_update() {
     ));
 }
 
+// ===== PROFESSIONAL SEO OPTIMIZATION =====
+
+// Add professional meta tags and Open Graph data
+function creative_theme_seo_head() {
+    global $post;
+    
+    // Get page information
+    $site_name = get_bloginfo('name');
+    $site_description = get_bloginfo('description');
+    $site_url = home_url();
+    
+    if (is_front_page()) {
+        $title = $site_name . ' | ' . $site_description;
+        $description = 'Professional WordPress development and creative technology solutions. Specialized in glassmorphism design, performance optimization, and custom theme development.';
+        $url = $site_url;
+    } elseif (is_page()) {
+        $title = get_the_title() . ' | ' . $site_name;
+        $description = get_the_excerpt() ?: 'Professional creative technology services and WordPress development by 1976uk Creative.';
+        $url = get_permalink();
+    } else {
+        $title = wp_get_document_title();
+        $description = $site_description;
+        $url = $site_url;
+    }
+    
+    // Clean up description
+    $description = wp_strip_all_tags($description);
+    $description = substr($description, 0, 160);
+    
+    echo "\n<!-- 1976uk Creative SEO Meta Tags -->\n";
+    echo '<meta name="description" content="' . esc_attr($description) . '">' . "\n";
+    echo '<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">' . "\n";
+    
+    // Open Graph meta tags for social sharing
+    echo '<meta property="og:type" content="website">' . "\n";
+    echo '<meta property="og:title" content="' . esc_attr($title) . '">' . "\n";
+    echo '<meta property="og:description" content="' . esc_attr($description) . '">' . "\n";
+    echo '<meta property="og:url" content="' . esc_url($url) . '">' . "\n";
+    echo '<meta property="og:site_name" content="' . esc_attr($site_name) . '">' . "\n";
+    echo '<meta property="og:locale" content="en_GB">' . "\n";
+    
+    // Twitter Card meta tags
+    echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+    echo '<meta name="twitter:title" content="' . esc_attr($title) . '">' . "\n";
+    echo '<meta name="twitter:description" content="' . esc_attr($description) . '">' . "\n";
+    
+    // Canonical URL
+    echo '<link rel="canonical" href="' . esc_url($url) . '">' . "\n";
+    echo "<!-- End 1976uk Creative SEO -->\n\n";
+}
+add_action('wp_head', 'creative_theme_seo_head', 1);
+
 // Additional custom functions can be added below
 ?>
