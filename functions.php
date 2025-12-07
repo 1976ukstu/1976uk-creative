@@ -697,5 +697,55 @@ function creative_theme_seo_head() {
 }
 add_action('wp_head', 'creative_theme_seo_head', 1);
 
+// Add JSON-LD Schema markup for better search engine understanding
+function creative_theme_schema_markup() {
+    $site_name = get_bloginfo('name');
+    $site_url = home_url();
+    
+    // Organization Schema
+    $organization_schema = array(
+        "@context" => "https://schema.org",
+        "@type" => "Organization",
+        "name" => $site_name,
+        "url" => $site_url,
+        "description" => "Professional WordPress development and creative technology solutions specializing in custom themes, performance optimization, and innovative design.",
+        "address" => array(
+            "@type" => "PostalAddress",
+            "addressCountry" => "GB"
+        ),
+        "contactPoint" => array(
+            "@type" => "ContactPoint",
+            "contactType" => "customer service",
+            "url" => $site_url . "/contact"
+        ),
+        "sameAs" => array(
+            "https://github.com/1976ukstu",
+            "https://www.upwork.com/freelancers/~01d3e9362798a7a655",
+            "https://linkedin.com/in/stuart-hunt-1976uk"
+        )
+    );
+    
+    // Website Schema
+    $website_schema = array(
+        "@context" => "https://schema.org",
+        "@type" => "WebSite",
+        "name" => $site_name,
+        "url" => $site_url,
+        "description" => get_bloginfo('description'),
+        "publisher" => array(
+            "@type" => "Organization",
+            "name" => $site_name
+        )
+    );
+    
+    echo '<script type="application/ld+json">';
+    echo json_encode($organization_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    echo '</script>';
+    echo '<script type="application/ld+json">';
+    echo json_encode($website_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    echo '</script>';
+}
+add_action('wp_head', 'creative_theme_schema_markup', 2);
+
 // Additional custom functions can be added below
 ?>
