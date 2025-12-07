@@ -974,5 +974,53 @@ function creative_theme_security_headers() {
 }
 add_action('send_headers', 'creative_theme_security_headers');
 
+// Disable file editing from WordPress admin for security
+function creative_theme_disable_file_editing() {
+    if (!defined('DISALLOW_FILE_EDIT')) {
+        define('DISALLOW_FILE_EDIT', true);
+    }
+}
+add_action('init', 'creative_theme_disable_file_editing');
+
+// Remove WordPress version from head for security
+remove_action('wp_head', 'wp_generator');
+
+// Disable XML-RPC for security (already added but ensuring it's here)
+add_filter('xmlrpc_enabled', '__return_false');
+
+// Hide WordPress login errors to prevent user enumeration
+function creative_theme_hide_login_errors() {
+    return 'Invalid credentials. Please try again.';
+}
+add_filter('authenticate', function($user, $username, $password) {
+    if (is_wp_error($user) && !empty($username)) {
+        error_log('Failed login attempt for username: ' . $username . ' from IP: ' . ($_SERVER['REMOTE_ADDR'] ?? 'unknown'));
+    }
+    return $user;
+}, 30, 3);
+add_filter('login_errors', 'creative_theme_hide_login_errors');
+
+// Limit login attempts (basic protection)
+function creative_theme_limit_login_attempts() {
+    $ip = $_SERVER['REMOTE_ADDR'] ?? '';
+    $attempts_key = 'login_attempts_' . md5($ip);
+    $attempts = get_transient($attempts_key) ?: 0;
+    
+    if ($attempts >= 5) {
+        wp_die('Too many failed login attempts. Please try again in 15 minutes.', 'Login Blocked', array('response' => 429));
+    }
+    
+    // Increment attempts on failed login
+    add_action('wp_login_failed', function() use ($attempts_key, $attempts) {
+        set_transient($attempts_key, $attempts + 1, 15 * MINUTE_IN_SECONDS);
+    });
+    
+    // Clear attempts on successful login
+    add_action('wp_login', function() use ($attempts_key) {
+        delete_transient($attempts_key);
+    });
+}
+add_action('wp_authenticate', 'creative_theme_limit_login_attempts', 1);
+
 // Additional custom functions can be added below
 ?>
