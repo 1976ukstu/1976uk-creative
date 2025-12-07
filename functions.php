@@ -747,5 +747,189 @@ function creative_theme_schema_markup() {
 }
 add_action('wp_head', 'creative_theme_schema_markup', 2);
 
+// Add page-specific schema markup
+function creative_theme_page_specific_schema() {
+    if (is_page('portfolio')) {
+        // Professional Service schema for Portfolio page
+        $portfolio_schema = array(
+            "@context" => "https://schema.org",
+            "@type" => "ProfessionalService",
+            "name" => "WordPress Development & Creative Technology",
+            "provider" => array(
+                "@type" => "Organization",
+                "name" => get_bloginfo('name')
+            ),
+            "serviceType" => "Web Development",
+            "description" => "Professional WordPress development, custom theme creation, and creative technology solutions.",
+            "areaServed" => array(
+                "@type" => "Country",
+                "name" => "United Kingdom"
+            ),
+            "hasOfferCatalog" => array(
+                "@type" => "OfferCatalog",
+                "name" => "Development Services",
+                "itemListElement" => array(
+                    array(
+                        "@type" => "Offer",
+                        "itemOffered" => array(
+                            "@type" => "Service",
+                            "name" => "WordPress Development"
+                        )
+                    ),
+                    array(
+                        "@type" => "Offer", 
+                        "itemOffered" => array(
+                            "@type" => "Service",
+                            "name" => "Custom Theme Creation"
+                        )
+                    ),
+                    array(
+                        "@type" => "Offer",
+                        "itemOffered" => array(
+                            "@type" => "Service", 
+                            "name" => "Performance Optimization"
+                        )
+                    )
+                )
+            )
+        );
+        
+        echo '<script type="application/ld+json">';
+        echo json_encode($portfolio_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        echo '</script>';
+    }
+    
+    if (is_page('contact')) {
+        // Contact Page schema
+        $contact_schema = array(
+            "@context" => "https://schema.org",
+            "@type" => "ContactPage",
+            "name" => "Contact 1976uk Creative",
+            "description" => "Get in touch for professional WordPress development and creative technology services.",
+            "mainEntity" => array(
+                "@type" => "Organization",
+                "name" => get_bloginfo('name'),
+                "contactPoint" => array(
+                    "@type" => "ContactPoint",
+                    "contactType" => "customer service",
+                    "url" => home_url('/contact'),
+                    "availableLanguage" => "English"
+                )
+            )
+        );
+        
+        echo '<script type="application/ld+json">';
+        echo json_encode($contact_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        echo '</script>';
+    }
+}
+add_action('wp_head', 'creative_theme_page_specific_schema', 3);
+
+// Add FAQ Schema for services (helps with voice search)
+function creative_theme_faq_schema() {
+    if (is_page('about') || is_page('portfolio')) {
+        $faq_schema = array(
+            "@context" => "https://schema.org",
+            "@type" => "FAQPage",
+            "mainEntity" => array(
+                array(
+                    "@type" => "Question",
+                    "name" => "What services does 1976uk Creative offer?",
+                    "acceptedAnswer" => array(
+                        "@type" => "Answer",
+                        "text" => "We specialize in WordPress development, custom theme creation, performance optimization, glassmorphism design, and creative technology solutions."
+                    )
+                ),
+                array(
+                    "@type" => "Question", 
+                    "name" => "Do you work with businesses outside the UK?",
+                    "acceptedAnswer" => array(
+                        "@type" => "Answer",
+                        "text" => "Yes, we work with clients globally, offering remote WordPress development and creative technology services."
+                    )
+                ),
+                array(
+                    "@type" => "Question",
+                    "name" => "What makes your WordPress development different?",
+                    "acceptedAnswer" => array(
+                        "@type" => "Answer", 
+                        "text" => "We focus on clean-code architecture, performance optimization, and innovative glassmorphism design while maintaining professional WordPress standards."
+                    )
+                )
+            )
+        );
+        
+        echo '<script type="application/ld+json">';
+        echo json_encode($faq_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        echo '</script>';
+    }
+}
+add_action('wp_head', 'creative_theme_faq_schema', 4);
+
+// Add breadcrumb schema for better navigation understanding
+function creative_theme_breadcrumb_schema() {
+    if (!is_front_page() && is_page()) {
+        $breadcrumb_schema = array(
+            "@context" => "https://schema.org", 
+            "@type" => "BreadcrumbList",
+            "itemListElement" => array(
+                array(
+                    "@type" => "ListItem",
+                    "position" => 1,
+                    "name" => "Home",
+                    "item" => home_url()
+                ),
+                array(
+                    "@type" => "ListItem",
+                    "position" => 2,
+                    "name" => get_the_title(),
+                    "item" => get_permalink()
+                )
+            )
+        );
+        
+        echo '<script type="application/ld+json">';
+        echo json_encode($breadcrumb_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        echo '</script>';
+    }
+}
+add_action('wp_head', 'creative_theme_breadcrumb_schema', 5);
+
+// SEO-friendly sitemap generation hint for search engines
+function creative_theme_seo_hints() {
+    if (is_front_page()) {
+        // Add hreflang for international SEO (if needed later)
+        echo '<link rel="alternate" hreflang="en-gb" href="' . home_url() . '" />' . "\n";
+        echo '<link rel="alternate" hreflang="en" href="' . home_url() . '" />' . "\n";
+        
+        // Preconnect to external domains for performance
+        echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
+        echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+        
+        // DNS prefetch for external services
+        echo '<link rel="dns-prefetch" href="//github.com">' . "\n";
+        echo '<link rel="dns-prefetch" href="//upwork.com">' . "\n";
+        echo '<link rel="dns-prefetch" href="//linkedin.com">' . "\n";
+    }
+}
+add_action('wp_head', 'creative_theme_seo_hints', 6);
+
+// Enhanced title tag optimization
+function creative_theme_document_title_parts($title_parts) {
+    if (is_front_page()) {
+        $title_parts['title'] = '1976uk Creative | Professional WordPress Development & Creative Technology';
+        unset($title_parts['tagline']);
+    } elseif (is_page('portfolio')) {
+        $title_parts['title'] = 'Portfolio | WordPress Development Services | 1976uk Creative';
+    } elseif (is_page('contact')) {
+        $title_parts['title'] = 'Contact | Get Professional WordPress Development Quote | 1976uk Creative';
+    } elseif (is_page('about')) {
+        $title_parts['title'] = 'About | Creative Technologist & WordPress Expert | 1976uk Creative';
+    }
+    
+    return $title_parts;
+}
+add_filter('document_title_parts', 'creative_theme_document_title_parts');
+
 // Additional custom functions can be added below
 ?>
