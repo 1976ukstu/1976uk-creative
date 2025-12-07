@@ -479,15 +479,15 @@ function artist_theme_performance_optimizations() {
 }
 add_action( 'init', 'artist_theme_performance_optimizations' );
 
+// Add WebP support function
+function add_webp_upload_support( $mimes ) {
+    $mimes['webp'] = 'image/webp';
+    return $mimes;
+}
+add_filter( 'upload_mimes', 'add_webp_upload_support' );
+
 // Optimize images for better performance
 function artist_theme_image_optimization() {
-    // Add WebP support
-    function add_webp_upload_support( $mimes ) {
-        $mimes['webp'] = 'image/webp';
-        return $mimes;
-    }
-    add_filter( 'upload_mimes', 'add_webp_upload_support' );
-    
     // Enable lazy loading for images (WordPress 5.5+)
     add_filter( 'wp_lazy_loading_enabled', '__return_true' );
 }
