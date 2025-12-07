@@ -74,7 +74,8 @@ get_template_part('template-parts/enhanced-universal-menu');
                                 </div>
                             <?php endif; ?>
                             
-                            <!-- Project Concepts -->
+                            <!-- Project Concepts - TEMPORARILY COMMENTED OUT FOR MOBILE OPTIMIZATION -->
+                            <!--
                             <div class="project-concepts">
                                 <h3>💡 Strategic Development Concepts</h3>
                                 
@@ -128,6 +129,7 @@ get_template_part('template-parts/enhanced-universal-menu');
                                     </div>
                                 </div>
                             </div>
+                            -->
                             
                             <!-- Development Timeline -->
                             <div class="development-timeline">
