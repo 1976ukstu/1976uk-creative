@@ -313,10 +313,10 @@ function add_weekly_updates_capabilities() {
 }
 add_action( 'admin_init', 'add_weekly_updates_capabilities' );
 
-// Enqueue modular CSS and scripts - PERFORMANCE OPTIMIZED!
+// Enqueue modular CSS and scripts - NEW ARCHITECTURE!
 function creative_theme_scripts() {
-    // Version for cache busting - update when making changes
-    $version = '2.1.0'; // Bumped for performance optimization
+    // Version for cache busting
+    $version = '2.0.0'; // Bumped for major refactor
     
     // Core styles (typography, colors, global elements)
     wp_enqueue_style( 
@@ -443,55 +443,14 @@ function creative_theme_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'creative_theme_scripts' );
 
-// ===== PERFORMANCE OPTIMIZATION FUNCTIONS =====
-
-// Remove unused WordPress default assets
+// Only remove specific problematic styles, keep accessibility ones
 function artist_theme_clean_styles() {
-    // Remove block library styles if not using Gutenberg blocks
+    // Only remove block library styles if not using Gutenberg blocks
+    // This keeps accessibility styles while removing potential @import issues
     wp_dequeue_style( 'wp-block-library' );
     wp_dequeue_style( 'wp-block-library-theme' );
-    wp_dequeue_style( 'wc-blocks-style' ); // Remove WooCommerce blocks if present
-    
-    // Remove emoji scripts and styles for better performance
-    remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-    remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-    remove_action( 'wp_print_styles', 'print_emoji_styles' );
-    remove_action( 'admin_print_styles', 'print_emoji_styles' );
 }
-    wp_dequeue_style( 'wp-block-library-theme' );
-}
-add_action( 'wp_enqueue_scripts', 'artist_theme_clean_styles' );
-
-// Optimize WordPress performance
-function artist_theme_performance_optimizations() {
-    // Remove unnecessary meta tags and links
-    remove_action( 'wp_head', 'wp_generator' );
-    remove_action( 'wp_head', 'wlwmanifest_link' );
-    remove_action( 'wp_head', 'rsd_link' );
-    remove_action( 'wp_head', 'wp_shortlink_wp_head' );
-    
-    // Remove unnecessary REST API links for better security and performance
-    remove_action( 'wp_head', 'rest_output_link_wp_head', 10 );
-    remove_action( 'wp_head', 'wp_oembed_add_discovery_links', 10 );
-    
-    // Disable XML-RPC for security
-    add_filter( 'xmlrpc_enabled', '__return_false' );
-}
-add_action( 'init', 'artist_theme_performance_optimizations' );
-
-// Add WebP support function
-function add_webp_upload_support( $mimes ) {
-    $mimes['webp'] = 'image/webp';
-    return $mimes;
-}
-add_filter( 'upload_mimes', 'add_webp_upload_support' );
-
-// Optimize images for better performance
-function artist_theme_image_optimization() {
-    // Enable lazy loading for images (WordPress 5.5+)
-    add_filter( 'wp_lazy_loading_enabled', '__return_true' );
-}
-add_action( 'init', 'artist_theme_image_optimization' );
+add_action( 'wp_enqueue_scripts', 'artist_theme_clean_styles', 1 );
 
 // Custom menu fallback for 1976uk Creative (Updated with About page)
 function creative_lab_fallback_menu() {
