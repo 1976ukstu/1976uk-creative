@@ -19,8 +19,8 @@ class DashboardV2Config {
     // Dashboard version
     const VERSION = '2.0.0';
     
-    // Dashboard settings
-    const PASSWORD = '1976uk';
+    // Dashboard settings - Use stronger password in production
+    const PASSWORD = '1976uk_Creative_Dashboard_2024!';
     const SESSION_KEY = 'dashboard_v2_authenticated';
     const CARDS_COUNT = 6;
     

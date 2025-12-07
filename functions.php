@@ -6,7 +6,9 @@ add_action('init', function() {
         isset($_POST['name'], $_POST['email'], $_POST['message']) &&
         !empty($_POST['name']) &&
         !empty($_POST['email']) &&
-        !empty($_POST['message'])
+        !empty($_POST['message']) &&
+        isset($_POST['contact_nonce']) &&
+        wp_verify_nonce($_POST['contact_nonce'], 'contact_form_nonce')
     ) {
         // Basic spam protection
         $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
@@ -930,6 +932,47 @@ function creative_theme_document_title_parts($title_parts) {
     return $title_parts;
 }
 add_filter('document_title_parts', 'creative_theme_document_title_parts');
+
+// ===== CRITICAL SECURITY FIXES =====
+
+// Add nonce verification to contact form (SECURITY FIX)
+function add_contact_form_nonce() {
+    // Only run this fix on pages that have contact forms
+    if (is_page('contact')) {
+        add_action('wp_footer', function() {
+            echo '<script>
+            // Add nonce to contact form for security
+            document.addEventListener("DOMContentLoaded", function() {
+                const contactForm = document.querySelector("form");
+                if (contactForm && !contactForm.querySelector("input[name=\"contact_nonce\"]")) {
+                    const nonceField = document.createElement("input");
+                    nonceField.type = "hidden";
+                    nonceField.name = "contact_nonce";
+                    nonceField.value = "' . wp_create_nonce('contact_form_nonce') . '";
+                    contactForm.appendChild(nonceField);
+                }
+            });
+            </script>';
+        });
+    }
+}
+add_action('wp_head', 'add_contact_form_nonce');
+
+// Add security headers for production
+function creative_theme_security_headers() {
+    // Prevent clickjacking
+    header('X-Frame-Options: SAMEORIGIN');
+    
+    // Prevent MIME type sniffing
+    header('X-Content-Type-Options: nosniff');
+    
+    // Enable XSS protection
+    header('X-XSS-Protection: 1; mode=block');
+    
+    // Referrer Policy for privacy
+    header('Referrer-Policy: strict-origin-when-cross-origin');
+}
+add_action('send_headers', 'creative_theme_security_headers');
 
 // Additional custom functions can be added below
 ?>
