@@ -965,6 +965,26 @@ get_template_part('template-parts/enhanced-universal-menu');
         gap: 20px;
     }
     
+    .form-group {
+        width: 100%;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px 15px;
+        min-width: 0;
+        max-width: 100%;
+    }
+    
+    .form-group select {
+        padding-right: 40px;
+        background-size: 16px;
+        background-position: right 12px center;
+    }
+    
     .form-section {
         padding: 25px 20px;
     }
@@ -982,28 +1002,6 @@ get_template_part('template-parts/enhanced-universal-menu');
         grid-template-columns: 1fr;
     }
 }
-
-@media (max-width: 480px) {
-    .contact-card-header-v2 h1 {
-        font-size: 1.8em;
-    }
-    
-    .header-icon {
-        font-size: 3em;
-    }
-    
-    .form-section {
-        padding: 20px 15px;
-    }
-    
-    .contact-submit-professional {
-        padding: 15px 35px;
-        font-size: 1.1em;
-    }
-    
-    .white-stripes {
-        opacity: 0.2;
-    }
 }
 
 /* Animation Enhancements */
