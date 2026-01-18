@@ -1,0 +1,569 @@
+/* ==========================================================================
+   PROJECTS PAGE STYLES
+   Hub page template with development roadmap and subdomain strategy
+   Strategic planning and technical innovation showcase
+   ========================================================================== */
+
+/* ==========================================================================
+   RESPONSIVE SITE TITLE POSITIONING
+   Fix site title positioning at mobile breakpoints
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .page-template-page-projects .site-title {
+    top: 20px !important;
+    left: 20px !important;
+    position: fixed !important;
+  }
+}
+
+/* ==========================================================================
+   TEXT SHADOW OVERRIDES
+   Ensure crisp white typography across all Projects page elements
+   ========================================================================== */
+
+/* Override text shadows for crisp white subtitles - Projects page specific */
+.projects-intro h3,
+.projects-intro h2,
+.project-concepts h4,
+.project-concept-card h4,
+.dashboard-content h3,
+.dashboard-content h2,
+.projects-content h3,
+.projects-content h2 {
+    text-shadow: none !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+/* Broader override for any shadowy text in dashboard content */
+.dashboard-content * {
+    text-shadow: none !important;
+}
+
+/* ==========================================================================
+   PROJECTS GRID LAYOUT
+   Two-column Hub page structure matching About page design
+   ========================================================================== */
+
+/* Projects Grid Layout - matches About page structure */
+.projects-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+    margin-top: 40px;
+}
+
+/* Main Projects Content - Enhanced Specificity and Better Mobile Support */
+.page-template-page-projects .projects-main,
+.dashboard-section .projects-main {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 25px !important;
+    padding: 40px !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    backdrop-filter: blur(15px) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+/* Projects Sidebar */
+.projects-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.page-template-page-projects .tech-specs,
+.page-template-page-projects .projects-status,
+.dashboard-section .tech-specs,
+.dashboard-section .projects-status {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 25px !important;
+    padding: 30px !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    backdrop-filter: blur(15px) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* ==========================================================================
+   PROJECT CONCEPT CARDS
+   Subdomain strategy showcase with interactive design
+   ========================================================================== */
+
+/* Project Concept Cards */
+.concepts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 25px;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow: hidden;
+    padding: 0;
+}
+
+/* TEMPORARY: Uncomment to hide concept cards for testing */
+/*
+.project-concepts {
+    display: none !important;
+}
+*/
+
+.project-concept-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 25px;
+    transition: all 0.3s ease;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.project-concept-card:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.concept-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.concept-status {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.concept-tech {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* ==========================================================================
+   DEVELOPMENT TIMELINE
+   Project roadmap with phased approach and status tracking
+   ========================================================================== */
+
+/* Development Timeline */
+.timeline-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.timeline-phase {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.phase-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.phase-header h4 {
+    margin: 0;
+    color: white;
+    font-size: 1.2em;
+}
+
+.phase-status {
+    font-size: 0.8em;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.phase-status.active {
+    background: rgba(46, 204, 113, 0.8);
+    color: white;
+}
+
+.phase-status.planned {
+    background: rgba(52, 152, 219, 0.8);
+    color: white;
+}
+
+.phase-status.future {
+    background: rgba(155, 89, 182, 0.8);
+    color: white;
+}
+
+.phase-tasks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.phase-tasks li {
+    padding: 6px 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95em;
+    line-height: 1.4;
+}
+
+/* ==========================================================================
+   TECHNICAL SPECIFICATIONS AND STATUS
+   Development metrics and progress tracking
+   ========================================================================== */
+
+/* Tech Specs List */
+.tech-specs ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tech-specs li {
+    margin-bottom: 12px;
+    font-size: 0.95em;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    line-height: 1.4;
+}
+
+.tech-specs li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.tech-specs strong {
+    color: white;
+    font-weight: 600;
+}
+
+/* Status Progress */
+.status-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.status-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.status-item:last-child {
+    border-bottom: none;
+}
+
+.status-name {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.status-progress {
+    font-size: 0.8em;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-weight: 600;
+    min-width: 45px;
+    text-align: center;
+}
+
+.status-progress.active {
+    background: rgba(46, 204, 113, 0.8);
+    color: white;
+}
+
+.status-progress.planning {
+    background: rgba(52, 152, 219, 0.8);
+    color: white;
+}
+
+.status-progress.future {
+    background: rgba(155, 89, 182, 0.8);
+    color: white;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   Mobile-first responsive breakpoints for projects page
+   ========================================================================== */
+
+/* Responsive Layout Improvements */
+@media (max-width: 1200px) {
+    .projects-grid {
+        gap: 30px;
+    }
+    
+    .concepts-grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 15px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .concepts-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto !important;
+        gap: 20px;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-content {
+        padding: 10px !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+    }
+    
+    .projects-main {
+        padding: 10px !important;
+        border-radius: 20px !important;
+        margin: 0 !important;
+        width: calc(100% - 20px) !important;
+        max-width: calc(100vw - 20px) !important;
+        box-sizing: border-box !important;
+    }
+}
+
+/* Extra small screens - 480px and below */
+@media (max-width: 480px) {
+    body.page-template-page-projects {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+    
+    .dashboard-content {
+        padding: 5px !important;
+    }
+    
+    .projects-main {
+        padding: 8px !important;
+        width: calc(100% - 16px) !important;
+        max-width: calc(100vw - 16px) !important;
+    }
+    
+    .project-concept-card {
+        min-width: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        flex-shrink: 1 !important;
+        overflow-wrap: break-word !important;
+    }
+    
+    /* Force override of any grid minmax constraints */
+    .concepts-grid {
+        grid-template-columns: 1fr !important;
+        grid-auto-flow: row !important;
+        grid-auto-rows: auto !important;
+    }
+    
+    .project-concepts {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+    
+    .concepts-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px;
+        margin-top: 20px;
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .project-concept-card {
+        padding: 15px;
+        border-radius: 15px;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+    }
+    
+    .timeline-container {
+        gap: 20px;
+    }
+    
+    .phase-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-content {
+        padding: 8px !important;
+        margin: 0 !important;
+    }
+    
+    .projects-main {
+        padding: 15px !important;
+        border-radius: 12px !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+    }
+    
+    .project-concept-card {
+        padding: 12px !important;
+        border-radius: 10px !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .concept-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+    
+    .concept-status {
+        font-size: 0.65em;
+        padding: 3px 6px;
+    }
+    
+    .concepts-grid {
+        gap: 10px !important;
+        padding: 0 !important;
+        margin: 15px 0 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-content {
+        padding: 5px !important;
+        margin: 0 !important;
+    }
+    
+    .dashboard-section {
+        padding: 15px !important;
+        margin: 0 !important;
+    }
+    
+    .projects-main {
+        padding: 15px !important;
+        border-radius: 15px !important;
+        margin: 0 !important;
+        width: calc(100% - 10px) !important;
+        max-width: calc(100% - 10px) !important;
+        box-sizing: border-box !important;
+    }
+    
+    .project-concept-card {
+        padding: 10px !important;
+        border-radius: 8px !important;
+        margin: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+    
+    .concepts-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto !important;
+        gap: 8px !important;
+        padding: 0 !important;
+        margin: 10px 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+    
+    .concept-header h4 {
+        font-size: 0.9em !important;
+        line-height: 1.2 !important;
+        word-break: break-word !important;
+    }
+    
+    .concept-status {
+        font-size: 0.6em;
+        padding: 2px 5px;
+        white-space: nowrap;
+    }
+}
+
+/* ==========================================================================
+   PROJECTS PAGE POSITIONING IMPROVEMENTS  
+   Adjust concept bubble positioning and Development Roadmap spacing
+   ========================================================================== */
+
+/* Improve concept bubble positioning */
+.concept-status {
+  position: relative;
+  top: -2px; /* Slight upward adjustment for better visual alignment */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hide or fix any problematic numbered div.span-concept bubbles */
+.span-concept,
+div.span-concept,
+.project-concept-card .span-concept {
+  display: none !important; /* Hide if causing positioning issues */
+}
+
+/* Alternative: If numbered bubbles should be visible, position them properly */
+.project-concept-card {
+  position: relative;
+  overflow: visible; /* Allow for proper bubble positioning */
+}
+
+/* Fix any absolutely positioned numbered elements */
+.project-concept-card [class*="concept"]:not(.concept-status):not(.concept-header):not(.concept-tech) {
+  position: static !important;
+  display: none !important; /* Hide unexpected numbered elements */
+}
+
+/* Add spacing above Development Roadmap title */
+.development-timeline h3 {
+  margin-top: 20px !important; /* Add a few px of space above */
+  padding-top: 8px;
+}

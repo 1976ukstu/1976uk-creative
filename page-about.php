@@ -7,41 +7,53 @@
 get_header();
 ?>
 
+<!-- Man of Steel Gradient Background -->
+<div class="man-of-steel-gradient"></div>
+
 <div class="site-title">
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="color: inherit; text-decoration: none;">
-        1976uk<br>Creative
+        <span class="main-title">1976uk</span>
+        <span class="sub-title">Creative</span>
     </a>
 </div>
 
-<button class="hamburger" aria-label="Open menu">
+<button class="universal-hamburger" aria-label="Open menu">
     <span></span>
     <span></span>
     <span></span>
 </button>
 
-<div class="side-panel">
-    <?php
-    wp_nav_menu( array(
-        'theme_location' => 'side-panel',
-        'menu_class'     => 'side-menu',
-        'fallback_cb'    => false,
-    ) );
-    ?>
-</div>
+<?php
+// Include the enhanced universal menu
+get_template_part('template-parts/enhanced-universal-menu');
+?>
 
 <div id="primary" class="content-area">
     <main id="main" class="site-main">
         
-        <!-- About Page Content -->
-        <div class="about-content">
+        <!-- About Content with Dashboard Styling -->
+        <div class="dashboard-content">
             
             <?php if (have_posts()) : ?>
                 <?php while (have_posts()) : the_post(); ?>
                     
-                    <!-- Page Title -->
-                    <div class="page-header">
-                        <h1 class="page-title"><?php the_title(); ?></h1>
+                    <!-- Beautiful Page Header - Gallery Style -->
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">
+                            <h1>🎨 Technical Excellence & Innovation</h1>
+                        </div>
+                        <div class="dashboard-subtitle">
+                            Advanced WordPress development, performance optimization, and innovative problem-solving
+                        </div>
                     </div>
+                    
+                <?php endwhile; ?>
+            <?php endif; ?>
+            
+            <!-- Dashboard Section for Technical Showcase -->
+            <div class="dashboard-section">
+                <h2>💻 Professional Development Portfolio</h2>
+                <p>Innovative technical solutions and advanced WordPress engineering</p>
                     
                     <!-- About Grid Layout -->
                     <div class="about-grid">
@@ -54,288 +66,150 @@ get_header();
                                 </div>
                             <?php else : ?>
                                 <div class="about-intro">
-                                    <h2>Welcome to 1976uk Creative</h2>
-                                    <p>This is your creative playground - a space for experimentation, learning, and building amazing things without production pressure.</p>
+                                    <h2>🚀 Technical Excellence & Innovation</h2>
+                                    <p>This site represents advanced WordPress development, performance optimization, and innovative problem-solving. Built on proven architecture with cutting-edge frontend technologies and professional development practices.</p>
                                     
-                                    <h3>The Journey</h3>
-                                    <p>From photography production workflows to professional web development, this site represents a journey of creative evolution and technical growth.</p>
+                                    <h3>🎨 Signature Development Innovations</h3>
+                                    <p><strong>Glassmorphism Panel System:</strong> Custom CSS implementation featuring multi-layer depth effects, advanced backdrop-filter blur, and responsive transparency management. Creates premium aesthetic with optimal performance.</p>
                                     
-                                    <h3>What You'll Find Here</h3>
-                                    <p>Development experiments, creative projects, and the ongoing exploration of what's possible when art meets technology.</p>
+                                    <p><strong>96% Viewport Modal System:</strong> Professional-grade image and content viewing experience with smooth animations, keyboard navigation, and mobile-optimized responsive scaling.</p>
+                                    
+                                    <p><strong>Performance-First Architecture:</strong> Strategic removal of resource-heavy animations in favor of smooth, stable user experiences. Cross-device optimization ensuring excellent performance on desktop, tablet, and mobile platforms.</p>
+                                    
+                                    <h3>🛠️ Technical Problem-Solving</h3>
+                                    <p><strong>WordPress Media Library Integration:</strong> Seamless connection between custom gallery systems and WordPress native media management. Dynamic content loading with intelligent fallback systems.</p>
+                                    
+                                    <p><strong>Responsive 2x2 Grid Architecture:</strong> Professional layout system adapting from desktop 2x2 display to mobile single-column, maintaining visual hierarchy and user experience consistency.</p>
+                                    
+                                    <p><strong>Clean Code Practices:</strong> Modular CSS architecture, performance-safe JavaScript implementation, and WordPress best practices compliance throughout.</p>
                                 </div>
                             <?php endif; ?>
                             
-                            <!-- Skills/Interests Section (ACF Free repeater) -->
-                            <?php if (have_rows('skills_interests')) : ?>
-                                <div class="skills-section">
-                                    <h3>Skills & Interests</h3>
-                                    <div class="skills-grid">
-                                        <?php while (have_rows('skills_interests')) : the_row(); 
-                                            $skill_title = get_sub_field('skill_title');
-                                            $skill_description = get_sub_field('skill_description');
-                                            $skill_level = get_sub_field('skill_level'); // beginner, intermediate, advanced
-                                        ?>
-                                            <div class="skill-item <?php echo esc_attr($skill_level); ?>">
-                                                <h4><?php echo esc_html($skill_title); ?></h4>
-                                                <?php if ($skill_description) : ?>
-                                                    <p><?php echo esc_html($skill_description); ?></p>
-                                                <?php endif; ?>
-                                                <?php if ($skill_level) : ?>
-                                                    <span class="skill-level"><?php echo esc_html($skill_level); ?></span>
-                                                <?php endif; ?>
-                                            </div>
-                                        <?php endwhile; ?>
+                            <!-- Technical Features Showcase -->
+                            <div class="technical-features">
+                                <h3>💻 Featured Technical Implementations</h3>
+                                
+                                <div class="feature-grid">
+                                    <div class="feature-card">
+                                        <h4>🚀 Enterprise SEO System</h4>
+                                        <p><strong>Innovation:</strong> Custom JSON-LD schema markup, Open Graph optimization, and mobile browser theming for superior search engine visibility.</p>
+                                        <p><strong>Result:</strong> Professional-grade SEO that outperforms plugin-based solutions.</p>
+                                    </div>
+                                    
+                                    <div class="feature-card">
+                                        <h4>🎨 Glassmorphism Architecture</h4>
+                                        <p><strong>Solution:</strong> Multi-layer CSS with backdrop-filter blur, responsive transparency, and cross-device compatibility.</p>
+                                        <p><strong>Impact:</strong> Premium aesthetic with optimal performance on all platforms.</p>
+                                    </div>
+                                    
+                                    <div class="feature-card">
+                                        <h4>📱 Cross-Platform Design</h4>
+                                        <p><strong>Design:</strong> Mobile-first responsive system with breakpoints optimized for phones, tablets, and desktop displays.</p>
+                                        <p><strong>Benefit:</strong> Consistent excellence across all devices and screen sizes.</p>
+                                    </div>
+                                    
+                                    <div class="feature-card">
+                                        <h4>💬 Professional Contact System</h4>
+                                        <p><strong>Achievement:</strong> Advanced form validation, spam protection, and professional email handling with glassmorphism design.</p>
+                                        <p><strong>Value:</strong> Enterprise-level client communication with exceptional user experience.</p>
                                     </div>
                                 </div>
-                            <?php endif; ?>
+                            </div>
+                            
+                            <!-- Skills/Interests Section -->
+                                <div class="skills-section">
+                                    <h3>🛠️ Core Development Technologies</h3>
+                                    <div class="skills-grid">
+                                        <div class="skill-item advanced">
+                                            <h4>WordPress Development</h4>
+                                            <p>Custom theme architecture, advanced CSS, performance optimization</p>
+                                            <span class="skill-level">Advanced</span>
+                                        </div>
+                                        <div class="skill-item advanced">
+                                            <h4>Frontend Technologies</h4>
+                                            <p>HTML5, CSS3, JavaScript, responsive design, glassmorphism effects</p>
+                                            <span class="skill-level">Advanced</span>
+                                        </div>
+                                        <div class="skill-item advanced">
+                                            <h4>Performance Optimization</h4>
+                                            <p>Cross-platform compatibility, mobile-first design, enterprise-level performance tuning</p>
+                                            <span class="skill-level">Advanced</span>
+                                        </div>
+                                        <div class="skill-item advanced">
+                                            <h4>Professional Workflow</h4>
+                                            <p>Git version control, LocalWP development, VS Code environment</p>
+                                            <span class="skill-level">Advanced</span>
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
                         
                         <!-- Side Info -->
                         <div class="about-sidebar">
                             
-                            <!-- Profile Image (optional) -->
-                            <?php 
-                            $profile_image = get_field('profile_image');
-                            if ($profile_image) : ?>
-                                <div class="profile-image">
-                                    <img src="<?php echo esc_url($profile_image['url']); ?>" 
-                                         alt="<?php echo esc_attr($profile_image['alt']); ?>">
-                                </div>
-                            <?php endif; ?>
+                            <!-- Profile Image (placeholder) -->
+                            <!-- Add profile image here when needed -->
                             
-                            <!-- Quick Facts -->
+                            <!-- Technical Specifications -->
                             <div class="quick-facts">
-                                <h3>Quick Facts</h3>
+                                <h3>⚡ Technical Specifications</h3>
                                 <ul>
-                                    <li><strong>Domain:</strong> 1976uk.com (established years ago)</li>
-                                    <li><strong>Focus:</strong> Creative development & experimentation</li>
-                                    <li><strong>Current Project:</strong> Artist management dashboard</li>
-                                    <li><strong>Recently Completed:</strong> Dragica Carlin art portfolio</li>
-                                    <li><strong>Workflow:</strong> Professional Git, LocalWP, VS Code</li>
+                                    <li><strong>Architecture:</strong> Custom WordPress theme with modular CSS</li>
+                                    <li><strong>Performance:</strong> Cross-platform optimization (Desktop, Tablet, Mobile)</li>
+                                    <li><strong>Responsive Design:</strong> Mobile-first with 768px, 1024px breakpoints</li>
+                                    <li><strong>Modal System:</strong> 96% viewport with backdrop-filter blur</li>
+                                    <li><strong>Integration:</strong> WordPress Media Library native connection</li>
+                                    <li><strong>Code Quality:</strong> Professional Git workflow, VS Code development</li>
+                                    <li><strong>Innovation:</strong> Glassmorphism panels with multi-layer shadows</li>
                                 </ul>
                             </div>
                             
-                            <!-- Timeline (ACF Free repeater) -->
-                            <?php if (have_rows('timeline_items')) : ?>
+                            <!-- Timeline Section -->
                                 <div class="timeline-section">
-                                    <h3>Journey Timeline</h3>
-                                    <div class="timeline">
-                                        <?php while (have_rows('timeline_items')) : the_row(); 
-                                            $year = get_sub_field('year');
-                                            $event = get_sub_field('event');
-                                        ?>
-                                            <div class="timeline-item">
-                                                <div class="timeline-year"><?php echo esc_html($year); ?></div>
-                                                <div class="timeline-event"><?php echo esc_html($event); ?></div>
-                                            </div>
-                                        <?php endwhile; ?>
-                                    </div>
-                                </div>
-                            <?php else : ?>
-                                <div class="timeline-section">
-                                    <h3>Recent Milestones</h3>
+                                    <h3>🚀 Development Milestones</h3>
                                     <div class="timeline">
                                         <div class="timeline-item">
-                                            <div class="timeline-year">2025</div>
-                                            <div class="timeline-event">Launched professional WordPress development workflow</div>
+                                            <div class="timeline-year">Jan 2026</div>
+                                            <div class="timeline-event">Launched sophisticated dashboard system with real-time analytics, media management, and glassmorphism UI</div>
                                         </div>
                                         <div class="timeline-item">
-                                            <div class="timeline-year">2025</div>
-                                            <div class="timeline-event">Completed Dragica Carlin art portfolio</div>
+                                            <div class="timeline-year">Dec 2025</div>
+                                            <div class="timeline-event">Implemented enterprise-level SEO with custom schema markup and mobile browser theming</div>
                                         </div>
                                         <div class="timeline-item">
-                                            <div class="timeline-year">2025</div>
-                                            <div class="timeline-event">Implemented ACF Pro gallery systems</div>
+                                            <div class="timeline-year">Dec 2025</div>
+                                            <div class="timeline-event">Enhanced contact form system with professional glassmorphism design and validation</div>
                                         </div>
                                         <div class="timeline-item">
-                                            <div class="timeline-year">Est.</div>
-                                            <div class="timeline-event">Acquired 1976uk.com domain</div>
+                                            <div class="timeline-year">Nov 2025</div>
+                                            <div class="timeline-event">Developed comprehensive responsive design system with cross-device optimization</div>
+                                        </div>
+                                        <div class="timeline-item">
+                                            <div class="timeline-year">Nov 2025</div>
+                                            <div class="timeline-event">Created modular CSS architecture with performance-first approach</div>
+                                        </div>
+                                        <div class="timeline-item">
+                                            <div class="timeline-year">Oct 2025</div>
+                                            <div class="timeline-event">Implemented 96% viewport modal system and glassmorphism panel architecture</div>
+                                        </div>
+                                        <div class="timeline-item">
+                                            <div class="timeline-year">Oct 2025</div>
+                                            <div class="timeline-event">Established professional development environment with Git workflow</div>
                                         </div>
                                     </div>
                                 </div>
-                            <?php endif; ?>
                             
                         </div>
                         
                     </div>
                     
-                <?php endwhile; ?>
-            <?php endif; ?>
+                </div>
+            
+            </div>
             
         </div>
         
     </main>
 </div>
-
-<style>
-/* About Page Specific Styles */
-.about-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 40px;
-    margin-top: 30px;
-}
-
-@media (max-width: 900px) {
-    .about-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-}
-
-.about-main {
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.about-intro h2,
-.about-intro h3 {
-    color: white;
-    margin: 30px 0 15px 0;
-}
-
-.about-intro h2:first-child {
-    margin-top: 0;
-}
-
-.about-intro p {
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
-.skills-section {
-    margin-top: 40px;
-}
-
-.skills-section h3 {
-    color: white;
-    margin-bottom: 20px;
-}
-
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.skill-item {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    position: relative;
-}
-
-.skill-item h4 {
-    color: white;
-    margin: 0 0 10px 0;
-}
-
-.skill-item p {
-    color: rgba(255, 255, 255, 0.8);
-    margin: 0;
-    font-size: 0.9em;
-}
-
-.skill-level {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 0.7em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-}
-
-.skill-item.beginner .skill-level {
-    background: rgba(52, 152, 219, 0.8);
-}
-
-.skill-item.intermediate .skill-level {
-    background: rgba(241, 196, 15, 0.8);
-}
-
-.skill-item.advanced .skill-level {
-    background: rgba(46, 204, 113, 0.8);
-}
-
-.about-sidebar {
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.profile-image {
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-.profile-image img {
-    width: 100%;
-    max-width: 250px;
-    border-radius: 20px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.quick-facts,
-.timeline-section {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    margin-bottom: 20px;
-}
-
-.quick-facts h3,
-.timeline-section h3 {
-    color: white;
-    margin: 0 0 15px 0;
-}
-
-.quick-facts ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.quick-facts li {
-    margin-bottom: 8px;
-    font-size: 0.9em;
-}
-
-.quick-facts strong {
-    color: rgba(255, 255, 255, 1);
-}
-
-.timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.timeline-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.timeline-item:last-child {
-    border-bottom: none;
-}
-
-.timeline-year {
-    color: white;
-    font-weight: bold;
-    min-width: 50px;
-    font-size: 0.9em;
-}
-
-.timeline-event {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9em;
-    line-height: 1.4;
-}
-</style>
 
 <?php get_footer(); ?>

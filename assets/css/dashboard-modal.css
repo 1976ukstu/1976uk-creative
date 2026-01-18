@@ -1,0 +1,296 @@
+/* Dashboard Modal - Funky Frosted Glass Design */
+
+.dashboard-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(3px);
+    cursor: pointer;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.dashboard-modal-content {
+    position: relative;
+    width: 96%;
+    height: 96%;
+    margin: 2% auto;
+    background: rgba(15, 30, 60, 0.85);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(0, 150, 255, 0.3);
+    cursor: default;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: dashboardFadeIn 0.4s ease-out;
+}
+
+/* Simple Tech Background */
+.dashboard-funky-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.2;
+    background: 
+        linear-gradient(135deg, rgba(0, 40, 80, 0.8) 0%, rgba(0, 20, 40, 0.9) 100%),
+        linear-gradient(45deg, transparent 40%, rgba(0, 150, 255, 0.05) 50%, transparent 60%),
+        url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="60" fill="%23001122"/><circle cx="30" cy="30" r="1" fill="%23003366"/><circle cx="10" cy="10" r="1" fill="%23003366"/><circle cx="50" cy="50" r="1" fill="%23003366"/></svg>');
+    background-size: cover, 100% 100%, 60px 60px;
+}
+
+/* Clean fade-in animation for modal */
+@keyframes dashboardFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Modal Header */
+.dashboard-modal-header {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.dashboard-info h3 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dashboard-subtitle {
+    display: block;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 5px;
+    font-weight: 400;
+}
+
+.dashboard-controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.control-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1);
+}
+
+/* Dashboard Content Area */
+.dashboard-content-area {
+    position: relative;
+    z-index: 10;
+    flex: 1;
+    padding: 30px;
+    overflow: auto;
+}
+
+/* Dashboard Grid View */
+.dashboard-grid-view {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-funky-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+    height: 80%;
+    min-height: 500px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Simple Dashboard Cards */
+.dashboard-funky-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* No shimmer effect - performance focused */
+
+.dashboard-funky-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    border-color: rgba(0, 150, 255, 0.3);
+}
+
+/* Hover state handled above */
+
+.card-frosted-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.card-icon {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.card-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.card-description {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    font-weight: 400;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Dashboard View Content */
+.dashboard-view-content {
+    height: 100%;
+}
+
+.dashboard-back-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 25px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.dashboard-back-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateX(-5px);
+}
+
+.view-content-container {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 15px;
+    padding: 25px;
+    height: calc(100% - 80px);
+    overflow: auto;
+    backdrop-filter: blur(15px);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+    to {
+        opacity: 1;
+        backdrop-filter: blur(3px);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-funky-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        width: 95%;
+        height: 80%;
+        gap: 20px;
+    }
+    
+    .dashboard-modal-header {
+        padding: 20px;
+    }
+    
+    .dashboard-info h3 {
+        font-size: 1.6rem;
+    }
+    
+    .dashboard-content-area {
+        padding: 20px;
+    }
+    
+    .card-icon {
+        font-size: 2.8rem;
+    }
+    
+    .card-title {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-funky-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(6, 1fr);
+        height: 90%;
+        gap: 15px;
+    }
+    
+    .dashboard-modal-content {
+        width: 98%;
+        height: 98%;
+        margin: 1% auto;
+    }
+}

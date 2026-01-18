@@ -1,80 +1,152 @@
 <?php
-// --- Enhanced Contact Form Handler with Debugging ---
+/**
+ * 1976uk Creative Theme Functions
+ * 
+ * Custom WordPress theme for creative professionals featuring
+ * integrated dashboard, real-time analytics, and media management.
+ * 
+ * @package 1976uk_Creative_Theme
+ * @author Stuart Hunt <contact@1976uk.com>
+ * @version 2.0.0
+ * @since 1.0.0
+ * @link https://1976uk.com
+ * 
+ * Developed by Stuart Hunt - Creative Technologist
+ * Specialized WordPress solutions for creative industries
+ * © 2025-2026 All Rights Reserved
+ */
+
+// Prevent direct access
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+// --- Enhanced Contact Form Handler with Gmail Forwarding & Spam Protection ---
 add_action('init', function() {
     if (
         isset($_POST['artist_contact_form_submitted']) &&
         isset($_POST['name'], $_POST['email'], $_POST['message']) &&
         !empty($_POST['name']) &&
         !empty($_POST['email']) &&
-        !empty($_POST['message'])
+        !empty($_POST['message']) &&
+        isset($_POST['contact_nonce']) &&
+        wp_verify_nonce($_POST['contact_nonce'], 'contact_form_nonce')
     ) {
+        // Basic spam protection
+        $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+        $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? 'unknown';
+        
+        // Simple honeypot check (add hidden field to form)
+        if (!empty($_POST['website'])) {
+            error_log('Spam detected (honeypot triggered) from IP: ' . $ip);
+            wp_safe_redirect(add_query_arg('contact_status', 'error', wp_get_referer()));
+            exit;
+        }
+        
+        // Rate limiting - only allow 1 submission per minute per IP
+        $submission_key = 'contact_submission_' . md5($ip);
+        $last_submission = get_transient($submission_key);
+        if ($last_submission) {
+            error_log('Rate limit exceeded from IP: ' . $ip);
+            wp_safe_redirect(add_query_arg('contact_status', 'error', wp_get_referer()));
+            exit;
+        }
+        set_transient($submission_key, time(), 60); // 1 minute cooldown
+        
         $name = sanitize_text_field($_POST['name']);
         $email = sanitize_email($_POST['email']);
         $subject = sanitize_text_field($_POST['subject'] ?? '');
         $project_type = sanitize_text_field($_POST['project-type'] ?? '');
         $message = sanitize_textarea_field($_POST['message']);
         
-        // Log form submission attempt
-        error_log('Contact form submitted by: ' . $name . ' (' . $email . ')');
+        // Additional spam detection
+        $spam_words = ['hello world', 'test', 'generic', 'lorem ipsum', 'click here', 'free money'];
+        $combined_text = strtolower($name . ' ' . $subject . ' ' . $message);
+        foreach ($spam_words as $spam_word) {
+            if (strpos($combined_text, $spam_word) !== false) {
+                error_log('Potential spam detected (keyword: ' . $spam_word . ') from: ' . $email);
+                // Still process but flag as suspicious
+                $subject = '[SUSPICIOUS] ' . $subject;
+                break;
+            }
+        }
         
-        $to = 'stuart@1976uk.com';
-        $mail_subject = ($subject ? $subject . ' - ' : '') . 'Website Contact Form';
-        $body = "Name: $name\nEmail: $email\nProject Type: $project_type\nMessage:\n$message";
+        // Log form submission attempt
+        error_log('Contact form submitted by: ' . $name . ' (' . $email . ') from IP: ' . $ip);
+        
+        // Multiple recipients - both cPanel webmail AND Gmail
+        $recipients = array(
+            'stuart@1976uk.com',     // Your cPanel email
+            'your-gmail@gmail.com'   // Add your Gmail address here
+        );
+        
+        $mail_subject = ($subject ? $subject . ' - ' : '') . '1976uk Website Contact Form';
+        $body = "=== 1976uk WEBSITE CONTACT FORM ===\n\n";
+        $body .= "Name: $name\n";
+        $body .= "Email: $email\n";
+        $body .= "Project Type: $project_type\n";
+        $body .= "Subject: $subject\n\n";
+        $body .= "Message:\n" . $message . "\n\n";
+        $body .= "=== TECHNICAL INFO ===\n";
+        $body .= "IP Address: $ip\n";
+        $body .= "User Agent: $user_agent\n";
+        $body .= "Submitted: " . date('Y-m-d H:i:s') . "\n";
         
         // Enhanced headers for better deliverability
         $headers = array(
             'Content-Type: text/plain; charset=UTF-8',
             'Reply-To: ' . $name . ' <' . $email . '>',
-            'From: ' . get_bloginfo('name') . ' <noreply@' . parse_url(home_url(), PHP_URL_HOST) . '>'
+            'From: 1976uk Creative <noreply@' . parse_url(home_url(), PHP_URL_HOST) . '>',
+            'X-Mailer: 1976uk Creative Contact Form',
+            'X-Originating-IP: ' . $ip
         );
         
-        $success = false;
+        $success_count = 0;
         if (is_email($email)) {
-            // Log email attempt
-            error_log('Attempting to send email to: ' . $to . ' with subject: ' . $mail_subject);
-            
-            $success = wp_mail($to, $mail_subject, $body, $headers);
-            
-            // Log result
-            if ($success) {
-                error_log('wp_mail() returned TRUE for: ' . $to);
+            // Send to all recipients
+            foreach ($recipients as $recipient) {
+                error_log('Attempting to send email to: ' . $recipient);
                 
-                // Double-check by trying PHP mail() as backup
-                $php_mail_headers = "From: " . get_bloginfo('name') . " <noreply@" . parse_url(home_url(), PHP_URL_HOST) . ">\r\n";
-                $php_mail_headers .= "Reply-To: " . $name . " <" . $email . ">\r\n";
-                $php_mail_headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+                $individual_success = wp_mail($recipient, $mail_subject, $body, $headers);
                 
-                $php_success = mail($to, $mail_subject, $body, $php_mail_headers);
-                error_log('PHP mail() backup result: ' . ($php_success ? 'SUCCESS' : 'FAILED'));
-            } else {
-                error_log('wp_mail() FAILED for: ' . $to);
-                
-                // Get more detailed error information
-                global $phpmailer;
-                if (isset($phpmailer) && !empty($phpmailer->ErrorInfo)) {
-                    error_log('PHPMailer error: ' . $phpmailer->ErrorInfo);
+                if ($individual_success) {
+                    error_log('Email sent successfully to: ' . $recipient);
+                    $success_count++;
+                } else {
+                    error_log('Email failed to: ' . $recipient);
+                    
+                    // Try fallback with PHP mail()
+                    $php_headers = implode("\r\n", array(
+                        "From: 1976uk Creative <noreply@" . parse_url(home_url(), PHP_URL_HOST) . ">",
+                        "Reply-To: " . $name . " <" . $email . ">",
+                        "Content-Type: text/plain; charset=UTF-8",
+                        "X-Mailer: 1976uk Creative Contact Form",
+                        "X-Originating-IP: " . $ip
+                    ));
+                    
+                    $php_success = mail($recipient, $mail_subject, $body, $php_headers);
+                    if ($php_success) {
+                        error_log('PHP mail() backup successful to: ' . $recipient);
+                        $success_count++;
+                    } else {
+                        error_log('PHP mail() backup failed to: ' . $recipient);
+                    }
                 }
-                
-                // Try fallback with PHP mail()
-                error_log('Attempting fallback with PHP mail()...');
-                $php_mail_headers = "From: " . get_bloginfo('name') . " <noreply@" . parse_url(home_url(), PHP_URL_HOST) . ">\r\n";
-                $php_mail_headers .= "Reply-To: " . $name . " <" . $email . ">\r\n";
-                $php_mail_headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-                
-                $success = mail($to, $mail_subject, $body, $php_mail_headers);
-                error_log('PHP mail() fallback result: ' . ($success ? 'SUCCESS' : 'FAILED'));
             }
         } else {
             error_log('Invalid email address provided: ' . $email);
         }
         
+        // Determine overall success
+        $overall_success = $success_count > 0;
+        
         // Redirect back to the form page with status
         $contact_page_url = get_permalink(get_page_by_path('contact'));
         $redirect_url = add_query_arg([
-            'contact_status' => $success ? 'success' : 'error',
+            'contact_status' => $overall_success ? 'success' : 'error',
         ], wp_get_referer() ?: $contact_page_url);
         
-        error_log('Redirecting to: ' . $redirect_url . ' with status: ' . ($success ? 'success' : 'error'));
+        error_log('Redirecting to: ' . $redirect_url . ' with status: ' . ($overall_success ? 'success' : 'error') . ' (sent to ' . $success_count . ' recipients)');
         
         wp_safe_redirect($redirect_url);
         exit;
@@ -265,22 +337,197 @@ function add_weekly_updates_capabilities() {
 }
 add_action( 'admin_init', 'add_weekly_updates_capabilities' );
 
-// Enqueue scripts and styles
-function artist_theme_scripts() {
-    // Enqueue Google Fonts (proper way, not @import)
-    wp_enqueue_style( 'artist-theme-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap', array(), null );
-
-    // Enqueue main stylesheet with version for cache busting
-    wp_enqueue_style( 'artist-theme-style', get_stylesheet_uri(), array('artist-theme-fonts'), '1.0.2' );
-
-    // Enqueue additional styles
-    wp_enqueue_style( 'artist-theme-custom-style', get_template_directory_uri() . '/assets/css/style.css', array('artist-theme-style'), '1.0.2' );
-
-    // Enqueue JavaScript file
-    wp_enqueue_script( 'artist-theme-scripts', get_template_directory_uri() . '/assets/js/scripts.js', array(), '1.0.3', true );
+// Enqueue modular CSS and scripts - NEW ARCHITECTURE!
+function creative_theme_scripts() {
+    // Version for cache busting
+    $version = '2.0.0'; // Bumped for major refactor
+    
+    // Core styles (typography, colors, global elements)
+    wp_enqueue_style( 
+        '1976uk-core', 
+        get_template_directory_uri() . '/assets/css/core.css', 
+        array(), 
+        $version 
+    );
+    
+    // Layout styles (grid systems, containers, responsive)
+    wp_enqueue_style( 
+        '1976uk-layout', 
+        get_template_directory_uri() . '/assets/css/layout.css', 
+        array('1976uk-core'), 
+        $version 
+    );
+    
+    // Component styles (cards, buttons, modals)
+    wp_enqueue_style( 
+        '1976uk-components', 
+        get_template_directory_uri() . '/assets/css/components.css', 
+        array('1976uk-layout'), 
+        $version 
+    );
+    
+    // Page-specific styles
+    if (is_front_page()) {
+        wp_enqueue_style( 
+            '1976uk-homepage', 
+            get_template_directory_uri() . '/assets/css/pages/homepage.css', 
+            array('1976uk-components'), 
+            $version 
+        );
+    }
+    
+    // Websites page styles
+    if (is_page('websites')) {
+        wp_enqueue_style( 
+            '1976uk-websites', 
+            get_template_directory_uri() . '/assets/css/pages/websites.css', 
+            array('1976uk-components'), 
+            $version 
+        );
+    }
+    
+    // Gallery page styles  
+    if (is_page('gallery')) {
+        wp_enqueue_style( 
+            '1976uk-gallery', 
+            get_template_directory_uri() . '/assets/css/pages/gallery.css', 
+            array('1976uk-components'), 
+            $version 
+        );
+    }
+    
+    // Contact page styles
+    if (is_page('contact')) {
+        wp_enqueue_style( 
+            '1976uk-contact', 
+            get_template_directory_uri() . '/assets/css/pages/contact.css', 
+            array('1976uk-components'), 
+            $version 
+        );
+    }
+    
+    // Portfolio page styles
+    if (is_page('portfolio')) {
+        wp_enqueue_style( 
+            '1976uk-portfolio', 
+            get_template_directory_uri() . '/assets/css/pages/portfolio.css', 
+            array('1976uk-components'), 
+            $version 
+        );
+    }
+    
+    // Projects page styles
+    if (is_page('projects')) {
+        wp_enqueue_style( 
+            '1976uk-projects', 
+            get_template_directory_uri() . '/assets/css/pages/projects.css', 
+            array('1976uk-components'), 
+            $version 
+        );
+    }
+    
+    // Text page styles
+    if (is_page('text')) {
+        wp_enqueue_style( 
+            '1976uk-text', 
+            get_template_directory_uri() . '/assets/css/pages/text.css', 
+            array('1976uk-components'), 
+            $version 
+        );
+    }
+    
+    // About page styles
+    if (is_page('about')) {
+        wp_enqueue_style( 
+            '1976uk-about', 
+            get_template_directory_uri() . '/assets/css/pages/about.css', 
+            array('1976uk-components'), 
+            $version 
+        );
+    }
+    
+    // Debug styles (only load when needed)
+    if (isset($_GET['debug']) && $_GET['debug'] === 'layout') {
+        wp_enqueue_style( 
+            '1976uk-debug', 
+            get_template_directory_uri() . '/assets/css/debug.css', 
+            array('1976uk-components'), 
+            $version 
+        );
+        
+        // Add debug class to body
+        add_filter('body_class', function($classes) {
+            $classes[] = 'debug-layout';
+            return $classes;
+        });
+    }
+    
+    // Keep the existing JavaScript
+    wp_enqueue_script( '1976uk-creative-scripts', get_template_directory_uri() . '/assets/js/scripts.js', array(), $version, true );
+    
+    // Dashboard Modal System - Global Assets
+    wp_enqueue_style( 
+        '1976uk-dashboard-modal', 
+        get_template_directory_uri() . '/assets/css/dashboard-modal.css', 
+        array('1976uk-components'), 
+        $version 
+    );
+    
+    wp_enqueue_script( 
+        '1976uk-dashboard-modal-js', 
+        get_template_directory_uri() . '/assets/js/dashboard-modal.js', 
+        array(), 
+        $version, 
+        true 
+    );
 }
-add_action( 'wp_enqueue_scripts', 'artist_theme_scripts' );
+add_action( 'wp_enqueue_scripts', 'creative_theme_scripts' );
 
+// Step 1: Basic Analytics AJAX Handler - Simple Version
+add_action('wp_ajax_get_dashboard_analytics', 'handle_simple_analytics');
+add_action('wp_ajax_nopriv_get_dashboard_analytics', 'handle_simple_analytics');
+
+function handle_simple_analytics() {
+    // Step 2: Real WordPress data - keeping it simple
+    $posts_count = wp_count_posts('post');
+    $pages_count = wp_count_posts('page');
+    $media_count = wp_count_posts('attachment');
+    $comments_count = wp_count_comments();
+    
+    $data = array(
+        'posts' => $posts_count->publish,
+        'pages' => $pages_count->publish,
+        'media' => $media_count->inherit,
+        'comments' => $comments_count->approved
+    );
+    
+    wp_send_json_success($data);
+}
+
+// Step 3: Simple Data Extraction Handler
+add_action('wp_ajax_extract_live_media', 'handle_simple_extraction');
+add_action('wp_ajax_nopriv_extract_live_media', 'handle_simple_extraction');
+
+function handle_simple_extraction() {
+    $url = sanitize_text_field($_POST['url']);
+    
+    if (empty($url)) {
+        wp_send_json_error('URL required');
+        return;
+    }
+    
+    // Simple test response
+    wp_send_json_success(array(
+        'images' => array(
+            array('url' => 'https://example.com/test1.jpg', 'alt' => 'Test Image 1'),
+            array('url' => 'https://example.com/test2.jpg', 'alt' => 'Test Image 2')
+        ),
+        'videos' => array(),
+        'total' => 2
+    ));
+}
+
+// Only remove specific problematic styles, keep accessibility ones
 // Only remove specific problematic styles, keep accessibility ones
 function artist_theme_clean_styles() {
     // Only remove block library styles if not using Gutenberg blocks
@@ -289,6 +536,574 @@ function artist_theme_clean_styles() {
     wp_dequeue_style( 'wp-block-library-theme' );
 }
 add_action( 'wp_enqueue_scripts', 'artist_theme_clean_styles', 1 );
+
+// Custom menu fallback for 1976uk Creative (Updated with About page)
+function creative_lab_fallback_menu() {
+    echo '<nav class="home-menu"><ul>';
+    
+    // Websites Page - Primary focus for launch
+    $websites_page = get_page_by_path('websites');
+    if ($websites_page) {
+        echo '<li><a href="' . get_permalink($websites_page->ID) . '">Websites</a></li>';
+    }
+    
+    // About Page - Your story and journey
+    $about_page = get_page_by_path('about');
+    if ($about_page) {
+        echo '<li><a href="' . get_permalink($about_page->ID) . '">About</a></li>';
+    }
+    
+    // Contact Page - Essential for business
+    $contact_page = get_page_by_path('contact');
+    if ($contact_page) {
+        echo '<li><a href="' . get_permalink($contact_page->ID) . '">Contact</a></li>';
+    }
+    
+    echo '</ul></nav>';
+}
+
+// Custom side menu fallback for other pages (Updated with About page)
+function creative_lab_side_fallback_menu() {
+    echo '<ul class="side-menu">';
+    
+    // Websites Page - Interactive gallery showcase
+    $websites_page = get_page_by_path('websites');
+    if ($websites_page) {
+        echo '<li><a href="' . get_permalink($websites_page->ID) . '">Websites</a></li>';
+    }
+    
+    // About Page - Your story and journey
+    $about_page = get_page_by_path('about');
+    if ($about_page) {
+        echo '<li><a href="' . get_permalink($about_page->ID) . '">About</a></li>';
+    }
+    
+    // Contact Page - Business inquiries
+    $contact_page = get_page_by_path('contact');
+    if ($contact_page) {
+        echo '<li><a href="' . get_permalink($contact_page->ID) . '">Contact</a></li>';
+    }
+    
+    echo '</ul>';
+}
+
+// ==========================================================================
+// AJAX HANDLERS FOR DASHBOARD DRAG & DROP FUNCTIONALITY
+// ==========================================================================
+
+// Handle AJAX file uploads for gallery dashboard
+add_action('wp_ajax_upload_gallery_image', 'handle_gallery_image_upload');
+add_action('wp_ajax_nopriv_upload_gallery_image', 'handle_gallery_image_upload');
+
+function handle_gallery_image_upload() {
+    // Enable detailed error logging
+    error_log('Gallery image upload started');
+    
+    // Check if this is a valid AJAX request
+    if (!defined('DOING_AJAX') || !DOING_AJAX) {
+        error_log('Not an AJAX request');
+        wp_send_json_error('Not an AJAX request');
+        return;
+    }
+    
+    // Verify nonce for security
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'gallery_upload_nonce')) {
+        error_log('Security check failed - nonce invalid');
+        wp_send_json_error('Security check failed');
+        return;
+    }
+    
+    // Check if file was uploaded
+    if (!isset($_FILES['gallery_image']) || $_FILES['gallery_image']['error'] !== UPLOAD_ERR_OK) {
+        $error = $_FILES['gallery_image']['error'] ?? 'No file provided';
+        error_log('File upload error: ' . $error);
+        wp_send_json_error('No file uploaded or upload error: ' . $error);
+        return;
+    }
+    
+    $card_id = sanitize_text_field($_POST['card_id'] ?? '');
+    if (empty($card_id)) {
+        error_log('Card ID missing');
+        wp_send_json_error('Card ID is required');
+        return;
+    }
+    
+    $uploaded_file = $_FILES['gallery_image'];
+    
+    // Validate file type
+    $allowed_types = array('image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp');
+    $file_type = $uploaded_file['type'];
+    if (!in_array($file_type, $allowed_types)) {
+        error_log('Invalid file type: ' . $file_type);
+        wp_send_json_error('Invalid file type. Please upload JPG, PNG, GIF, or WebP images.');
+        return;
+    }
+    
+    // Validate file size (max 5MB)
+    $max_size = 5 * 1024 * 1024; // 5MB
+    if ($uploaded_file['size'] > $max_size) {
+        error_log('File too large: ' . $uploaded_file['size']);
+        wp_send_json_error('File too large. Maximum size is 5MB.');
+        return;
+    }
+    
+    // Use WordPress media handling
+    require_once(ABSPATH . 'wp-admin/includes/image.php');
+    require_once(ABSPATH . 'wp-admin/includes/file.php');
+    require_once(ABSPATH . 'wp-admin/includes/media.php');
+    
+    // Handle the upload
+    $upload_overrides = array(
+        'test_form' => false
+    );
+    
+    $movefile = wp_handle_upload($uploaded_file, $upload_overrides);
+    
+    if ($movefile && !isset($movefile['error'])) {
+        // Create attachment
+        $attachment = array(
+            'post_mime_type' => $movefile['type'],
+            'post_title' => 'Gallery Card ' . $card_id,
+            'post_content' => '',
+            'post_status' => 'inherit'
+        );
+        
+        $attach_id = wp_insert_attachment($attachment, $movefile['file']);
+        
+        if (!is_wp_error($attach_id)) {
+            $attach_data = wp_generate_attachment_metadata($attach_id, $movefile['file']);
+            wp_update_attachment_metadata($attach_id, $attach_data);
+            
+            // Store card metadata
+            update_option('gallery_card_' . $card_id . '_image', $movefile['url']);
+            update_option('gallery_card_' . $card_id . '_attachment_id', $attach_id);
+            update_option('gallery_card_' . $card_id . '_updated', current_time('mysql'));
+            
+            error_log('Upload successful for card: ' . $card_id);
+            
+            wp_send_json_success(array(
+                'url' => $movefile['url'],
+                'attachment_id' => $attach_id,
+                'card_id' => $card_id,
+                'message' => 'Upload successful!'
+            ));
+        } else {
+            error_log('Attachment creation failed: ' . $attach_id->get_error_message());
+            wp_send_json_error('Failed to create attachment: ' . $attach_id->get_error_message());
+        }
+    } else {
+        $error_message = isset($movefile['error']) ? $movefile['error'] : 'Unknown upload error';
+        error_log('Upload failed: ' . $error_message);
+        wp_send_json_error('Upload failed: ' . $error_message);
+    }
+}
+
+// Handle AJAX card data updates
+add_action('wp_ajax_update_card_data', 'handle_card_data_update');
+add_action('wp_ajax_nopriv_update_card_data', 'handle_card_data_update');
+
+function handle_card_data_update() {
+    // Verify nonce for security
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'gallery_upload_nonce')) {
+        wp_send_json_error('Security check failed');
+        return;
+    }
+    
+    $card_id = sanitize_text_field($_POST['card_id'] ?? '');
+    $title = sanitize_text_field($_POST['title'] ?? '');
+    $description = sanitize_textarea_field($_POST['description'] ?? '');
+    
+    if (empty($card_id)) {
+        wp_send_json_error('Card ID is required');
+        return;
+    }
+    
+    update_option('gallery_card_' . $card_id . '_title', $title);
+    update_option('gallery_card_' . $card_id . '_description', $description);
+    update_option('gallery_card_' . $card_id . '_updated', current_time('mysql'));
+    
+    wp_send_json_success(array(
+        'card_id' => $card_id,
+        'title' => $title,
+        'description' => $description,
+        'updated' => current_time('mysql')
+    ));
+}
+
+// ===== PROFESSIONAL SEO OPTIMIZATION =====
+
+// Add professional meta tags and Open Graph data
+function creative_theme_seo_head() {
+    global $post;
+    
+    // Get page information
+    $site_name = get_bloginfo('name');
+    $site_description = get_bloginfo('description');
+    $site_url = home_url();
+    
+    if (is_front_page()) {
+        $title = $site_name . ' | ' . $site_description;
+        $description = 'Professional WordPress development and creative technology solutions. Specialized in glassmorphism design, performance optimization, and custom theme development.';
+        $url = $site_url;
+    } elseif (is_page()) {
+        $title = get_the_title() . ' | ' . $site_name;
+        $description = get_the_excerpt() ?: 'Professional creative technology services and WordPress development by 1976uk Creative.';
+        $url = get_permalink();
+    } else {
+        $title = wp_get_document_title();
+        $description = $site_description;
+        $url = $site_url;
+    }
+    
+    // Clean up description
+    $description = wp_strip_all_tags($description);
+    $description = substr($description, 0, 160);
+    
+    echo "\n<!-- 1976uk Creative SEO Meta Tags -->\n";
+    echo '<meta name="description" content="' . esc_attr($description) . '">' . "\n";
+    echo '<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">' . "\n";
+    
+    // Open Graph meta tags for social sharing
+    echo '<meta property="og:type" content="website">' . "\n";
+    echo '<meta property="og:title" content="' . esc_attr($title) . '">' . "\n";
+    echo '<meta property="og:description" content="' . esc_attr($description) . '">' . "\n";
+    echo '<meta property="og:url" content="' . esc_url($url) . '">' . "\n";
+    echo '<meta property="og:site_name" content="' . esc_attr($site_name) . '">' . "\n";
+    echo '<meta property="og:locale" content="en_GB">' . "\n";
+    
+    // Twitter Card meta tags
+    echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+    echo '<meta name="twitter:title" content="' . esc_attr($title) . '">' . "\n";
+    echo '<meta name="twitter:description" content="' . esc_attr($description) . '">' . "\n";
+    
+    // Canonical URL
+    echo '<link rel="canonical" href="' . esc_url($url) . '">' . "\n";
+    echo "<!-- End 1976uk Creative SEO -->\n\n";
+}
+add_action('wp_head', 'creative_theme_seo_head', 1);
+
+// Add JSON-LD Schema markup for better search engine understanding
+function creative_theme_schema_markup() {
+    $site_name = get_bloginfo('name');
+    $site_url = home_url();
+    
+    // Organization Schema
+    $organization_schema = array(
+        "@context" => "https://schema.org",
+        "@type" => "Organization",
+        "name" => $site_name,
+        "url" => $site_url,
+        "description" => "Professional WordPress development and creative technology solutions specializing in custom themes, performance optimization, and innovative design.",
+        "address" => array(
+            "@type" => "PostalAddress",
+            "addressCountry" => "GB"
+        ),
+        "contactPoint" => array(
+            "@type" => "ContactPoint",
+            "contactType" => "customer service",
+            "url" => $site_url . "/contact"
+        ),
+        "sameAs" => array(
+            "https://github.com/1976ukstu",
+            "https://www.upwork.com/freelancers/~01d3e9362798a7a655",
+            "https://linkedin.com/in/stuart-hunt-1976uk"
+        )
+    );
+    
+    // Website Schema
+    $website_schema = array(
+        "@context" => "https://schema.org",
+        "@type" => "WebSite",
+        "name" => $site_name,
+        "url" => $site_url,
+        "description" => get_bloginfo('description'),
+        "publisher" => array(
+            "@type" => "Organization",
+            "name" => $site_name
+        )
+    );
+    
+    echo '<script type="application/ld+json">';
+    echo json_encode($organization_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    echo '</script>';
+    echo '<script type="application/ld+json">';
+    echo json_encode($website_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    echo '</script>';
+}
+add_action('wp_head', 'creative_theme_schema_markup', 2);
+
+// Add page-specific schema markup
+function creative_theme_page_specific_schema() {
+    if (is_page('portfolio')) {
+        // Professional Service schema for Portfolio page
+        $portfolio_schema = array(
+            "@context" => "https://schema.org",
+            "@type" => "ProfessionalService",
+            "name" => "WordPress Development & Creative Technology",
+            "provider" => array(
+                "@type" => "Organization",
+                "name" => get_bloginfo('name')
+            ),
+            "serviceType" => "Web Development",
+            "description" => "Professional WordPress development, custom theme creation, and creative technology solutions.",
+            "areaServed" => array(
+                "@type" => "Country",
+                "name" => "United Kingdom"
+            ),
+            "hasOfferCatalog" => array(
+                "@type" => "OfferCatalog",
+                "name" => "Development Services",
+                "itemListElement" => array(
+                    array(
+                        "@type" => "Offer",
+                        "itemOffered" => array(
+                            "@type" => "Service",
+                            "name" => "WordPress Development"
+                        )
+                    ),
+                    array(
+                        "@type" => "Offer", 
+                        "itemOffered" => array(
+                            "@type" => "Service",
+                            "name" => "Custom Theme Creation"
+                        )
+                    ),
+                    array(
+                        "@type" => "Offer",
+                        "itemOffered" => array(
+                            "@type" => "Service", 
+                            "name" => "Performance Optimization"
+                        )
+                    )
+                )
+            )
+        );
+        
+        echo '<script type="application/ld+json">';
+        echo json_encode($portfolio_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        echo '</script>';
+    }
+    
+    if (is_page('contact')) {
+        // Contact Page schema
+        $contact_schema = array(
+            "@context" => "https://schema.org",
+            "@type" => "ContactPage",
+            "name" => "Contact 1976uk Creative",
+            "description" => "Get in touch for professional WordPress development and creative technology services.",
+            "mainEntity" => array(
+                "@type" => "Organization",
+                "name" => get_bloginfo('name'),
+                "contactPoint" => array(
+                    "@type" => "ContactPoint",
+                    "contactType" => "customer service",
+                    "url" => home_url('/contact'),
+                    "availableLanguage" => "English"
+                )
+            )
+        );
+        
+        echo '<script type="application/ld+json">';
+        echo json_encode($contact_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        echo '</script>';
+    }
+}
+add_action('wp_head', 'creative_theme_page_specific_schema', 3);
+
+// Add FAQ Schema for services (helps with voice search)
+function creative_theme_faq_schema() {
+    if (is_page('about') || is_page('portfolio')) {
+        $faq_schema = array(
+            "@context" => "https://schema.org",
+            "@type" => "FAQPage",
+            "mainEntity" => array(
+                array(
+                    "@type" => "Question",
+                    "name" => "What services does 1976uk Creative offer?",
+                    "acceptedAnswer" => array(
+                        "@type" => "Answer",
+                        "text" => "We specialize in WordPress development, custom theme creation, performance optimization, glassmorphism design, and creative technology solutions."
+                    )
+                ),
+                array(
+                    "@type" => "Question", 
+                    "name" => "Do you work with businesses outside the UK?",
+                    "acceptedAnswer" => array(
+                        "@type" => "Answer",
+                        "text" => "Yes, we work with clients globally, offering remote WordPress development and creative technology services."
+                    )
+                ),
+                array(
+                    "@type" => "Question",
+                    "name" => "What makes your WordPress development different?",
+                    "acceptedAnswer" => array(
+                        "@type" => "Answer", 
+                        "text" => "We focus on clean-code architecture, performance optimization, and innovative glassmorphism design while maintaining professional WordPress standards."
+                    )
+                )
+            )
+        );
+        
+        echo '<script type="application/ld+json">';
+        echo json_encode($faq_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        echo '</script>';
+    }
+}
+add_action('wp_head', 'creative_theme_faq_schema', 4);
+
+// Add breadcrumb schema for better navigation understanding
+function creative_theme_breadcrumb_schema() {
+    if (!is_front_page() && is_page()) {
+        $breadcrumb_schema = array(
+            "@context" => "https://schema.org", 
+            "@type" => "BreadcrumbList",
+            "itemListElement" => array(
+                array(
+                    "@type" => "ListItem",
+                    "position" => 1,
+                    "name" => "Home",
+                    "item" => home_url()
+                ),
+                array(
+                    "@type" => "ListItem",
+                    "position" => 2,
+                    "name" => get_the_title(),
+                    "item" => get_permalink()
+                )
+            )
+        );
+        
+        echo '<script type="application/ld+json">';
+        echo json_encode($breadcrumb_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        echo '</script>';
+    }
+}
+add_action('wp_head', 'creative_theme_breadcrumb_schema', 5);
+
+// SEO-friendly sitemap generation hint for search engines
+function creative_theme_seo_hints() {
+    if (is_front_page()) {
+        // Add hreflang for international SEO (if needed later)
+        echo '<link rel="alternate" hreflang="en-gb" href="' . home_url() . '" />' . "\n";
+        echo '<link rel="alternate" hreflang="en" href="' . home_url() . '" />' . "\n";
+        
+        // Preconnect to external domains for performance
+        echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
+        echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+        
+        // DNS prefetch for external services
+        echo '<link rel="dns-prefetch" href="//github.com">' . "\n";
+        echo '<link rel="dns-prefetch" href="//upwork.com">' . "\n";
+        echo '<link rel="dns-prefetch" href="//linkedin.com">' . "\n";
+    }
+}
+add_action('wp_head', 'creative_theme_seo_hints', 6);
+
+// Enhanced title tag optimization
+function creative_theme_document_title_parts($title_parts) {
+    if (is_front_page()) {
+        $title_parts['title'] = '1976uk Creative | Professional WordPress Development & Creative Technology';
+        unset($title_parts['tagline']);
+    } elseif (is_page('portfolio')) {
+        $title_parts['title'] = 'Portfolio | WordPress Development Services | 1976uk Creative';
+    } elseif (is_page('contact')) {
+        $title_parts['title'] = 'Contact | Get Professional WordPress Development Quote | 1976uk Creative';
+    } elseif (is_page('about')) {
+        $title_parts['title'] = 'About | Creative Technologist & WordPress Expert | 1976uk Creative';
+    }
+    
+    return $title_parts;
+}
+add_filter('document_title_parts', 'creative_theme_document_title_parts');
+
+// ===== CRITICAL SECURITY FIXES =====
+
+// Add nonce verification to contact form (SECURITY FIX)
+function add_contact_form_nonce() {
+    // Only run this fix on pages that have contact forms
+    if (is_page('contact')) {
+        add_action('wp_footer', function() {
+            echo '<script>
+            // Add nonce to contact form for security
+            document.addEventListener("DOMContentLoaded", function() {
+                const contactForm = document.querySelector("form");
+                if (contactForm && !contactForm.querySelector("input[name=\"contact_nonce\"]")) {
+                    const nonceField = document.createElement("input");
+                    nonceField.type = "hidden";
+                    nonceField.name = "contact_nonce";
+                    nonceField.value = "' . wp_create_nonce('contact_form_nonce') . '";
+                    contactForm.appendChild(nonceField);
+                }
+            });
+            </script>';
+        });
+    }
+}
+add_action('wp_head', 'add_contact_form_nonce');
+
+// Add security headers for production
+function creative_theme_security_headers() {
+    // Prevent clickjacking
+    header('X-Frame-Options: SAMEORIGIN');
+    
+    // Prevent MIME type sniffing
+    header('X-Content-Type-Options: nosniff');
+    
+    // Enable XSS protection
+    header('X-XSS-Protection: 1; mode=block');
+    
+    // Referrer Policy for privacy
+    header('Referrer-Policy: strict-origin-when-cross-origin');
+}
+add_action('send_headers', 'creative_theme_security_headers');
+
+// Disable file editing from WordPress admin for security
+function creative_theme_disable_file_editing() {
+    if (!defined('DISALLOW_FILE_EDIT')) {
+        define('DISALLOW_FILE_EDIT', true);
+    }
+}
+add_action('init', 'creative_theme_disable_file_editing');
+
+// Remove WordPress version from head for security
+remove_action('wp_head', 'wp_generator');
+
+// Disable XML-RPC for security (already added but ensuring it's here)
+add_filter('xmlrpc_enabled', '__return_false');
+
+// Hide WordPress login errors to prevent user enumeration
+function creative_theme_hide_login_errors() {
+    return 'Invalid credentials. Please try again.';
+}
+add_filter('authenticate', function($user, $username, $password) {
+    if (is_wp_error($user) && !empty($username)) {
+        error_log('Failed login attempt for username: ' . $username . ' from IP: ' . ($_SERVER['REMOTE_ADDR'] ?? 'unknown'));
+    }
+    return $user;
+}, 30, 3);
+add_filter('login_errors', 'creative_theme_hide_login_errors');
+
+// Limit login attempts (basic protection)
+function creative_theme_limit_login_attempts() {
+    $ip = $_SERVER['REMOTE_ADDR'] ?? '';
+    $attempts_key = 'login_attempts_' . md5($ip);
+    $attempts = get_transient($attempts_key) ?: 0;
+    
+    if ($attempts >= 5) {
+        wp_die('Too many failed login attempts. Please try again in 15 minutes.', 'Login Blocked', array('response' => 429));
+    }
+    
+    // Increment attempts on failed login
+    add_action('wp_login_failed', function() use ($attempts_key, $attempts) {
+        set_transient($attempts_key, $attempts + 1, 15 * MINUTE_IN_SECONDS);
+    });
+    
+    // Clear attempts on successful login
+    add_action('wp_login', function() use ($attempts_key) {
+        delete_transient($attempts_key);
+    });
+}
+add_action('wp_authenticate', 'creative_theme_limit_login_attempts', 1);
 
 // Additional custom functions can be added below
 ?>

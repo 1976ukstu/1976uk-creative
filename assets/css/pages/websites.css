@@ -1,0 +1,83 @@
+/* ==========================================================================
+   WEBSITES PAGE STYLES
+   Extracted from main style.css for modular architecture
+   Nuclear grid fixes with ultra high specificity for reliable layout
+   ========================================================================== */
+
+/* ==========================================================================
+   RESPONSIVE SITE TITLE POSITIONING
+   Fix site title positioning at mobile breakpoints
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .page-template-page-websites .site-title {
+    top: 20px !important;
+    left: 20px !important;
+    position: fixed !important;
+  }
+}
+
+/* ==========================================================================
+   WEBSITES RESPONSIVE LAYOUT SUPPORT
+   Additional responsive fixes for websites-2x2-grid container
+   ========================================================================== */
+
+/* Ensure website cards never overflow container */
+body .website-card-2x2,
+html body .website-card-2x2,
+.site .website-card-2x2,
+#page .website-card-2x2 {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  min-width: 0 !important; /* Remove min-width that causes overflow */
+}
+
+/* Backup responsive rules in case inline CSS fails */
+@media (max-width: 900px) {
+  .page-template-page-websites .websites-2x2-grid {
+    grid-template-columns: 1fr !important;
+    gap: 25px !important;
+    max-width: 600px !important;
+    margin: 30px auto !important;
+    padding: 0 15px !important;
+  }
+}
+
+@media (max-width: 550px) {
+  .page-template-page-websites .websites-2x2-grid {
+    gap: 15px !important;
+    padding: 0 10px !important;
+  }
+  
+  .page-template-page-websites .website-card-2x2 {
+    max-width: calc(100vw - 40px) !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* ==========================================================================
+   WEBSITES PAGE TITLE CONSISTENCY
+   Match Gallery page title size for consistency across pages
+   ========================================================================== */
+
+/* Websites page title size to match Gallery */
+.page-template-page-websites .dashboard-title h1 {
+  font-size: 3.5em !important;
+}
+
+/* ==========================================================================
+   WEBSITE CARD PREVIEW ENHANCEMENT
+   Increase preview area to show more website content like gallery cards
+   ========================================================================== */
+
+/* Increase website preview area for better visibility */
+.page-template-page-websites .card-preview {
+  height: 250px !important;
+}
+
+/* Adjust card aspect ratio to accommodate larger preview */
+.page-template-page-websites .website-card-2x2 {
+  aspect-ratio: 1.1/1 !important;
+  min-height: 450px !important;
+}

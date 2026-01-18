@@ -2,329 +2,245 @@
 /**
  * Template Name: Projects
  * 
- * Custom template for Projects page - showcase development work and creative projects
- * Uses standard WordPress content + ACF Free repeater fields
+ * Projects page for 1976uk Creative - subdomain strategy and development roadmap
  */
 get_header();
 ?>
 
+<!-- Man of Steel Gradient Background -->
+<div class="man-of-steel-gradient"></div>
+
 <div class="site-title">
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="color: inherit; text-decoration: none;">
-        1976uk<br>Creative
+        <span class="main-title">1976uk</span>
+        <span class="sub-title">Creative</span>
     </a>
 </div>
 
-<button class="hamburger" aria-label="Open menu">
+<button class="universal-hamburger" aria-label="Open menu">
     <span></span>
     <span></span>
     <span></span>
 </button>
 
-<div class="side-panel">
-    <?php
-    wp_nav_menu( array(
-        'theme_location' => 'side-panel',
-        'menu_class'     => 'side-menu',
-        'fallback_cb'    => false,
-    ) );
-    ?>
-</div>
+<?php
+// Include the enhanced universal menu
+get_template_part('template-parts/enhanced-universal-menu');
+?>
 
 <div id="primary" class="content-area">
     <main id="main" class="site-main">
         
-        <!-- Projects Page Content -->
-        <div class="projects-content">
+        <!-- Projects Content with Dashboard Styling -->
+        <div class="dashboard-content">
             
             <?php if (have_posts()) : ?>
                 <?php while (have_posts()) : the_post(); ?>
                     
-                    <!-- Page Title -->
-                    <div class="page-header">
-                        <h1 class="page-title"><?php the_title(); ?></h1>
-                        <?php if (get_the_content()) : ?>
-                            <div class="page-intro">
-                                <?php the_content(); ?>
-                            </div>
-                        <?php endif; ?>
+                    <!-- Beautiful Page Header - Gallery Style -->
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">
+                            <h1>🚀 Development Projects & Strategy</h1>
+                        </div>
+                        <div class="dashboard-subtitle">
+                            Subdomain architecture, development roadmap, and innovative project concepts
+                        </div>
                     </div>
-                    
-                    <!-- Projects Grid -->
-                    <?php if (have_rows('project_items')) : ?>
-                        <div class="projects-grid">
-                            <?php while (have_rows('project_items')) : the_row(); 
-                                $image = get_sub_field('project_image');
-                                $title = get_sub_field('project_title');
-                                $description = get_sub_field('project_description');
-                                $tech_stack = get_sub_field('tech_stack');
-                                $project_link = get_sub_field('project_link');
-                                $github_link = get_sub_field('github_link');
-                                $project_type = get_sub_field('project_type'); // web, app, design, etc.
-                            ?>
-                                <div class="project-card <?php echo esc_attr($project_type); ?>-project">
-                                    <?php if ($image) : ?>
-                                        <div class="project-image">
-                                            <img src="<?php echo esc_url($image['url']); ?>" 
-                                                 alt="<?php echo esc_attr($image['alt']); ?>"
-                                                 onclick="openLightbox('<?php echo esc_url($image['url']); ?>', '<?php echo esc_js($title); ?>', '<?php echo esc_js($description); ?>')">
-                                            <?php if ($project_type) : ?>
-                                                <div class="project-type-badge"><?php echo esc_html($project_type); ?></div>
-                                            <?php endif; ?>
-                                        </div>
-                                    <?php endif; ?>
-                                    
-                                    <div class="project-info">
-                                        <?php if ($title) : ?>
-                                            <h3 class="project-title"><?php echo esc_html($title); ?></h3>
-                                        <?php endif; ?>
-                                        
-                                        <?php if ($description) : ?>
-                                            <p class="project-description"><?php echo esc_html($description); ?></p>
-                                        <?php endif; ?>
-                                        
-                                        <?php if ($tech_stack) : ?>
-                                            <div class="tech-stack">
-                                                <strong>Tech:</strong> <?php echo esc_html($tech_stack); ?>
-                                            </div>
-                                        <?php endif; ?>
-                                        
-                                        <div class="project-links">
-                                            <?php if ($project_link) : ?>
-                                                <a href="<?php echo esc_url($project_link); ?>" class="project-link" target="_blank">
-                                                    <span>🌐</span> View Live
-                                                </a>
-                                            <?php endif; ?>
-                                            
-                                            <?php if ($github_link) : ?>
-                                                <a href="<?php echo esc_url($github_link); ?>" class="github-link" target="_blank">
-                                                    <span>📂</span> View Code
-                                                </a>
-                                            <?php endif; ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endwhile; ?>
-                        </div>
-                    <?php else : ?>
-                        <div class="no-projects">
-                            <p>Development projects coming soon! This is your experimental playground.</p>
-                            <div class="placeholder-projects">
-                                <div class="project-card web-project">
-                                    <div class="project-image">
-                                        <div class="placeholder-img">🎨 Art Portfolio Site</div>
-                                        <div class="project-type-badge">WordPress</div>
-                                    </div>
-                                    <div class="project-info">
-                                        <h3 class="project-title">Professional Art Portfolio</h3>
-                                        <p class="project-description">Complete art portfolio website with ACF Pro galleries, responsive design, and professional Git workflow.</p>
-                                        <div class="tech-stack"><strong>Tech:</strong> WordPress, ACF Pro, CSS Grid, Git</div>
-                                        <div class="project-links">
-                                            <span class="project-link">✅ Production Live</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="project-card dashboard-project">
-                                    <div class="project-image">
-                                        <div class="placeholder-img">🛠️ Content Dashboard</div>
-                                        <div class="project-type-badge">Development</div>
-                                    </div>
-                                    <div class="project-info">
-                                        <h3 class="project-title">Artist Management Dashboard</h3>
-                                        <p class="project-description">Comprehensive content and portfolio management system for creative professionals.</p>
-                                        <div class="tech-stack"><strong>Tech:</strong> PHP, WordPress API, Custom Development</div>
-                                        <div class="project-links">
-                                            <span class="github-link">🚧 In Development</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="project-card creative-project">
-                                    <div class="project-image">
-                                        <div class="placeholder-img">🌟 1976uk Creative</div>
-                                        <div class="project-type-badge">Portfolio</div>
-                                    </div>
-                                    <div class="project-info">
-                                        <h3 class="project-title">Personal Creative Lab</h3>
-                                        <p class="project-description">Experimental development playground built on proven foundation with modern workflow.</p>
-                                        <div class="tech-stack"><strong>Tech:</strong> WordPress, ACF Free, VS Code, Git</div>
-                                        <div class="project-links">
-                                            <span class="project-link">🔄 Active Development</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endif; ?>
                     
                 <?php endwhile; ?>
             <?php endif; ?>
+            
+            <!-- Dashboard Section for Projects Strategy -->
+            <div class="dashboard-section">
+                <h2>🛠️ Project Innovation Hub</h2>
+                <p>Strategic development initiatives and creative technology concepts</p>
+                    
+                    <!-- Projects Grid Layout -->
+                    <div class="projects-grid">
+                        
+                        <!-- Main Projects Content -->
+                        <div class="projects-main">
+                            <?php if (get_the_content()) : ?>
+                                <div class="projects-intro">
+                                    <?php the_content(); ?>
+                                </div>
+                            <?php else : ?>
+                                <div class="projects-intro">
+                                    <h2>🌟 Subdomain Strategy Concepts</h2>
+                                    <p>Exploring innovative architecture with specialized subdomain applications for enhanced user experience and technical excellence. Each concept represents a focused development initiative.</p>
+                                    
+                                    <h3>🏗️ Architecture Vision</h3>
+                                    <p>Multi-domain approach enabling specialized functionality while maintaining cohesive branding and user experience. Technical innovation meets strategic planning.</p>
+                                </div>
+                            <?php endif; ?>
+                            
+                            <!-- Project Concepts - TEMPORARILY COMMENTED OUT FOR MOBILE OPTIMIZATION -->
+                            <!--
+                            <div class="project-concepts">
+                                <h3>💡 Strategic Development Concepts</h3>
+                                
+                                <div class="concepts-grid">
+                                    <div class="project-concept-card">
+                                        <div class="concept-header">
+                                            <h4>🎛️ dashboard.1976uk.com</h4>
+                                            <span class="concept-status">Planning</span>
+                                        </div>
+                                        <p><strong>Vision:</strong> Professional content management and analytics dashboard for creative professionals.</p>
+                                        <p><strong>Features:</strong> Gallery management, performance metrics, client portal, content scheduling.</p>
+                                        <div class="concept-tech">
+                                            <strong>Tech Stack:</strong> WordPress API, Custom PHP, Advanced Analytics
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="project-concept-card">
+                                        <div class="concept-header">
+                                            <h4>🛠️ apps.1976uk.com</h4>
+                                            <span class="concept-status">Concept</span>
+                                        </div>
+                                        <p><strong>Vision:</strong> Specialized application hub featuring custom tools and experimental interfaces.</p>
+                                        <p><strong>Features:</strong> Development utilities, client tools, portfolio generators, creative experiments.</p>
+                                        <div class="concept-tech">
+                                            <strong>Tech Stack:</strong> React/Vue.js, Node.js, Progressive Web App
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="project-concept-card">
+                                        <div class="concept-header">
+                                            <h4>📊 analytics.1976uk.com</h4>
+                                            <span class="concept-status">Research</span>
+                                        </div>
+                                        <p><strong>Vision:</strong> Advanced performance monitoring and user experience analytics platform.</p>
+                                        <p><strong>Features:</strong> Real-time metrics, conversion tracking, user journey analysis, custom reports.</p>
+                                        <div class="concept-tech">
+                                            <strong>Tech Stack:</strong> Custom Analytics, Data Visualization, API Integration
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="project-concept-card">
+                                        <div class="concept-header">
+                                            <h4>🎨 lab.1976uk.com</h4>
+                                            <span class="concept-status">Active</span>
+                                        </div>
+                                        <p><strong>Vision:</strong> Experimental development playground and innovation showcase.</p>
+                                        <p><strong>Features:</strong> Code experiments, design prototypes, technical blog, open source projects.</p>
+                                        <div class="concept-tech">
+                                            <strong>Tech Stack:</strong> Current WordPress Foundation, Advanced CSS, JavaScript
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            -->
+                            
+                            <!-- Development Timeline -->
+                            <div class="development-timeline">
+                                <h3>📅 Development Roadmap</h3>
+                                
+                                <div class="timeline-container">
+                                    <div class="timeline-phase">
+                                        <div class="phase-header">
+                                            <h4>Phase 1: Foundation (Current)</h4>
+                                            <span class="phase-status active">In Progress</span>
+                                        </div>
+                                        <ul class="phase-tasks">
+                                            <li>✅ Core site architecture with glassmorphism design</li>
+                                            <li>✅ Gallery system with WordPress media integration</li>
+                                            <li>✅ Responsive 2x2 grid implementation</li>
+                                            <li>🔄 Hub pages template foundation (About, Portfolio, Projects)</li>
+                                            <li>⏳ Content population and professional copywriting</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="timeline-phase">
+                                        <div class="phase-header">
+                                            <h4>Phase 2: Subdomain Architecture</h4>
+                                            <span class="phase-status planned">Planned</span>
+                                        </div>
+                                        <ul class="phase-tasks">
+                                            <li>⏳ Domain strategy and SSL configuration</li>
+                                            <li>⏳ Dashboard subdomain development (dashboard.1976uk.com)</li>
+                                            <li>⏳ Applications hub planning (apps.1976uk.com)</li>
+                                            <li>⏳ Cross-domain authentication system</li>
+                                            <li>⏳ API architecture for subdomain communication</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="timeline-phase">
+                                        <div class="phase-header">
+                                            <h4>Phase 3: Advanced Features</h4>
+                                            <span class="phase-status future">Future</span>
+                                        </div>
+                                        <ul class="phase-tasks">
+                                            <li>⏳ Custom analytics implementation</li>
+                                            <li>⏳ Client portal and project management</li>
+                                            <li>⏳ Progressive Web App conversion</li>
+                                            <li>⏳ Advanced performance optimization</li>
+                                            <li>⏳ Mobile application companion</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Projects Sidebar -->
+                        <div class="projects-sidebar">
+                            
+                            <!-- Technical Specifications -->
+                            <div class="tech-specs">
+                                <h3>⚡ Technical Approach</h3>
+                                <ul>
+                                    <li><strong>Architecture:</strong> Modular subdomain strategy</li>
+                                    <li><strong>Foundation:</strong> Proven WordPress base</li>
+                                    <li><strong>Scaling:</strong> API-first development</li>
+                                    <li><strong>Performance:</strong> Progressive optimization</li>
+                                    <li><strong>Security:</strong> Cross-domain authentication</li>
+                                    <li><strong>Innovation:</strong> Experimental features</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Current Projects Status -->
+                            <div class="projects-status">
+                                <h3>📈 Development Status</h3>
+                                <div class="status-list">
+                                    <div class="status-item">
+                                        <div class="status-name">Core Foundation</div>
+                                        <div class="status-progress active">85%</div>
+                                    </div>
+                                    <div class="status-item">
+                                        <div class="status-name">Hub Pages Template</div>
+                                        <div class="status-progress active">70%</div>
+                                    </div>
+                                    <div class="status-item">
+                                        <div class="status-name">Content Strategy</div>
+                                        <div class="status-progress planning">40%</div>
+                                    </div>
+                                    <div class="status-item">
+                                        <div class="status-name">Dashboard Concept</div>
+                                        <div class="status-progress planning">25%</div>
+                                    </div>
+                                    <div class="status-item">
+                                        <div class="status-name">Apps Hub Planning</div>
+                                        <div class="status-progress future">15%</div>
+                                    </div>
+                                    <div class="status-item">
+                                        <div class="status-name">Analytics Integration</div>
+                                        <div class="status-progress future">10%</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            
+            </div>
             
         </div>
         
     </main>
 </div>
 
-<!-- Lightbox for Project Images -->
-<div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <div class="lightbox-content" onclick="event.stopPropagation()">
-        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        <img id="lightbox-image" src="" alt="">
-        <div class="lightbox-info">
-            <h3 id="lightbox-title"></h3>
-            <p id="lightbox-description"></p>
-        </div>
-    </div>
-</div>
 
-<script>
-function openLightbox(imageSrc, title, description) {
-    document.getElementById('lightbox').style.display = 'flex';
-    document.getElementById('lightbox-image').src = imageSrc;
-    document.getElementById('lightbox-title').textContent = title || '';
-    document.getElementById('lightbox-description').textContent = description || '';
-    document.body.style.overflow = 'hidden';
-}
-
-function closeLightbox() {
-    document.getElementById('lightbox').style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-// Close lightbox with Escape key
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        closeLightbox();
-    }
-});
-</script>
-
-<style>
-/* Projects Page Specific Styles */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-    margin-top: 30px;
-}
-
-.project-card {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-}
-
-.project-image {
-    position: relative;
-    aspect-ratio: 16/9;
-    overflow: hidden;
-}
-
-.project-image img,
-.placeholder-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.placeholder-img {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    font-size: 1.5em;
-    font-weight: bold;
-}
-
-.project-image:hover img,
-.project-image:hover .placeholder-img {
-    transform: scale(1.05);
-}
-
-.project-type-badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-size: 0.8em;
-    text-transform: uppercase;
-}
-
-.project-info {
-    padding: 20px;
-}
-
-.project-title {
-    color: white;
-    margin: 0 0 10px 0;
-    font-size: 1.4em;
-}
-
-.project-description {
-    color: rgba(255, 255, 255, 0.9);
-    margin: 0 0 15px 0;
-    line-height: 1.5;
-}
-
-.tech-stack {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9em;
-    margin: 10px 0 15px 0;
-}
-
-.project-links {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-}
-
-.project-link,
-.github-link {
-    color: white;
-    text-decoration: none;
-    padding: 8px 15px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 20px;
-    transition: all 0.3s ease;
-    font-size: 0.9em;
-}
-
-.project-link:hover,
-.github-link:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.6);
-}
-
-.placeholder-projects {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-    margin-top: 20px;
-}
-
-.no-projects {
-    text-align: center;
-    color: rgba(255, 255, 255, 0.9);
-    margin-top: 40px;
-}
-
-.no-projects p {
-    font-size: 1.2em;
-    margin-bottom: 30px;
-}
-</style>
 
 <?php get_footer(); ?>
