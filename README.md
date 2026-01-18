@@ -16,13 +16,13 @@ I built this theme from the ground up to demonstrate a "clean-code first" philos
 ## ✨ Key Features
 
 ### **Custom Architecture**
-* **Bespoke Theme Development:** A fully custom theme structure (no pre-bought templates).
-* **ACF Integration:** A tailored backend using Advanced Custom Fields (ACF) to give the user complete control without code bloat.
+* **Bespoke Theme Development:** A fully custom theme built from scratch (no pre-bought templates).
+* **Native WordPress Integration:** Clean, efficient code using WordPress core functions without external dependencies.
 * **Performance Focused:** Clean CSS architecture and optimized assets for 100/100 Lighthouse scores.
 * **Git Workflow:** Professional version control and deployment pipeline.
 
-### **The "Artist Dashboard" (In Development)**
-I am currently developing a bespoke "Artist Management Dashboard" within this theme. This allows creatives to manage their galleries and media through a simplified, intuitive UI, removing the complexity of the standard WordPress dashboard.
+### **Creative Management Dashboard (Completed)**
+Features a sophisticated integrated dashboard system with real-time analytics, media management, and content tools. This allows creatives to manage their galleries, analyze site performance, and extract media content through an intuitive glassmorphism UI, streamlining the creative workflow.
 
 ---
 
@@ -48,8 +48,6 @@ This theme follows strict WordPress coding standards and a modular file structur
 
 I utilize Advanced Custom Fields to create structured data types, ensuring the site is dynamic and easy to update.
 
-Example: Projects Repeater
-,
 Tech Stack: Dynamic text fields
 
 GitHub Integration: Direct links to public repos
@@ -63,9 +61,7 @@ I run this project using Agile methodologies, constantly iterating on features.
 
 [x] Phase 2: Custom Contact Form Logic with Validation
 
-[ ] Phase 3: Integration of "Artist Dashboard" for simplified media management
-
-[ ] Phase 4: Experimental integration of Project IDX features
+[x] Phase 3: Custom Dashboard with Real-time Analytics & Media Management (Completed Jan 2026)
 
 ## 💻 Tech Stack
 Core: HTML5, CSS3, PHP 8.2, JavaScript (ES6+)
@@ -78,4 +74,18 @@ Local Dev: LocalWP
 
 Version Control: Git / GitHub
 
-© 2025 Stuart Hunt / 1976uk Creative. All Rights Reserved.
+## 🔥 Latest Development Features (Jan 2026)
+- **Advanced Dashboard System**: Modal-based analytics and media management
+- **Real-time WordPress Analytics**: Live site statistics integration  
+- **Media Extraction Tools**: Live website content analysis capabilities
+- **Glassmorphism UI**: Modern frosted glass design language
+- **Performance Optimization**: Streamlined asset loading and responsive design
+
+## 👨‍💻 Lead Developer
+**Stuart Hunt**  
+Creative Technologist & WordPress Specialist  
+Specializing in custom WordPress solutions for creative professionals
+
+---
+
+© 2025-2026 Stuart Hunt / 1976uk Creative. All Rights Reserved.

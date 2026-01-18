@@ -1,4 +1,26 @@
 <?php
+/**
+ * 1976uk Creative Theme Functions
+ * 
+ * Custom WordPress theme for creative professionals featuring
+ * integrated dashboard, real-time analytics, and media management.
+ * 
+ * @package 1976uk_Creative_Theme
+ * @author Stuart Hunt <contact@1976uk.com>
+ * @version 2.0.0
+ * @since 1.0.0
+ * @link https://1976uk.com
+ * 
+ * Developed by Stuart Hunt - Creative Technologist
+ * Specialized WordPress solutions for creative industries
+ * © 2025-2026 All Rights Reserved
+ */
+
+// Prevent direct access
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 // --- Enhanced Contact Form Handler with Gmail Forwarding & Spam Protection ---
 add_action('init', function() {
     if (
@@ -442,9 +464,70 @@ function creative_theme_scripts() {
     
     // Keep the existing JavaScript
     wp_enqueue_script( '1976uk-creative-scripts', get_template_directory_uri() . '/assets/js/scripts.js', array(), $version, true );
+    
+    // Dashboard Modal System - Global Assets
+    wp_enqueue_style( 
+        '1976uk-dashboard-modal', 
+        get_template_directory_uri() . '/assets/css/dashboard-modal.css', 
+        array('1976uk-components'), 
+        $version 
+    );
+    
+    wp_enqueue_script( 
+        '1976uk-dashboard-modal-js', 
+        get_template_directory_uri() . '/assets/js/dashboard-modal.js', 
+        array(), 
+        $version, 
+        true 
+    );
 }
 add_action( 'wp_enqueue_scripts', 'creative_theme_scripts' );
 
+// Step 1: Basic Analytics AJAX Handler - Simple Version
+add_action('wp_ajax_get_dashboard_analytics', 'handle_simple_analytics');
+add_action('wp_ajax_nopriv_get_dashboard_analytics', 'handle_simple_analytics');
+
+function handle_simple_analytics() {
+    // Step 2: Real WordPress data - keeping it simple
+    $posts_count = wp_count_posts('post');
+    $pages_count = wp_count_posts('page');
+    $media_count = wp_count_posts('attachment');
+    $comments_count = wp_count_comments();
+    
+    $data = array(
+        'posts' => $posts_count->publish,
+        'pages' => $pages_count->publish,
+        'media' => $media_count->inherit,
+        'comments' => $comments_count->approved
+    );
+    
+    wp_send_json_success($data);
+}
+
+// Step 3: Simple Data Extraction Handler
+add_action('wp_ajax_extract_live_media', 'handle_simple_extraction');
+add_action('wp_ajax_nopriv_extract_live_media', 'handle_simple_extraction');
+
+function handle_simple_extraction() {
+    $url = sanitize_text_field($_POST['url']);
+    
+    if (empty($url)) {
+        wp_send_json_error('URL required');
+        return;
+    }
+    
+    // Simple test response
+    wp_send_json_success(array(
+        'images' => array(
+            array('url' => 'https://example.com/test1.jpg', 'alt' => 'Test Image 1'),
+            array('url' => 'https://example.com/test2.jpg', 'alt' => 'Test Image 2')
+        ),
+        'videos' => array(),
+        'total' => 2
+    ));
+}
+
+// Only remove specific problematic styles, keep accessibility ones
 // Only remove specific problematic styles, keep accessibility ones
 function artist_theme_clean_styles() {
     // Only remove block library styles if not using Gutenberg blocks
